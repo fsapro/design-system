@@ -1,0 +1,281 @@
+<title>Skin B — Registre</title>
+<style>
+  :root {
+    color-scheme: light;
+    --n000: #ffffff;
+    --n050: #f8f8f6;
+    --n100: #efefec;
+    --n200: #e2e2dd;
+    --n300: #cdcdc6;
+    --n400: #a0a099;
+    --n500: #77776f;
+    --n600: #575751;
+    --n700: #3d3d38;
+    --n800: #292926;
+    --n900: #161614;
+
+    --a100: #e7eef5;
+    --a300: #a9c3da;
+    --a500: #2d6296;
+    --a600: #24507c;
+    --a700: #1a3b5c;
+
+    --att100: #fbf0d8; --att500: #9c7212; --att700: #6b4d0a;
+    --cri100: #fae7e4; --cri500: #a83a2c; --cri700: #75281e;
+    --aff100: #e6f0e7; --aff500: #3d7548; --aff700: #2a5232;
+
+    --r-ctl: 3px;
+    --r-surf: 6px;
+
+    --sans: 'Public Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background: var(--n050);
+    color: var(--n700);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 40px 24px 72px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  .masthead {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px;
+    padding-bottom: 24px; margin-bottom: 32px;
+    border-bottom: 1px solid var(--n300);
+  }
+  .brandmark {
+    width: 52px; height: 52px; border-radius: var(--r-surf);
+    background: var(--a500);
+    display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 22px;
+    font-family: var(--mono);
+  }
+  .masthead h1 { margin: 0; font-size: 31px; font-weight: 600; letter-spacing: -0.015em; color: var(--n800); }
+  .masthead .eyebrow {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--a600); font-weight: 600; margin: 0 0 4px;
+  }
+  .masthead p { margin: 6px 0 0; color: var(--n500); font-size: 15px; max-width: 52ch; }
+  .masthead .spec { margin-left: auto; text-align: right; font-size: 12.5px; color: var(--n500); line-height: 1.7; }
+  .masthead .spec code { font-family: var(--mono); color: var(--n700); }
+
+  section { margin-bottom: 34px; }
+  .sec-label {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--n400); font-weight: 600; margin: 0 0 14px;
+  }
+
+  .card {
+    background: var(--n000); border: 1px solid var(--n200);
+    border-radius: var(--r-surf); padding: 20px;
+  }
+
+  .ramp { display: flex; flex-wrap: wrap; gap: 0; border-radius: var(--r-ctl); overflow: hidden; border: 1px solid var(--n200); }
+  .swatch { flex: 1 1 0; min-width: 54px; height: 68px; display: flex; align-items: flex-end; padding: 6px 7px; }
+  .swatch span { font-size: 10.5px; font-family: var(--mono); }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .chip {
+    border-radius: var(--r-ctl); padding: 12px 14px; color: #fff; font-size: 13px; font-weight: 500;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .chip code { font-family: var(--mono); font-size: 11px; opacity: 0.85; font-weight: 400; }
+
+  .type-row { display: flex; align-items: baseline; gap: 18px; padding: 7px 0; border-bottom: 1px solid var(--n100); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row .tag { font-family: var(--mono); font-size: 11px; color: var(--n400); width: 68px; flex: none; }
+  .type-row .demo { color: var(--n800); }
+
+  .btn {
+    font-family: inherit; font-size: 14px; font-weight: 500; border-radius: var(--r-ctl);
+    height: 36px; padding: 0 16px; border: 1px solid transparent; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; transition: background .12s, border-color .12s;
+  }
+  .btn:focus-visible { outline: 2px solid var(--a500); outline-offset: 2px; }
+  .btn-primary { background: var(--a500); color: #fff; }
+  .btn-primary:hover { background: var(--a600); }
+  .btn-outline { background: transparent; border-color: var(--n300); color: var(--n700); }
+  .btn-outline:hover { background: var(--n100); }
+  .btn-ghost { background: transparent; color: var(--n700); }
+  .btn-ghost:hover { background: var(--n100); }
+  .btn-danger { background: var(--cri500); color: #fff; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+
+  /* occurrence status badges — 3px, plein ou contour */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px; border-radius: var(--r-ctl);
+    padding: 2px 9px; font-size: 12px; font-weight: 500; line-height: 1.5; border: 1px solid transparent;
+  }
+  .b-solid-neutral { background: var(--n700); color: #fff; }
+  .b-outline { background: transparent; border-color: var(--n400); color: var(--n500); }
+  .b-att { background: var(--att500); color: #fff; }
+  .b-aff { background: var(--aff500); color: #fff; }
+  .b-cri { background: var(--cri500); color: #fff; }
+  .b-accent { background: var(--a500); color: #fff; }
+  .strike { text-decoration: line-through; }
+
+  /* lifecycle labels — rectangular, outline only, caps */
+  .life {
+    display: inline-flex; align-items: center; border-radius: 0;
+    padding: 2px 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; font-family: var(--mono);
+  }
+  .l-draft { border: 1px dashed var(--n500); color: var(--n500); }
+  .l-pub { border: 1px solid var(--n600); color: var(--n600); }
+  .l-dep { border: 1px solid var(--n400); color: var(--n400); text-decoration: line-through; }
+
+  .input {
+    height: 36px; border: 1px solid var(--n300); background: var(--n000); border-radius: var(--r-ctl);
+    padding: 0 12px; font-family: inherit; font-size: 14px; color: var(--n800); width: 240px;
+  }
+  .input:focus-visible { outline: 2px solid var(--a500); outline-offset: 1px; border-color: var(--a500); }
+  .input::placeholder { color: var(--n400); }
+
+  .prov { border: 1px solid var(--n200); border-radius: var(--r-surf); overflow: hidden; }
+  .prov-head { background: var(--n050); padding: 12px 16px; border-bottom: 1px solid var(--n200); }
+  .prov-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--n800); font-family: var(--mono); }
+  .prov-sub { font-family: var(--mono); font-size: 12px; color: var(--n500); margin-top: 3px; }
+  .prov-body { padding: 12px 16px; font-family: var(--mono); font-size: 12px; color: var(--n500); line-height: 1.9; }
+  .prov-body b { color: var(--n800); font-weight: 600; }
+
+  .notice { border: 1px solid var(--n300); background: var(--n100); border-radius: var(--r-ctl); padding: 16px 18px; }
+  .notice h4 { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--n800); }
+  .notice p { margin: 0 0 12px; font-size: 13.5px; color: var(--n600); line-height: 1.55; max-width: 62ch; }
+
+  .viz { display: flex; gap: 0; height: 46px; border-radius: var(--r-ctl); overflow: hidden; border: 1px solid var(--n200); }
+  .viz div { flex: 1; }
+  .viz-note { font-size: 12px; color: var(--n400); margin-top: 8px; }
+
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--n300); font-size: 12.5px; color: var(--n400); }
+</style>
+
+<div class="page">
+  <div class="wrap">
+    <header class="masthead">
+      <div class="brandmark">B</div>
+      <div>
+        <p class="eyebrow">Skin B — direction proposée</p>
+        <h1>Registre</h1>
+        <p>Neutres de papier, un seul bleu d'encre réservé à l'interactif. Registre proche de Stacks : lecture continue, chrome minimal, aucune ombre, aucun dégradé. Les codes en monospace.</p>
+      </div>
+      <div class="spec">
+        Polices&nbsp;: <code>Public Sans</code><br>
+        <code>IBM Plex Mono</code><br>
+        <span style="opacity:.7">(aperçu en police système)</span><br>
+        Accent&nbsp;: <code>#2d6296</code> · Rayon&nbsp;: <code>3px</code>
+      </div>
+    </header>
+
+    <section>
+      <p class="sec-label">Neutres — échelle de papier, portent 90 % de l'interface</p>
+      <div class="ramp">
+        <div class="swatch" style="background:#ffffff"><span style="color:#a0a099">000</span></div>
+        <div class="swatch" style="background:#f8f8f6"><span style="color:#a0a099">050</span></div>
+        <div class="swatch" style="background:#efefec"><span style="color:#a0a099">100</span></div>
+        <div class="swatch" style="background:#e2e2dd"><span style="color:#77776f">200</span></div>
+        <div class="swatch" style="background:#cdcdc6"><span style="color:#3d3d38">300</span></div>
+        <div class="swatch" style="background:#a0a099"><span style="color:#fff">400</span></div>
+        <div class="swatch" style="background:#77776f"><span style="color:#fff">500</span></div>
+        <div class="swatch" style="background:#575751"><span style="color:#fff">600</span></div>
+        <div class="swatch" style="background:#3d3d38"><span style="color:#fff">700</span></div>
+        <div class="swatch" style="background:#161614"><span style="color:#fff">900</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Accent (interactif seul) &amp; sémantiques (statut) — jamais confondus</p>
+      <div class="grid-3">
+        <div class="chip" style="background:#2d6296">Bleu d'encre · interactif<code>#2d6296</code></div>
+        <div class="chip" style="background:#9c7212">Attention<code>#9c7212</code></div>
+        <div class="chip" style="background:#a83a2c">Critical<code>#a83a2c</code></div>
+        <div class="chip" style="background:#3d7548">Affirm · terminaison<code>#3d7548</code></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Échelle typographique</p>
+      <div class="card">
+        <div class="type-row"><span class="tag">2xl / 31</span><span class="demo" style="font-size:31px;font-weight:600">Titre de vue principale</span></div>
+        <div class="type-row"><span class="tag">xl / 25</span><span class="demo" style="font-size:25px;font-weight:600">Titre d'écran</span></div>
+        <div class="type-row"><span class="tag">lg / 20</span><span class="demo" style="font-size:20px;font-weight:600">Titre de section</span></div>
+        <div class="type-row"><span class="tag">base / 15</span><span class="demo" style="font-size:15px">Texte courant — lecture continue, confortable.</span></div>
+        <div class="type-row"><span class="tag">sm / 13</span><span class="demo" style="font-size:13px;color:#575751">Libellés, tableaux denses</span></div>
+        <div class="type-row"><span class="tag">mono</span><span class="demo" style="font-family:var(--mono);font-size:13px">DELIVERY_OVERDUE · identifiant contractuel</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Composants</p>
+      <div class="card stack">
+        <div class="row">
+          <button class="btn btn-primary">Publier</button>
+          <button class="btn btn-outline">Modifier</button>
+          <button class="btn btn-ghost">Écarter</button>
+          <button class="btn btn-danger">Rejeter</button>
+          <input class="input" placeholder="Motif obligatoire" />
+        </div>
+        <div class="row">
+          <span class="badge b-solid-neutral">Active</span>
+          <span class="badge b-outline">Resolved</span>
+          <span class="badge b-att">Reopened</span>
+          <span class="badge b-accent">Started</span>
+          <span class="badge b-aff">Done</span>
+          <span class="badge b-cri">Failed</span>
+          <span class="badge b-outline strike">Ignored</span>
+        </div>
+        <div class="row">
+          <span class="life l-draft">Draft</span>
+          <span class="life l-pub">Published</span>
+          <span class="life l-dep">Deprecated</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;color:#a0a099">Statuts d'occurrence (badge arrondi 3px) et cycle de vie (étiquette rectangulaire, capitales) — <b style="color:#575751">deux formes distinctes</b>. <b style="color:#575751">Resolved n'est jamais vert.</b></p>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Bandeau de provenance — la signature</p>
+      <div class="prov">
+        <div class="prov-head">
+          <div class="prov-title">DELIVERY_COMMITMENT_NOT_MET</div>
+          <div class="prov-sub">Shipment · SHP-00123 · COMMITMENT_TRACKING</div>
+        </div>
+        <div class="prov-body">
+          règle <b>OVERDUE_TO_COMMITMENT v4</b> · définition v2<br>
+          exécution <b>EC-2026-0714-0031</b> · EVENT · 14 juil. 09:22
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">État vide — une absence n'est jamais une assertion</p>
+      <div class="notice">
+        <h4>Aucun résultat produit sur ce périmètre.</h4>
+        <p>L'absence de résultat ne signifie pas la conformité. Elle peut correspondre à une règle évaluée sans résultat, hors périmètre, non publiée, ou à un objet non couvert par une exécution.</p>
+        <div class="row">
+          <button class="btn btn-outline">Voir les exécutions</button>
+          <button class="btn btn-outline">Voir les règles applicables</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Palette data-viz — catégorielle, dérivée de la peau</p>
+      <div class="viz">
+        <div style="background:#2d6296"></div>
+        <div style="background:#9c7212"></div>
+        <div style="background:#3d7548"></div>
+        <div style="background:#a83a2c"></div>
+        <div style="background:#575751"></div>
+        <div style="background:#a9c3da"></div>
+        <div style="background:#6b4d0a"></div>
+      </div>
+      <p class="viz-note">Sept teintes sourdes, cohérentes avec le registre papier. À proposer — le corpus TA²S ne définit pas de palette de graphes.</p>
+    </section>
+
+    <div class="foot">Template de skin — aperçu à structure identique au Skin A. Aucune valeur n'est définitive ; sert à trancher la direction.</div>
+  </div>
+</div>

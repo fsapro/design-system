@@ -1,0 +1,285 @@
+<title>Skin A — Atelier</title>
+<style>
+  :root {
+    color-scheme: light;
+    --canvas: #f7f6f2;
+    --surface: #ffffff;
+    --subtle: #f6f5f4;
+    --hover: #f1f1ef;
+    --selected: #e2f1ef;
+    --ink: #2c2920;
+    --ink-soft: #68604a;
+    --ink-faint: #9b9587;
+    --line: rgba(44, 41, 32, 0.16);
+    --line-soft: rgba(44, 41, 32, 0.09);
+
+    --teal-600: #0f6b66;
+    --teal-700: #0b5753;
+    --teal-800: #08423f;
+
+    --info: #4057a1;
+    --success: #4a7d2e;
+    --warning: #8a5a00;
+    --danger: #a7354a;
+
+    --n-gray: #787774;   --n-gray-bg: #f1f1ef;
+    --n-orange: #d9730d; --n-orange-bg: #faebdd;
+    --n-blue: #337ea9;   --n-blue-bg: #d3e5ef;
+    --n-brown: #9f6b53;  --n-brown-bg: #f4eeee;
+    --n-purple: #9065b0; --n-purple-bg: #e8deee;
+    --n-pink: #c14c8a;   --n-pink-bg: #f5e0e9;
+
+    --r-sm: 4px;
+    --r-md: 6px;
+    --r-lg: 10px;
+
+    --sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+    --mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 40px 24px 72px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  .masthead {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px;
+    padding-bottom: 24px; margin-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brandmark {
+    width: 52px; height: 52px; border-radius: var(--r-lg);
+    background: var(--teal-600);
+    display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 22px;
+    box-shadow: 0 1px 2px rgba(44,41,32,.14);
+  }
+  .masthead h1 { margin: 0; font-size: 31px; font-weight: 600; letter-spacing: -0.02em; }
+  .masthead .eyebrow {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--teal-700); font-weight: 600; margin: 0 0 4px;
+  }
+  .masthead p { margin: 6px 0 0; color: var(--ink-soft); font-size: 15px; max-width: 52ch; }
+  .masthead .spec { margin-left: auto; text-align: right; font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; }
+  .masthead .spec code { font-family: var(--mono); color: var(--ink); }
+
+  section { margin-bottom: 34px; }
+  .sec-label {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--ink-faint); font-weight: 600; margin: 0 0 14px;
+  }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r-lg); padding: 20px;
+    box-shadow: 0 1px 2px var(--line-soft);
+  }
+
+  /* color ramps */
+  .ramp { display: flex; flex-wrap: wrap; gap: 0; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); }
+  .swatch { flex: 1 1 0; min-width: 62px; height: 68px; display: flex; align-items: flex-end; padding: 6px 7px; }
+  .swatch span { font-size: 10.5px; font-family: var(--mono); }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .chip {
+    border-radius: var(--r-md); padding: 12px 14px; color: #fff; font-size: 13px; font-weight: 500;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .chip code { font-family: var(--mono); font-size: 11px; opacity: 0.85; font-weight: 400; }
+
+  /* type scale */
+  .type-row { display: flex; align-items: baseline; gap: 18px; padding: 7px 0; border-bottom: 1px solid var(--line-soft); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row .tag { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); width: 68px; flex: none; }
+  .type-row .demo { color: var(--ink); letter-spacing: -0.01em; }
+
+  /* components */
+  .btn {
+    font-family: inherit; font-size: 14px; font-weight: 500; border-radius: var(--r-md);
+    height: 36px; padding: 0 16px; border: 1px solid transparent; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; transition: background .12s, border-color .12s;
+  }
+  .btn:focus-visible { outline: 2px solid var(--info); outline-offset: 2px; }
+  .btn-primary { background: var(--teal-600); color: #fff; }
+  .btn-primary:hover { background: var(--teal-700); }
+  .btn-outline { background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn-outline:hover { background: var(--hover); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--hover); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px; border-radius: var(--r-md);
+    border: 1px solid; padding: 2px 9px; font-size: 12px; font-weight: 500; line-height: 1.5;
+  }
+  .b-success { color: var(--success); border-color: color-mix(in srgb, var(--success) 25%, transparent); background: color-mix(in srgb, var(--success) 12%, transparent); }
+  .b-warning { color: var(--warning); border-color: color-mix(in srgb, var(--warning) 25%, transparent); background: color-mix(in srgb, var(--warning) 12%, transparent); }
+  .b-danger  { color: var(--danger);  border-color: color-mix(in srgb, var(--danger) 25%, transparent);  background: color-mix(in srgb, var(--danger) 12%, transparent); }
+  .b-info    { color: var(--info);    border-color: color-mix(in srgb, var(--info) 25%, transparent);    background: color-mix(in srgb, var(--info) 12%, transparent); }
+  .b-neutral { color: var(--ink-soft); border-color: var(--line); background: var(--subtle); }
+
+  .tag {
+    display: inline-flex; align-items: center; gap: 5px; border-radius: var(--r-sm);
+    padding: 2px 9px; font-size: 12px; font-weight: 500;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  .input {
+    height: 36px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--r-md);
+    padding: 0 12px; font-family: inherit; font-size: 14px; color: var(--ink); width: 240px;
+  }
+  .input:focus-visible { outline: 2px solid var(--info); outline-offset: 1px; border-color: var(--teal-600); }
+  .input::placeholder { color: var(--ink-faint); }
+
+  /* provenance banner — signature */
+  .prov { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+  .prov-head { background: var(--subtle); padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .prov-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .prov-sub { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+  .prov-body { padding: 12px 16px; font-family: var(--mono); font-size: 12px; color: var(--ink-soft); line-height: 1.9; }
+  .prov-body b { color: var(--ink); font-weight: 600; }
+
+  /* empty-state notice */
+  .notice { border: 1px solid var(--line); background: var(--subtle); border-radius: var(--r-md); padding: 16px 18px; }
+  .notice h4 { margin: 0 0 6px; font-size: 14px; font-weight: 600; }
+  .notice p { margin: 0 0 12px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; max-width: 62ch; }
+
+  /* dataviz */
+  .viz { display: flex; gap: 0; height: 46px; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); }
+  .viz div { flex: 1; }
+  .viz-note { font-size: 12px; color: var(--ink-faint); margin-top: 8px; }
+
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-faint); }
+</style>
+
+<div class="page">
+  <div class="wrap">
+    <header class="masthead">
+      <div class="brandmark">A</div>
+      <div>
+        <p class="eyebrow">Skin A — direction proposée</p>
+        <h1>Atelier</h1>
+        <p>Neutres chauds, teal minéral employé avec parcimonie. Registre proche de Notion : densité maîtrisée, surfaces papier, la couleur ne sert qu'à l'action.</p>
+      </div>
+      <div class="spec">
+        Police&nbsp;: <code>Inter</code><br>
+        <span style="opacity:.7">(aperçu en police système)</span><br>
+        Accent&nbsp;: <code>#0f6b66</code><br>
+        Rayon&nbsp;: <code>6px</code>
+      </div>
+    </header>
+
+    <section>
+      <p class="sec-label">Neutres — portent 90 % de l'interface</p>
+      <div class="ramp">
+        <div class="swatch" style="background:#ffffff"><span style="color:#9b9587">surface</span></div>
+        <div class="swatch" style="background:#f7f6f2"><span style="color:#9b9587">canvas</span></div>
+        <div class="swatch" style="background:#f1f1ef"><span style="color:#9b9587">hover</span></div>
+        <div class="swatch" style="background:#9b9587"><span style="color:#fff">faint</span></div>
+        <div class="swatch" style="background:#68604a"><span style="color:#fff">soft</span></div>
+        <div class="swatch" style="background:#2c2920"><span style="color:#fff">ink</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Accent (action) &amp; sémantiques (statut) — jamais confondus</p>
+      <div class="grid-3">
+        <div class="chip" style="background:#0f6b66">Teal · action<code>#0f6b66</code></div>
+        <div class="chip" style="background:#4a7d2e">Success<code>#4a7d2e</code></div>
+        <div class="chip" style="background:#8a5a00">Warning<code>#8a5a00</code></div>
+        <div class="chip" style="background:#a7354a">Danger<code>#a7354a</code></div>
+        <div class="chip" style="background:#4057a1">Info / focus<code>#4057a1</code></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Échelle typographique</p>
+      <div class="card">
+        <div class="type-row"><span class="tag">2xl / 31</span><span class="demo" style="font-size:31px;font-weight:600">Titre de vue principale</span></div>
+        <div class="type-row"><span class="tag">xl / 25</span><span class="demo" style="font-size:25px;font-weight:600">Titre d'écran</span></div>
+        <div class="type-row"><span class="tag">lg / 20</span><span class="demo" style="font-size:20px;font-weight:600">Titre de section</span></div>
+        <div class="type-row"><span class="tag">base / 15</span><span class="demo" style="font-size:15px">Texte courant — lecture continue, confortable.</span></div>
+        <div class="type-row"><span class="tag">sm / 13</span><span class="demo" style="font-size:13px;color:#68604a">Libellés, tableaux denses</span></div>
+        <div class="type-row"><span class="tag">mono</span><span class="demo" style="font-family:var(--mono);font-size:13px">SHP-00123 · identifiant contractuel</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Composants</p>
+      <div class="card stack">
+        <div class="row">
+          <button class="btn btn-primary">Accepter</button>
+          <button class="btn btn-outline">Corriger</button>
+          <button class="btn btn-ghost">Différer</button>
+          <button class="btn btn-danger">Rejeter</button>
+          <input class="input" placeholder="Valeur corrigée" />
+        </div>
+        <div class="row">
+          <span class="badge b-success">● Accepté</span>
+          <span class="badge b-info">● Corrigé</span>
+          <span class="badge b-danger">● Rejeté</span>
+          <span class="badge b-warning">● À clarifier</span>
+          <span class="badge b-neutral">● Différé</span>
+        </div>
+        <div class="row">
+          <span class="tag" style="color:#787774;background:#f1f1ef"><span class="dot" style="background:#787774"></span>Source</span>
+          <span class="tag" style="color:#d9730d;background:#faebdd"><span class="dot" style="background:#d9730d"></span>Feedback</span>
+          <span class="tag" style="color:#337ea9;background:#d3e5ef"><span class="dot" style="background:#337ea9"></span>Evidence</span>
+          <span class="tag" style="color:#9f6b53;background:#f4eeee"><span class="dot" style="background:#9f6b53"></span>Acteur</span>
+          <span class="tag" style="color:#9065b0;background:#e8deee"><span class="dot" style="background:#9065b0"></span>Interprétation</span>
+          <span class="tag" style="color:#c14c8a;background:#f5e0e9"><span class="dot" style="background:#c14c8a"></span>Solution</span>
+        </div>
+        <p style="margin:0;font-size:12.5px;color:#9b9587">Badges de <b style="color:#68604a">statut</b> (workflow) et tags d'<b style="color:#68604a">entité</b> (ontologie) — deux registres, jamais la même couleur.</p>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Bandeau de provenance — la signature</p>
+      <div class="prov">
+        <div class="prov-head">
+          <div class="prov-title">Retard de livraison signalé</div>
+          <div class="prov-sub">Feedback · SHP-00123 · compte ACME-EU</div>
+        </div>
+        <div class="prov-body">
+          suggestion <b>AI_PROPOSED</b> · confiance modèle 0.72 · <b>INFÉRÉ</b><br>
+          source · snapshot v2 · import <b>EC-2026-0714-0031</b> · 14 juil. 09:22
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">État vide — une absence n'est jamais une assertion</p>
+      <div class="notice">
+        <h4>Aucun résultat produit sur ce périmètre.</h4>
+        <p>L'absence de résultat ne signifie pas la conformité. Elle peut venir d'une règle évaluée sans résultat, hors périmètre, non publiée, ou d'un objet non couvert par une exécution.</p>
+        <div class="row">
+          <button class="btn btn-outline">Voir les exécutions</button>
+          <button class="btn btn-outline">Voir les règles applicables</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Palette data-viz — catégorielle, dérivée de la peau</p>
+      <div class="viz">
+        <div style="background:#0f6b66"></div>
+        <div style="background:#d9730d"></div>
+        <div style="background:#337ea9"></div>
+        <div style="background:#9f6b53"></div>
+        <div style="background:#9065b0"></div>
+        <div style="background:#c14c8a"></div>
+        <div style="background:#8a5a00"></div>
+      </div>
+      <p class="viz-note">Sept teintes discriminables pour les graphes (Sankey, barres…). Distinctes de l'accent d'action et des couleurs de statut.</p>
+    </section>
+
+    <div class="foot">Template de skin — aperçu à structure identique au Skin B. Aucune valeur n'est définitive ; sert à trancher la direction.</div>
+  </div>
+</div>

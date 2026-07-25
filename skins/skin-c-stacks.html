@@ -1,0 +1,311 @@
+<title>Skin C — Calque Stacks</title>
+<style>
+  /*
+   * Valeurs relevées le 2026-07 depuis le paquet publié @stackoverflow/stacks
+   * (thème clair par défaut). HSL verbatim. Police = stack système réel de Stacks
+   * → le rendu typographique ici est authentique, pas un fallback.
+   */
+  :root {
+    color-scheme: light;
+
+    /* Échelle "black" (neutres) — verbatim Stacks */
+    --white:      hsl(0, 0%, 100%);
+    --black-050:  hsl(0, 0%, 100%);
+    --black-075:  hsl(210, 8%, 97%);
+    --black-100:  hsl(210, 8%, 98%);
+    --black-150:  hsl(210, 8%, 95%);
+    --black-200:  hsl(210, 8%, 90%);
+    --black-250:  hsl(210, 8%, 80%);
+    --black-300:  hsl(210, 9%, 75%);
+    --black-350:  hsl(210, 8%, 68%);
+    --black-400:  hsl(210, 8%, 42%);
+    --black-500:  hsl(210, 8%, 25%);
+    --black-600:  hsl(210, 8%, 5%);
+
+    /* theme-primary = orange-400 · theme-secondary = blue-400 (verbatim) */
+    --orange-100: hsl(23, 87%, 97%);
+    --orange-300: hsl(27, 87%, 72%);
+    --orange-400: hsl(27, 89%, 48%);
+    --orange-500: hsl(27, 87%, 41%);
+
+    --blue-100:   hsl(210, 80%, 96%);
+    --blue-300:   hsl(210, 78%, 76%);
+    --blue-400:   hsl(210, 77%, 46%);
+    --blue-500:   hsl(210, 77%, 36%);
+    --blue-600:   hsl(210, 80%, 23%);
+
+    --green-100:  hsl(148, 35%, 95%);
+    --green-400:  hsl(148, 70%, 31%);
+    --green-500:  hsl(148, 75%, 22%);
+
+    --red-100:    hsl(0, 72%, 96%);
+    --red-400:    hsl(0, 60%, 49%);
+    --red-500:    hsl(0, 65%, 37%);
+
+    --yellow-100: hsl(43, 85%, 95%);
+    --yellow-400: hsl(43, 85%, 50%);
+    --yellow-500: hsl(43, 85%, 33%);
+
+    /* Rayons ≈ échelle Stacks */
+    --br-sm: 4px;
+    --br-md: 6px;
+
+    /* Typographie — stacks système verbatim */
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background: var(--black-075);
+    color: var(--black-500);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    padding: 40px 24px 72px;
+    font-size: 15px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  .masthead {
+    display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px;
+    padding-bottom: 24px; margin-bottom: 32px;
+    border-bottom: 1px solid var(--black-200);
+  }
+  .brandmark {
+    width: 52px; height: 52px; border-radius: var(--br-md);
+    background: var(--orange-400);
+    display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 15px;
+    letter-spacing: -0.02em;
+  }
+  .masthead h1 { margin: 0; font-size: 28px; line-height: 1.4; font-weight: 600; color: var(--black-600); }
+  .masthead .eyebrow {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--orange-500); font-weight: 600; margin: 0 0 4px;
+  }
+  .masthead p { margin: 6px 0 0; color: var(--black-400); font-size: 15px; max-width: 54ch; line-height: 1.4; }
+  .masthead .spec { margin-left: auto; text-align: right; font-size: 12.5px; color: var(--black-400); line-height: 1.7; }
+  .masthead .spec code { font-family: var(--mono); color: var(--black-500); }
+
+  section { margin-bottom: 34px; }
+  .sec-label {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--black-400); font-weight: 600; margin: 0 0 14px;
+  }
+
+  .card {
+    background: var(--white); border: 1px solid var(--black-200);
+    border-radius: var(--br-md); padding: 20px;
+  }
+
+  .ramp { display: flex; flex-wrap: wrap; gap: 0; border-radius: var(--br-sm); overflow: hidden; border: 1px solid var(--black-200); }
+  .swatch { flex: 1 1 0; min-width: 54px; height: 68px; display: flex; align-items: flex-end; padding: 6px 7px; }
+  .swatch span { font-size: 10.5px; font-family: var(--mono); }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .chip {
+    border-radius: var(--br-sm); padding: 12px 14px; color: #fff; font-size: 13px; font-weight: 500;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .chip code { font-family: var(--mono); font-size: 11px; opacity: 0.9; font-weight: 400; }
+
+  .type-row { display: flex; align-items: baseline; gap: 18px; padding: 7px 0; border-bottom: 1px solid var(--black-150); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row .tag { font-family: var(--mono); font-size: 11px; color: var(--black-400); width: 110px; flex: none; }
+  .type-row .demo { color: var(--black-600); }
+
+  /* Stacks buttons — filled primary = blue, danger = red, outlined, muted */
+  .btn {
+    font-family: inherit; font-size: 14px; font-weight: 500; border-radius: var(--br-md);
+    height: 35px; padding: 0 12px; border: 1px solid transparent; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; transition: background .1s, border-color .1s;
+  }
+  .btn:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--blue-100); border-color: var(--blue-400); }
+  .btn-primary { background: var(--blue-500); color: #fff; }
+  .btn-primary:hover { background: var(--blue-600); }
+  .btn-outline { background: var(--white); border-color: var(--black-300); color: var(--blue-600); }
+  .btn-outline:hover { background: var(--blue-100); border-color: var(--blue-300); }
+  .btn-muted { background: var(--black-100); color: var(--black-500); border-color: var(--black-200); }
+  .btn-muted:hover { background: var(--black-150); }
+  .btn-danger { background: var(--red-500); color: #fff; }
+  .btn-danger:hover { background: var(--red-400); }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Iconic Stacks tag pills — blue */
+  .so-tag {
+    display: inline-flex; align-items: center; border-radius: var(--br-sm);
+    padding: 3px 8px; font-size: 12px; font-weight: 400; line-height: 1.3;
+    background: var(--blue-100); color: var(--blue-600); border: 1px solid transparent;
+  }
+  .so-tag:hover { background: var(--blue-300); color: var(--blue-600); }
+
+  /* status badges (s-badge feel) */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px; border-radius: var(--br-sm);
+    padding: 2px 8px; font-size: 12px; font-weight: 500; line-height: 1.5; border: 1px solid transparent;
+  }
+  .b-success { color: var(--green-500); background: var(--green-100); border-color: var(--green-400); }
+  .b-warning { color: var(--yellow-500); background: var(--yellow-100); border-color: var(--yellow-400); }
+  .b-danger  { color: var(--red-500);   background: var(--red-100);   border-color: var(--red-400); }
+  .b-info    { color: var(--blue-600);  background: var(--blue-100);  border-color: var(--blue-300); }
+  .b-neutral { color: var(--black-500); background: var(--black-100); border-color: var(--black-300); }
+
+  .input {
+    height: 35px; border: 1px solid var(--black-300); background: var(--white); border-radius: var(--br-sm);
+    padding: 0 11px; font-family: inherit; font-size: 14px; color: var(--black-600); width: 240px;
+  }
+  .input:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--blue-100); border-color: var(--blue-400); }
+  .input::placeholder { color: var(--black-400); }
+
+  /* provenance banner */
+  .prov { border: 1px solid var(--black-200); border-radius: var(--br-md); overflow: hidden; }
+  .prov-head { background: var(--black-100); padding: 12px 16px; border-bottom: 1px solid var(--black-200); }
+  .prov-title { font-size: 15px; font-weight: 600; color: var(--black-600); }
+  .prov-sub { font-family: var(--mono); font-size: 12px; color: var(--black-400); margin-top: 3px; }
+  .prov-body { padding: 12px 16px; font-family: var(--mono); font-size: 12px; color: var(--black-400); line-height: 1.9; }
+  .prov-body b { color: var(--black-600); font-weight: 600; }
+
+  /* Stacks s-notice — callout for empty state */
+  .notice { border: 1px solid var(--blue-300); background: var(--blue-100); border-radius: var(--br-md); padding: 16px 18px; }
+  .notice h4 { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--black-600); }
+  .notice p { margin: 0 0 12px; font-size: 14px; color: var(--black-500); line-height: 1.45; max-width: 64ch; }
+
+  .viz { display: flex; gap: 0; height: 46px; border-radius: var(--br-sm); overflow: hidden; border: 1px solid var(--black-200); }
+  .viz div { flex: 1; }
+  .viz-note { font-size: 12px; color: var(--black-400); margin-top: 8px; }
+
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--black-200); font-size: 12.5px; color: var(--black-400); line-height: 1.6; }
+  .foot code { font-family: var(--mono); }
+</style>
+
+<div class="page">
+  <div class="wrap">
+    <header class="masthead">
+      <div class="brandmark">St</div>
+      <div>
+        <p class="eyebrow">Skin C — calque fidèle du système réel</p>
+        <h1>Stacks</h1>
+        <p>Le design system réel de Stack Overflow, relevé tel quel. Neutres bleutés, bleu interactif pour l'action, orange comme accent de marque. Police système : ce que tu vois ici est le rendu typographique authentique de Stacks, pas un aperçu.</p>
+      </div>
+      <div class="spec">
+        Police&nbsp;: <code>système (réelle)</code><br>
+        Primary&nbsp;: <code>blue-500</code><br>
+        Accent&nbsp;: <code>orange-400</code><br>
+        Rayon&nbsp;: <code>4–6px</code>
+      </div>
+    </header>
+
+    <section>
+      <p class="sec-label">Neutres « black » — verbatim Stacks (thème clair)</p>
+      <div class="ramp">
+        <div class="swatch" style="background:hsl(0,0%,100%)"><span style="color:hsl(210,8%,42%)">050</span></div>
+        <div class="swatch" style="background:hsl(210,8%,95%)"><span style="color:hsl(210,8%,42%)">150</span></div>
+        <div class="swatch" style="background:hsl(210,8%,90%)"><span style="color:hsl(210,8%,42%)">200</span></div>
+        <div class="swatch" style="background:hsl(210,8%,80%)"><span style="color:hsl(210,8%,25%)">250</span></div>
+        <div class="swatch" style="background:hsl(210,9%,75%)"><span style="color:hsl(210,8%,25%)">300</span></div>
+        <div class="swatch" style="background:hsl(210,8%,68%)"><span style="color:#fff">350</span></div>
+        <div class="swatch" style="background:hsl(210,8%,42%)"><span style="color:#fff">400</span></div>
+        <div class="swatch" style="background:hsl(210,8%,25%)"><span style="color:#fff">500</span></div>
+        <div class="swatch" style="background:hsl(210,8%,5%)"><span style="color:#fff">600</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Action (bleu) · marque (orange) · sémantiques — verbatim</p>
+      <div class="grid-3">
+        <div class="chip" style="background:hsl(210,77%,36%)">Blue · action / lien<code>blue-500</code></div>
+        <div class="chip" style="background:hsl(27,89%,48%)">Orange · theme-primary<code>orange-400</code></div>
+        <div class="chip" style="background:hsl(148,75%,22%)">Green · succès<code>green-500</code></div>
+        <div class="chip" style="background:hsl(43,85%,33%)">Yellow · alerte<code>yellow-500</code></div>
+        <div class="chip" style="background:hsl(0,65%,37%)">Red · danger<code>red-500</code></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Échelle typographique — tokens Stacks</p>
+      <div class="card">
+        <div class="type-row"><span class="tag">fs-headline1 / 28</span><span class="demo" style="font-size:28px;font-weight:600">Titre de vue principale</span></div>
+        <div class="type-row"><span class="tag">fs-title / 22</span><span class="demo" style="font-size:22px;font-weight:600">Titre d'écran</span></div>
+        <div class="type-row"><span class="tag">fs-subheading / 20</span><span class="demo" style="font-size:20px;font-weight:600">Titre de section</span></div>
+        <div class="type-row"><span class="tag">fs-body2 / 16</span><span class="demo" style="font-size:16px">Texte courant — lecture continue.</span></div>
+        <div class="type-row"><span class="tag">fs-body1 / 14</span><span class="demo" style="font-size:14px;color:hsl(210,8%,25%)">Libellés, tableaux</span></div>
+        <div class="type-row"><span class="tag">mono</span><span class="demo" style="font-family:var(--mono);font-size:14px">SHP-00123 · identifiant</span></div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Composants</p>
+      <div class="card stack">
+        <div class="row">
+          <button class="btn btn-primary">Accepter</button>
+          <button class="btn btn-outline">Corriger</button>
+          <button class="btn btn-muted">Différer</button>
+          <button class="btn btn-danger">Rejeter</button>
+          <input class="input" placeholder="Valeur corrigée" />
+        </div>
+        <div class="row">
+          <span class="badge b-success">● Accepté</span>
+          <span class="badge b-info">● Corrigé</span>
+          <span class="badge b-danger">● Rejeté</span>
+          <span class="badge b-warning">● À clarifier</span>
+          <span class="badge b-neutral">● Différé</span>
+        </div>
+        <div class="row">
+          <span class="so-tag">feedback</span>
+          <span class="so-tag">evidence</span>
+          <span class="so-tag">account</span>
+          <span class="so-tag">persona</span>
+          <span class="so-tag">contradiction</span>
+        </div>
+        <p style="margin:0;font-size:13px;color:hsl(210,8%,42%)">Boutons remplis bleus, tags en pilules bleues (la signature de Stack Overflow), badges de statut sémantiques. L'orange reste réservé à la marque.</p>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Bandeau de provenance — la signature à conserver</p>
+      <div class="prov">
+        <div class="prov-head">
+          <div class="prov-title">Retard de livraison signalé</div>
+          <div class="prov-sub">Feedback · SHP-00123 · compte ACME-EU</div>
+        </div>
+        <div class="prov-body">
+          suggestion <b>AI_PROPOSED</b> · confiance modèle 0.72 · <b>INFÉRÉ</b><br>
+          source · snapshot v2 · import <b>EC-2026-0714-0031</b> · 14 juil. 09:22
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">État vide — rendu en callout Stacks (s-notice)</p>
+      <div class="notice">
+        <h4>Aucun résultat produit sur ce périmètre.</h4>
+        <p>L'absence de résultat ne signifie pas la conformité. Elle peut venir d'une règle évaluée sans résultat, hors périmètre, non publiée, ou d'un objet non couvert par une exécution.</p>
+        <div class="row">
+          <button class="btn btn-outline">Voir les exécutions</button>
+          <button class="btn btn-outline">Voir les règles applicables</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="sec-label">Palette data-viz — dérivée des familles Stacks</p>
+      <div class="viz">
+        <div style="background:hsl(210,77%,46%)"></div>
+        <div style="background:hsl(27,89%,48%)"></div>
+        <div style="background:hsl(148,70%,31%)"></div>
+        <div style="background:hsl(0,60%,49%)"></div>
+        <div style="background:hsl(43,85%,50%)"></div>
+        <div style="background:hsl(210,8%,42%)"></div>
+        <div style="background:hsl(210,78%,76%)"></div>
+      </div>
+      <p class="viz-note">Sept teintes tirées des familles nommées de Stacks (blue, orange, green, red, yellow, black-400). Stacks ne fournit pas de palette de graphes native — celle-ci est une proposition cohérente.</p>
+    </section>
+
+    <div class="foot">
+      Calque fidèle — valeurs relevées le 2026-07 depuis le paquet publié <code>@stackoverflow/stacks</code> (thème clair par défaut), en HSL verbatim.
+      La police est le stack système réel de Stacks : le rendu typographique ci-dessus est authentique, contrairement aux skins A et B dont les polices personnalisées retombent en police système.
+      Contenu d'exemple aligné sur les skins A/B pour comparer à structure identique.
+    </div>
+  </div>
+</div>
