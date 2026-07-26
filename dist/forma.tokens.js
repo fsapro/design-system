@@ -1,5 +1,5 @@
-// Forma by FSA v0.3.0 — généré, ne pas éditer.
-export const version = "0.3.0";
+// Forma by FSA v0.4.0 — généré, ne pas éditer.
+export const version = "0.4.0";
 export const tokens = {
   "color.viz.cat.1": "#ff7420",
   "color.viz.cat.2": "#008684",
