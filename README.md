@@ -12,33 +12,44 @@ Design system centralisé — peau **Foundation**. Une source de vérité (`toke
 npm install github:fsapro/design-system#v0.4.0
 ```
 
+Deux façons de consommer :
+
+**Avec bundler (React, Vue, Svelte, Next.js, Astro…)**
 ```js
 import "@fsapro/forma/css";
 ```
 
-Sans bundler — copiez `dist/forma.css` dans vos assets :
-
+**Sans bundler — copiez le fichier CSS dans vos assets**
 ```html
 <link rel="stylesheet" href="/assets/forma.css">
 ```
 
-## Usage
+Le CSS est autonome — aucune dépendance, aucun build requis côté consommateur. Il fonctionne partout : HTML nu, templates serveur, apps statiques, iframes.
 
-Deux règles suffisent pour démarrer :
+## Démarrage rapide
+
+Trois étapes pour une interface Forma :
 
 ```html
+<!-- 1. Charger le CSS -->
+<link rel="stylesheet" href="/assets/forma.css">
+
+<!-- 2. Envelopper votre app avec .fx-root et data-forma-theme -->
 <html data-forma-theme="dark">
   <body class="fx-root">
+    
+    <!-- 3. Utiliser les classes fx-* -->
     <button class="fx-btn fx-btn--primary">Publier</button>
+    <input type="text" class="fx-input" placeholder="Nom">
+    
   </body>
 </html>
 ```
 
-- `data-forma-theme="dark" | "light"` sur n'importe quel ancêtre bascule le thème (y compris sur un sous-arbre).
-- Sans l'attribut, le thème suit `prefers-color-scheme`.
-- `.fx-root` applique fond, couleur, police et normalisation. À poser une fois, au plus haut.
+**Pour swapper les thèmes :** `data-forma-theme="light"` sur n'importe quel élément (inclus les sous-arbres).  
+**Sans l'attribut :** le thème suit `prefers-color-scheme` de l'OS.
 
-Le catalogue complet des classes est dans [`docs/usage.md`](docs/usage.md), et la documentation vivante dans [`docs/index.html`](docs/index.html) — ouvrez-la directement dans un navigateur.
+Catalogue complet des composants et tokens dans [`docs/usage.md`](docs/usage.md). Galerie vivante : ouvrez [`docs/index.html`](docs/index.html) dans un navigateur pour voir tous les composants avec les deux thèmes.
 
 ## Consommer les tokens en JS
 
@@ -50,6 +61,69 @@ cssVar("color.action");            // "var(--forma-color-action)"
 ```
 
 Pour un outil de design ou un autre générateur, partez de `tokens/forma.tokens.json` (DTCG, avec les correspondances Pantone dans `$extensions.fsa`).
+
+## Consommer par stack
+
+**React / Next.js**
+```jsx
+import "@fsapro/forma/css";
+import { tokens, cssVar } from "@fsapro/forma";
+
+export default function App() {
+  return (
+    <html data-forma-theme="dark">
+      <body className="fx-root">
+        <button className="fx-btn fx-btn--primary">Publier</button>
+        <style>{`
+          .custom { background: ${tokens["theme.dark.color.action"]}; }
+        `}</style>
+      </body>
+    </html>
+  );
+}
+```
+
+**Vue**
+```vue
+<template>
+  <html :data-forma-theme="theme">
+    <body class="fx-root">
+      <button class="fx-btn fx-btn--primary">Publier</button>
+    </body>
+  </html>
+</template>
+
+<script setup>
+import "@fsapro/forma/css";
+const theme = "dark"; // ou "light", ou réactif
+</script>
+```
+
+**HTML nu / templates serveur**
+```html
+<!DOCTYPE html>
+<html data-forma-theme="dark">
+<head>
+  <link rel="stylesheet" href="/assets/forma.css">
+</head>
+<body class="fx-root">
+  <button class="fx-btn fx-btn--primary">Publier</button>
+</body>
+</html>
+```
+
+**Astro / Static sites**
+```astro
+---
+import "@fsapro/forma/css";
+---
+
+<html data-forma-theme="dark">
+  <body class="fx-root">
+    <button class="fx-btn fx-btn--primary">Publier</button>
+  </body>
+</html>
+```
 
 ## Structure
 
