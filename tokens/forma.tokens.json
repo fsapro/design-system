@@ -2,7 +2,7 @@
   "$schema": "https://design-tokens.org/dtcg",
   "$description": "Forma by FSA — peau Foundation. Source unique de vérité des valeurs ; dist/ en est dérivé par build/build-tokens.mjs.",
   "$extensions": {
-    "fsa.version": "0.3.0",
+    "fsa.version": "0.4.0",
     "fsa.skin": "foundation",
     "fsa.defaultTheme": "dark"
   },

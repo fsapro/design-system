@@ -59,8 +59,8 @@ jobs:
             exit 1
           fi
 
-          # Vérifie que le module exporte version
-          if ! grep -q '"version"' package/dist/forma.tokens.js; then
+          # Vérifie que le module exporte version (export ESM nommé, jamais une clé JSON entre guillemets)
+          if ! grep -q 'export const version' package/dist/forma.tokens.js; then
             echo "::error::forma.tokens.js n'exporte pas version"
             exit 1
           fi
