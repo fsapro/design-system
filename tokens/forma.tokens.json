@@ -1,0 +1,733 @@
+{
+  "$schema": "https://design-tokens.org/dtcg",
+  "$description": "Forma by FSA — peau Foundation. Source unique de vérité des valeurs ; dist/ en est dérivé par build/build-tokens.mjs.",
+  "$extensions": {
+    "fsa.version": "0.3.0",
+    "fsa.skin": "foundation",
+    "fsa.defaultTheme": "dark"
+  },
+  "color": {
+    "theme": {
+      "dark": {
+        "bg": {
+          "$type": "color",
+          "$value": "#161614",
+          "$extensions": {
+            "fsa.pantone": "19-4005 TCX",
+            "fsa.pantoneName": "Stretch Limo",
+            "fsa.usage": "Fond de page"
+          }
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "#1f1f1c",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Stretch Limo",
+            "fsa.usage": "Carte, panneau, table"
+          },
+          "sunken": {
+            "$type": "color",
+            "$value": "#292926",
+            "$extensions": {
+              "fsa.pantone": "19-4005 TCX",
+              "fsa.pantoneName": "Stretch Limo",
+              "fsa.usage": "En-tête de table, zone creuse"
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "#31312d",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": null,
+              "fsa.usage": "Survol de ligne"
+            }
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#3a3a35",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Jet Black",
+            "fsa.usage": "Séparation structurelle"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "#2c2c28",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": null,
+              "fsa.usage": "Séparation interne"
+            }
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#eeeeea",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Snow White",
+            "fsa.usage": "Texte principal"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#b4b4ac",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": null,
+              "fsa.usage": "Texte secondaire"
+            }
+          },
+          "faint": {
+            "$type": "color",
+            "$value": "#9a9a92",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": null,
+              "fsa.usage": "Métadonnée, libellé de colonne"
+            }
+          }
+        },
+        "action": {
+          "$type": "color",
+          "$value": "#5b93c9",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Chill Blue",
+            "fsa.usage": "Bouton, lien, focus, série active"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "#7aabd8",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": null,
+              "fsa.usage": "Survol d'action"
+            }
+          },
+          "quiet": {
+            "$type": "color",
+            "$value": "#1c2c3d",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": null,
+              "fsa.usage": "Fond d'état sélectionné"
+            }
+          }
+        },
+        "on": {
+          "action": {
+            "$type": "color",
+            "$value": "#0f1b26",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": "dérivé d'Ocean Depths",
+              "fsa.usage": "Texte sur aplat d'action"
+            }
+          },
+          "danger": {
+            "$type": "color",
+            "$value": "#20100c",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": "dérivé — pas de référence print",
+              "fsa.usage": "Texte sur aplat destructif"
+            }
+          }
+        },
+        "success": {
+          "$type": "color",
+          "$value": "#6ba178",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Sap Green",
+            "fsa.usage": "Statut abouti"
+          }
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "#cfa63e",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Spicy Mustard",
+            "fsa.usage": "Statut à clarifier"
+          }
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "#d9776a",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Marsala",
+            "fsa.usage": "Statut critique, action destructive"
+          }
+        },
+        "info": {
+          "$type": "color",
+          "$value": "#5b93c9",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Chill Blue",
+            "fsa.usage": "Statut actif, information"
+          }
+        }
+      },
+      "light": {
+        "bg": {
+          "$type": "color",
+          "$value": "#f8f8f6",
+          "$extensions": {
+            "fsa.pantone": "11-0602 TCX",
+            "fsa.pantoneName": "Snow White",
+            "fsa.usage": "Fond de page"
+          }
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$extensions": {
+            "fsa.pantone": "11-0601 TCX",
+            "fsa.pantoneName": "Bright White",
+            "fsa.usage": "Carte, panneau, table"
+          },
+          "sunken": {
+            "$type": "color",
+            "$value": "#efefec",
+            "$extensions": {
+              "fsa.pantone": "13-4108 TCX",
+              "fsa.pantoneName": "Nimbus Cloud",
+              "fsa.usage": "En-tête de table, zone creuse"
+            }
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "#efefec",
+            "$extensions": {
+              "fsa.pantone": "13-4108 TCX",
+              "fsa.pantoneName": "Nimbus Cloud",
+              "fsa.usage": "Survol de ligne"
+            }
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#e2e2dd",
+          "$extensions": {
+            "fsa.pantone": "13-4108 TCX",
+            "fsa.pantoneName": "Nimbus Cloud",
+            "fsa.usage": "Séparation structurelle"
+          },
+          "subtle": {
+            "$type": "color",
+            "$value": "#efefec",
+            "$extensions": {
+              "fsa.pantone": "13-4108 TCX",
+              "fsa.pantoneName": "Nimbus Cloud",
+              "fsa.usage": "Séparation interne"
+            }
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#292926",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "dérivé de Stretch Limo",
+            "fsa.usage": "Texte principal"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#575751",
+            "$extensions": {
+              "fsa.pantone": "18-0201 TCX",
+              "fsa.pantoneName": "Castlerock",
+              "fsa.usage": "Texte secondaire"
+            }
+          },
+          "faint": {
+            "$type": "color",
+            "$value": "#6d6d65",
+            "$extensions": {
+              "fsa.pantone": null,
+              "fsa.pantoneName": "→ Castlerock (assombri pour AA sur surface creuse)",
+              "fsa.usage": "Métadonnée, libellé de colonne"
+            }
+          }
+        },
+        "action": {
+          "$type": "color",
+          "$value": "#2d6296",
+          "$extensions": {
+            "fsa.pantone": "18-4244 TCX",
+            "fsa.pantoneName": "Directoire Blue",
+            "fsa.usage": "Bouton, lien, focus, série active"
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "#24507c",
+            "$extensions": {
+              "fsa.pantone": "19-4826 TCX",
+              "fsa.pantoneName": "Dragonfly",
+              "fsa.usage": "Survol d'action"
+            }
+          },
+          "quiet": {
+            "$type": "color",
+            "$value": "#e7eef5",
+            "$extensions": {
+              "fsa.pantone": "12-4305 TCX",
+              "fsa.pantoneName": "Spa Blue",
+              "fsa.usage": "Fond d'état sélectionné"
+            }
+          }
+        },
+        "on": {
+          "action": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$extensions": {
+              "fsa.pantone": "11-0601 TCX",
+              "fsa.pantoneName": "Bright White",
+              "fsa.usage": "Texte sur aplat d'action"
+            }
+          },
+          "danger": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$extensions": {
+              "fsa.pantone": "11-0601 TCX",
+              "fsa.pantoneName": "Bright White",
+              "fsa.usage": "Texte sur aplat destructif"
+            }
+          }
+        },
+        "success": {
+          "$type": "color",
+          "$value": "#396e44",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "→ Sap Green (assombri pour AA sur fond de badge)",
+            "fsa.usage": "Statut abouti"
+          }
+        },
+        "warning": {
+          "$type": "color",
+          "$value": "#7e5b0f",
+          "$extensions": {
+            "fsa.pantone": null,
+            "fsa.pantoneName": "→ Golden Amber (assombri pour AA sur fond de badge)",
+            "fsa.usage": "Statut à clarifier"
+          }
+        },
+        "danger": {
+          "$type": "color",
+          "$value": "#a83a2c",
+          "$extensions": {
+            "fsa.pantone": "18-1438 TCX",
+            "fsa.pantoneName": "Marsala",
+            "fsa.usage": "Statut critique, action destructive"
+          }
+        },
+        "info": {
+          "$type": "color",
+          "$value": "#2d6296",
+          "$extensions": {
+            "fsa.pantone": "18-4244 TCX",
+            "fsa.pantoneName": "Directoire Blue",
+            "fsa.usage": "Statut actif, information"
+          }
+        }
+      }
+    },
+    "viz": {
+      "categorical": [
+        {
+          "$type": "color",
+          "$value": "#ff7420",
+          "$extensions": {
+            "fsa.pantone": "16-1364 TCX",
+            "fsa.pantoneName": "Vibrant Orange",
+            "fsa.usage": "Série catégorielle 1"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#008684",
+          "$extensions": {
+            "fsa.pantone": "17-5034 TCX",
+            "fsa.pantoneName": "Lapis",
+            "fsa.usage": "Série catégorielle 2"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#bcca25",
+          "$extensions": {
+            "fsa.pantone": "14-0443 TCX",
+            "fsa.pantoneName": "Kiwi Colada",
+            "fsa.usage": "Série catégorielle 3"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#592147",
+          "$extensions": {
+            "fsa.pantone": "19-2524 TCX",
+            "fsa.pantoneName": "Dark Purple",
+            "fsa.usage": "Série catégorielle 4"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#c67fae",
+          "$extensions": {
+            "fsa.pantone": "16-3115 TCX",
+            "fsa.pantoneName": "Crocus",
+            "fsa.usage": "Série catégorielle 5"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#d8ae48",
+          "$extensions": {
+            "fsa.pantone": "14-0952 TCX",
+            "fsa.pantoneName": "Spicy Mustard",
+            "fsa.usage": "Série catégorielle 6"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#506e91",
+          "$extensions": {
+            "fsa.pantone": "18-4225 TCX",
+            "fsa.pantoneName": "Stormy Sea",
+            "fsa.usage": "Série catégorielle 7"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#f19035",
+          "$extensions": {
+            "fsa.pantone": "15-1153 TCX",
+            "fsa.pantoneName": "Apricot",
+            "fsa.usage": "Série catégorielle 8"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#9a2b2e",
+          "$extensions": {
+            "fsa.pantone": "18-1552 TCX",
+            "fsa.pantoneName": "Lava Falls",
+            "fsa.usage": "Série catégorielle 9"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#a5b2aa",
+          "$extensions": {
+            "fsa.pantone": "15-5205 TCX",
+            "fsa.pantoneName": "Aqua Gray",
+            "fsa.usage": "Série catégorielle 10"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#7391c8",
+          "$extensions": {
+            "fsa.pantone": "16-4031 TCX",
+            "fsa.pantoneName": "Cornflower Blue",
+            "fsa.usage": "Série catégorielle 11"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#9c4c8d",
+          "$extensions": {
+            "fsa.pantone": "18-3223 TCX",
+            "fsa.pantoneName": "Cattleya Orchid",
+            "fsa.usage": "Série catégorielle 12"
+          }
+        }
+      ],
+      "sequential": [
+        {
+          "$type": "color",
+          "$value": "#e7eef5",
+          "$extensions": {
+            "fsa.pantone": "12-4305 TCX",
+            "fsa.pantoneName": "Spa Blue",
+            "fsa.usage": "Échelle séquentielle, pas 1"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#a9c3da",
+          "$extensions": {
+            "fsa.pantone": "14-4122 TCX",
+            "fsa.pantoneName": "Airy Blue",
+            "fsa.usage": "Échelle séquentielle, pas 2"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#5b89ad",
+          "$extensions": {
+            "fsa.pantone": "17-4320 TCX",
+            "fsa.pantoneName": "Chill Blue",
+            "fsa.usage": "Échelle séquentielle, pas 3"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#2d6296",
+          "$extensions": {
+            "fsa.pantone": "18-4244 TCX",
+            "fsa.pantoneName": "Directoire Blue",
+            "fsa.usage": "Échelle séquentielle, pas 4"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#1a3b5c",
+          "$extensions": {
+            "fsa.pantone": "19-4826 TCX",
+            "fsa.pantoneName": "Dragonfly",
+            "fsa.usage": "Échelle séquentielle, pas 5"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#13273d",
+          "$extensions": {
+            "fsa.pantone": "19-4013 TCX",
+            "fsa.pantoneName": "Midnight Navy",
+            "fsa.usage": "Échelle séquentielle, pas 6"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#0c1f33",
+          "$extensions": {
+            "fsa.pantone": "19-4121 TCX",
+            "fsa.pantoneName": "Ocean Depths",
+            "fsa.usage": "Échelle séquentielle, pas 7"
+          }
+        }
+      ]
+    }
+  },
+  "font": {
+    "sans": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Sans",
+        "system-ui",
+        "Segoe UI",
+        "sans-serif"
+      ]
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Mono",
+        "ui-monospace",
+        "Consolas",
+        "monospace"
+      ]
+    },
+    "num": {
+      "$type": "fontFamily",
+      "$value": [
+        "ui-monospace",
+        "SFMono-Regular",
+        "Consolas",
+        "monospace"
+      ],
+      "$extensions": {
+        "fsa.usage": "Valeurs chiffrées des cartes de statistiques"
+      }
+    }
+  },
+  "typography": {
+    "2xl": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "31px",
+        "lineHeight": "1.15",
+        "fontWeight": 600,
+        "letterSpacing": "-0.02em"
+      },
+      "$extensions": {
+        "fsa.usage": "Titre de vue principale"
+      }
+    },
+    "xl": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "25px",
+        "lineHeight": "1.2",
+        "fontWeight": 600,
+        "letterSpacing": "-0.015em"
+      },
+      "$extensions": {
+        "fsa.usage": "Titre d'écran"
+      }
+    },
+    "lg": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "20px",
+        "lineHeight": "1.25",
+        "fontWeight": 600,
+        "letterSpacing": "-0.015em"
+      },
+      "$extensions": {
+        "fsa.usage": "Titre de section"
+      }
+    },
+    "base": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "15px",
+        "lineHeight": "1.5",
+        "fontWeight": 400,
+        "letterSpacing": "0"
+      },
+      "$extensions": {
+        "fsa.usage": "Texte courant"
+      }
+    },
+    "sm": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "13px",
+        "lineHeight": "1.4",
+        "fontWeight": 400,
+        "letterSpacing": "0"
+      },
+      "$extensions": {
+        "fsa.usage": "Libellé, tableau dense"
+      }
+    },
+    "xs": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": "11.5px",
+        "lineHeight": "1.45",
+        "fontWeight": 400,
+        "letterSpacing": "0"
+      },
+      "$extensions": {
+        "fsa.usage": "Métadonnée"
+      }
+    },
+    "mono": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": "13px",
+        "lineHeight": "1.5",
+        "fontWeight": 400,
+        "letterSpacing": "0"
+      },
+      "$extensions": {
+        "fsa.usage": "Identifiant contractuel"
+      }
+    }
+  },
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": "48px"
+    }
+  },
+  "radius": {
+    "control": {
+      "$type": "dimension",
+      "$value": "3px",
+      "$extensions": {
+        "fsa.usage": "Bouton, champ, badge"
+      }
+    },
+    "surface": {
+      "$type": "dimension",
+      "$value": "6px",
+      "$extensions": {
+        "fsa.usage": "Carte, panneau, overlay"
+      }
+    },
+    "pill": {
+      "$type": "dimension",
+      "$value": "999px",
+      "$extensions": {
+        "fsa.usage": "Pastille d'état en ligne"
+      }
+    }
+  },
+  "size": {
+    "control": {
+      "$type": "dimension",
+      "$value": "34px",
+      "$extensions": {
+        "fsa.usage": "Hauteur de contrôle à densité 75"
+      }
+    }
+  },
+  "elevation": {
+    "0": {
+      "$type": "shadow",
+      "$value": "none",
+      "$extensions": {
+        "fsa.usage": "Bord seul — défaut de la peau"
+      }
+    },
+    "1": {
+      "$type": "shadow",
+      "$value": "none",
+      "$extensions": {
+        "fsa.usage": "Carte : aucune ombre, le bord suffit"
+      }
+    },
+    "2": {
+      "$type": "shadow",
+      "$value": "0 6px 20px -8px rgba(22,22,20,.22)",
+      "$extensions": {
+        "fsa.usage": "Overlay uniquement",
+        "fsa.dark": "0 10px 26px -10px rgba(0,0,0,.8)"
+      }
+    }
+  }
+}

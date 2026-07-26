@@ -1,0 +1,27 @@
+{
+  "name": "@fsapro/forma",
+  "version": "0.3.0",
+  "description": "Forma by FSA — design system, peau Foundation. Tokens DTCG + CSS de composants, sans dépendance ni build côté consommateur.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/fsapro/design-system.git" },
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "main": "./dist/forma.tokens.js",
+  "exports": {
+    ".": "./dist/forma.tokens.js",
+    "./css": "./dist/forma.css",
+    "./tokens.css": "./dist/forma-tokens.css",
+    "./components.css": "./dist/forma-components.css",
+    "./tokens.json": "./tokens/forma.tokens.json",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "tokens", "src", "build", "docs/foundations.md", "CHANGELOG.md", "README.md"],
+  "scripts": {
+    "build": "node build/build-tokens.mjs",
+    "test:contrast": "node build/check-contrast.mjs",
+    "verify": "npm run build && git diff --exit-code dist && npm run test:contrast"
+  },
+  "engines": { "node": ">=18" },
+  "keywords": ["design-system", "design-tokens", "dtcg", "css", "fsa", "forma"],
+  "publishConfig": { "access": "restricted" }
+}

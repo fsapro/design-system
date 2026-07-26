@@ -1,27 +1,86 @@
-# Design system — en cours d'arbitrage
+# Forma by FSA
 
-Dépôt destiné à devenir le **design system centralisé** consommé par mes produits (dont [Opportunity Graph](https://github.com/fsapro/opportunity-graph)).
+Design system centralisé — peau **Foundation**. Une source de vérité (`tokens/forma.tokens.json`, format DTCG), un fichier CSS à charger, aucune dépendance et aucun build côté consommateur.
 
-## État actuel
+- **Thème par défaut :** dark. Light disponible, et suivi automatique des préférences système.
+- **Contrastes :** toutes les paires de texte passent WCAG AA, vérifié en CI.
+- **Stacks :** React, Vue, HTML nu, Power Apps — c'est du CSS et des variables, rien d'autre.
 
-Pas encore un design system fonctionnel — un espace de décision. Trois directions de skin ont été explorées et comparées avant de trancher laquelle devient la fondation.
+## Installation
 
-## `skins/`
+```bash
+npm install github:fsapro/design-system#v0.3.0
+```
 
-Trois maquettes HTML autonomes (aucune dépendance, s'ouvrent directement dans un navigateur), montrant les mêmes composants (boutons, badges, bandeau de provenance, état vide, palette data-viz) dans trois directions :
+```js
+import "@fsapro/forma/css";
+```
 
-- **`skin-a-atelier.html`** — neutres chauds + teal minéral, registre proche de Notion. Skin maison, alignée sur la direction actuelle d'Opportunity Graph.
-- **`skin-b-registre.html`** — neutres papier + bleu d'encre, registre proche de Stacks (Stack Overflow). Skin maison, inspirée d'un registre externe — aucune valeur reprise telle quelle.
-- **`skin-c-stacks.html`** — calque fidèle du design system réel de Stack Overflow (Stacks), valeurs relevées dans le paquet publié `@stackoverflow/stacks` (thème clair, HSL verbatim, juillet 2026). Sert de référence de calibrage, pas de fondation candidate en l'état — adopter une marque tierce va à l'encontre d'un design system propre.
-- **`comparatif.html`** — les trois skins côte à côte sur les mêmes composants, avec une matrice de décision.
+Sans bundler — copiez `dist/forma.css` dans vos assets :
 
-## Prochaine étape
+```html
+<link rel="stylesheet" href="/assets/forma.css">
+```
 
-Une fois une direction choisie (ou un croisement des trois), la fondation réelle prendra la forme de :
+## Usage
 
-- `tokens.json` (format DTCG) — source unique, versionnée ;
-- `tokens.css` — traduction consommée par les produits ;
-- `foundations.md` — gouvernance (règles de couleur, échelles, a11y) ;
-- `CHANGELOG.md` — contrat de version (majeur / mineur / correctif).
+Deux règles suffisent pour démarrer :
 
-Les composants (boutons, champs…) restent copiés dans chaque produit consommateur — seule la peau (tokens) est centralisée.
+```html
+<html data-forma-theme="dark">
+  <body class="fx-root">
+    <button class="fx-btn fx-btn--primary">Publier</button>
+  </body>
+</html>
+```
+
+- `data-forma-theme="dark" | "light"` sur n'importe quel ancêtre bascule le thème (y compris sur un sous-arbre).
+- Sans l'attribut, le thème suit `prefers-color-scheme`.
+- `.fx-root` applique fond, couleur, police et normalisation. À poser une fois, au plus haut.
+
+Le catalogue complet des classes est dans [`docs/usage.md`](docs/usage.md), et la documentation vivante dans [`docs/index.html`](docs/index.html) — ouvrez-la directement dans un navigateur.
+
+## Consommer les tokens en JS
+
+```js
+import tokens, { cssVar, version } from "@fsapro/forma";
+
+tokens["theme.dark.color.action"]; // "#5b93c9"
+cssVar("color.action");            // "var(--forma-color-action)"
+```
+
+Pour un outil de design ou un autre générateur, partez de `tokens/forma.tokens.json` (DTCG, avec les correspondances Pantone dans `$extensions.fsa`).
+
+## Structure
+
+```
+tokens/forma.tokens.json   Source de vérité. Toute valeur se change ICI.
+src/components.css         CSS de composants, écrit à la main.
+build/build-tokens.mjs     Génère dist/. Zéro dépendance.
+build/check-contrast.mjs   Vérifie WCAG AA sur toutes les paires.
+dist/                      Généré et commité — ne pas éditer.
+docs/                      Doc vivante + fondations.
+```
+
+## Modifier le système
+
+```bash
+node build/build-tokens.mjs      # après toute modification de tokens ou de composants
+node build/check-contrast.mjs    # avant de commiter une couleur
+```
+
+`dist/` est commité pour que l'installation depuis GitHub ne demande aucun build. La CI échoue si `dist/` n'est pas à jour ou si un contraste passe sous AA.
+
+## Versionnage
+
+Sémantique appliqué aux **tokens**, pas au code :
+
+- **Majeur** — un token sémantique est supprimé ou renommé, ou une règle d'usage change de sens.
+- **Mineur** — un token est ajouté, une valeur change sans casser l'usage.
+- **Correctif** — contraste, référence Pantone, documentation.
+
+Historique dans [`CHANGELOG.md`](CHANGELOG.md). Chaque version est taguée `vX.Y.Z` — épinglez le tag dans vos produits.
+
+## Ce que le système ne couvre pas encore
+
+Arbre / hiérarchie, filtres avancés sauvegardés, upload, sélecteur de date natif, table éditable en ligne, tiroir latéral. Motion non spécifié (durées et courbes). La peau **Atelier** est archivée dans `archive/`, non maintenue.

@@ -1,0 +1,141 @@
+/*! Forma by FSA — peau Foundation, v0.3.0
+ *  Généré depuis tokens/forma.tokens.json — ne pas éditer à la main.
+ *  Thème par défaut : dark. Bascule : <html data-forma-theme="light">
+ */
+
+:root, [data-forma-theme='dark'] {
+  --forma-color-bg: #161614;
+  --forma-color-surface: #1f1f1c;
+  --forma-color-surface-sunken: #292926;
+  --forma-color-surface-hover: #31312d;
+  --forma-color-border: #3a3a35;
+  --forma-color-border-subtle: #2c2c28;
+  --forma-color-text: #eeeeea;
+  --forma-color-text-muted: #b4b4ac;
+  --forma-color-text-faint: #9a9a92;
+  --forma-color-action: #5b93c9;
+  --forma-color-action-hover: #7aabd8;
+  --forma-color-action-quiet: #1c2c3d;
+  --forma-color-on-action: #0f1b26;
+  --forma-color-on-danger: #20100c;
+  --forma-color-success: #6ba178;
+  --forma-color-warning: #cfa63e;
+  --forma-color-danger: #d9776a;
+  --forma-color-info: #5b93c9;
+  --forma-color-viz-cat-1: #ff7420;
+  --forma-color-viz-cat-2: #008684;
+  --forma-color-viz-cat-3: #bcca25;
+  --forma-color-viz-cat-4: #592147;
+  --forma-color-viz-cat-5: #c67fae;
+  --forma-color-viz-cat-6: #d8ae48;
+  --forma-color-viz-cat-7: #506e91;
+  --forma-color-viz-cat-8: #f19035;
+  --forma-color-viz-cat-9: #9a2b2e;
+  --forma-color-viz-cat-10: #a5b2aa;
+  --forma-color-viz-cat-11: #7391c8;
+  --forma-color-viz-cat-12: #9c4c8d;
+  --forma-color-viz-seq-1: #e7eef5;
+  --forma-color-viz-seq-2: #a9c3da;
+  --forma-color-viz-seq-3: #5b89ad;
+  --forma-color-viz-seq-4: #2d6296;
+  --forma-color-viz-seq-5: #1a3b5c;
+  --forma-color-viz-seq-6: #13273d;
+  --forma-color-viz-seq-7: #0c1f33;
+  --forma-font-sans: 'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif;
+  --forma-font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --forma-font-num: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --forma-space-1: 4px;
+  --forma-space-2: 8px;
+  --forma-space-3: 12px;
+  --forma-space-4: 16px;
+  --forma-space-6: 24px;
+  --forma-space-8: 32px;
+  --forma-space-12: 48px;
+  --forma-radius-control: 3px;
+  --forma-radius-surface: 6px;
+  --forma-radius-pill: 999px;
+  --forma-size-control: 34px;
+  --forma-elevation-0: none;
+  --forma-elevation-1: none;
+  --forma-elevation-2: 0 6px 20px -8px rgba(22,22,20,.22);
+  --forma-type-2xl-family: var(--forma-font-sans);
+  --forma-type-2xl-size: 31px;
+  --forma-type-2xl-line: 1.15;
+  --forma-type-2xl-weight: 600;
+  --forma-type-2xl-tracking: -0.02em;
+  --forma-type-xl-family: var(--forma-font-sans);
+  --forma-type-xl-size: 25px;
+  --forma-type-xl-line: 1.2;
+  --forma-type-xl-weight: 600;
+  --forma-type-xl-tracking: -0.015em;
+  --forma-type-lg-family: var(--forma-font-sans);
+  --forma-type-lg-size: 20px;
+  --forma-type-lg-line: 1.25;
+  --forma-type-lg-weight: 600;
+  --forma-type-lg-tracking: -0.015em;
+  --forma-type-base-family: var(--forma-font-sans);
+  --forma-type-base-size: 15px;
+  --forma-type-base-line: 1.5;
+  --forma-type-base-weight: 400;
+  --forma-type-base-tracking: 0;
+  --forma-type-sm-family: var(--forma-font-sans);
+  --forma-type-sm-size: 13px;
+  --forma-type-sm-line: 1.4;
+  --forma-type-sm-weight: 400;
+  --forma-type-sm-tracking: 0;
+  --forma-type-xs-family: var(--forma-font-sans);
+  --forma-type-xs-size: 11.5px;
+  --forma-type-xs-line: 1.45;
+  --forma-type-xs-weight: 400;
+  --forma-type-xs-tracking: 0;
+  --forma-type-mono-family: var(--forma-font-mono);
+  --forma-type-mono-size: 13px;
+  --forma-type-mono-line: 1.5;
+  --forma-type-mono-weight: 400;
+  --forma-type-mono-tracking: 0;
+  --forma-elevation-2: 0 10px 26px -10px rgba(0,0,0,.8);
+}
+
+[data-forma-theme='light'] {
+  --forma-color-bg: #f8f8f6;
+  --forma-color-surface: #ffffff;
+  --forma-color-surface-sunken: #efefec;
+  --forma-color-surface-hover: #efefec;
+  --forma-color-border: #e2e2dd;
+  --forma-color-border-subtle: #efefec;
+  --forma-color-text: #292926;
+  --forma-color-text-muted: #575751;
+  --forma-color-text-faint: #6d6d65;
+  --forma-color-action: #2d6296;
+  --forma-color-action-hover: #24507c;
+  --forma-color-action-quiet: #e7eef5;
+  --forma-color-on-action: #ffffff;
+  --forma-color-on-danger: #ffffff;
+  --forma-color-success: #396e44;
+  --forma-color-warning: #7e5b0f;
+  --forma-color-danger: #a83a2c;
+  --forma-color-info: #2d6296;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-forma-theme]) {
+    --forma-color-bg: #f8f8f6;
+    --forma-color-surface: #ffffff;
+    --forma-color-surface-sunken: #efefec;
+    --forma-color-surface-hover: #efefec;
+    --forma-color-border: #e2e2dd;
+    --forma-color-border-subtle: #efefec;
+    --forma-color-text: #292926;
+    --forma-color-text-muted: #575751;
+    --forma-color-text-faint: #6d6d65;
+    --forma-color-action: #2d6296;
+    --forma-color-action-hover: #24507c;
+    --forma-color-action-quiet: #e7eef5;
+    --forma-color-on-action: #ffffff;
+    --forma-color-on-danger: #ffffff;
+    --forma-color-success: #396e44;
+    --forma-color-warning: #7e5b0f;
+    --forma-color-danger: #a83a2c;
+    --forma-color-info: #2d6296;
+}
+}

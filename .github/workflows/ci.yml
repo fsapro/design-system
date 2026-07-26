@@ -1,0 +1,28 @@
+name: verify
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Régénérer dist/ depuis les tokens
+        run: node build/build-tokens.mjs
+
+      - name: dist/ doit être à jour dans le commit
+        run: |
+          if ! git diff --exit-code dist; then
+            echo "::error::dist/ n'est pas synchronisé avec tokens/forma.tokens.json — lancez 'npm run build' et commitez."
+            exit 1
+          fi
+
+      - name: Contrastes WCAG AA
+        run: node build/check-contrast.mjs

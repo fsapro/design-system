@@ -1,0 +1,105 @@
+#!/usr/bin/env node
+// Forma by FSA — génère dist/ depuis tokens/forma.tokens.json.
+// Aucune dépendance : node build/build-tokens.mjs
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const tokens = JSON.parse(readFileSync(join(root, "tokens/forma.tokens.json"), "utf8"));
+const version = tokens.$extensions["fsa.version"];
+const P = "--forma-";
+
+const isToken = (n) => n && typeof n === "object" && "$value" in n;
+const q = (f) => (/[\s]/.test(f) && !f.startsWith("'") ? `'${f}'` : f);
+
+/** Aplatit un sous-arbre DTCG en paires [nom-css, valeur]. */
+function flatten(node, path = [], out = []) {
+  if (isToken(node)) {
+    out.push([path.join("-"), node]);
+    for (const [k, v] of Object.entries(node)) {
+      if (!k.startsWith("$") && typeof v === "object") flatten(v, [...path, k], out);
+    }
+    return out;
+  }
+  for (const [k, v] of Object.entries(node)) {
+    if (k.startsWith("$") || typeof v !== "object") continue;
+    if (Array.isArray(v)) v.forEach((item, i) => flatten(item, [...path, k, String(i + 1)], out));
+    else flatten(v, [...path, k], out);
+  }
+  return out;
+}
+
+function cssValue(token) {
+  const v = token.$value;
+  if (token.$type === "fontFamily") return Array.isArray(v) ? v.map(q).join(", ") : q(v);
+  return v;
+}
+
+/** Les tokens typographiques composites éclatent en -size / -line / -weight / -tracking. */
+function typographyDecls() {
+  const out = [];
+  for (const [name, tok] of Object.entries(tokens.typography)) {
+    if (name.startsWith("$")) continue;
+    const v = tok.$value;
+    const family = v.fontFamily.replace(/[{}]/g, "").replace(".", "-");
+    out.push([`type-${name}-family`, `var(${P}${family})`]);
+    out.push([`type-${name}-size`, v.fontSize]);
+    out.push([`type-${name}-line`, String(v.lineHeight)]);
+    out.push([`type-${name}-weight`, String(v.fontWeight)]);
+    out.push([`type-${name}-tracking`, v.letterSpacing]);
+  }
+  return out;
+}
+
+function themeDecls(theme) {
+  return flatten(tokens.color.theme[theme], ["color"]).map(([n, t]) => [n, cssValue(t)]);
+}
+
+function globalDecls() {
+  const out = [];
+  for (const [n, t] of flatten(tokens.color.viz, ["color", "viz"])) out.push([n.replace("categorical", "cat").replace("sequential", "seq"), cssValue(t)]);
+  for (const group of ["font", "space", "radius", "size"]) {
+    for (const [n, t] of flatten(tokens[group], [group])) out.push([n, cssValue(t)]);
+  }
+  for (const [n, t] of flatten(tokens.elevation, ["elevation"])) out.push([n, cssValue(t)]);
+  out.push(...typographyDecls());
+  return out;
+}
+
+const darkElevation = Object.entries(tokens.elevation)
+  .filter(([k, t]) => !k.startsWith("$") && t.$extensions && t.$extensions["fsa.dark"])
+  .map(([k, t]) => [`elevation-${k}`, t.$extensions["fsa.dark"]]);
+
+const block = (sel, decls, indent = "  ") =>
+  `${sel} {\n${decls.map(([n, v]) => `${indent}${P}${n}: ${v};`).join("\n")}\n}`;
+
+const header = `/*! Forma by FSA — peau Foundation, v${version}
+ *  Généré depuis tokens/forma.tokens.json — ne pas éditer à la main.
+ *  Thème par défaut : dark. Bascule : <html data-forma-theme="light">
+ */`;
+
+const tokensCss = [
+  header,
+  block(":root, [data-forma-theme='dark']", [...themeDecls("dark"), ...globalDecls(), ...darkElevation]),
+  block("[data-forma-theme='light']", themeDecls("light")),
+  `@media (prefers-color-scheme: light) {\n${block("  :root:not([data-forma-theme])", themeDecls("light"), "    ")}\n}`,
+].join("\n\n") + "\n";
+
+const flatJs = Object.fromEntries([
+  ...globalDecls().map(([n, v]) => [n.replace(/-/g, "."), v]),
+  ...themeDecls("dark").map(([n, v]) => [`theme.dark.${n.replace(/-/g, ".")}`, v]),
+  ...themeDecls("light").map(([n, v]) => [`theme.light.${n.replace(/-/g, ".")}`, v]),
+]);
+
+const tokensJs = `// Forma by FSA v${version} — généré, ne pas éditer.\nexport const version = ${JSON.stringify(version)};\nexport const tokens = ${JSON.stringify(flatJs, null, 2)};\nexport const cssVar = (name) => \`var(${P}\${name.replace(/\\./g, "-")})\`;\nexport default tokens;\n`;
+
+const components = readFileSync(join(root, "src/components.css"), "utf8");
+
+mkdirSync(join(root, "dist"), { recursive: true });
+writeFileSync(join(root, "dist/forma-tokens.css"), tokensCss);
+writeFileSync(join(root, "dist/forma-components.css"), components);
+writeFileSync(join(root, "dist/forma.css"), tokensCss + "\n" + components);
+writeFileSync(join(root, "dist/forma.tokens.js"), tokensJs);
+
+console.log(`Forma v${version} — dist/ régénéré (${tokensCss.split("\n").length} lignes de tokens).`);
