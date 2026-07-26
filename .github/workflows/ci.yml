@@ -36,3 +36,33 @@ jobs:
             echo "::error::docs/foundations.md n'est pas synchronisé avec les ratios de contraste actuels — lancez 'node build/update-contrast-report.mjs' et commitez."
             exit 1
           fi
+
+      - name: Installation du paquet (npm pack)
+        run: |
+          npm pack
+          TARBALL=$(ls -t *.tgz | head -1)
+          echo "TARBALL=$TARBALL" >> $GITHUB_ENV
+
+      - name: Vérification des points d'entrée
+        run: |
+          mkdir -p /tmp/forma-test
+          cd /tmp/forma-test
+          tar -xzf "$GITHUB_WORKSPACE/${{ env.TARBALL }}"
+
+          # Vérifie que les CSS contiennent les tokens attendus
+          if ! grep -q "forma-color-action" package/dist/forma.css; then
+            echo "::error::forma.css ne contient pas --forma-color-action"
+            exit 1
+          fi
+          if ! grep -q "forma-color-action" package/dist/forma-tokens.css; then
+            echo "::error::forma-tokens.css ne contient pas --forma-color-action"
+            exit 1
+          fi
+
+          # Vérifie que le module exporte version
+          if ! grep -q '"version"' package/dist/forma.tokens.js; then
+            echo "::error::forma.tokens.js n'exporte pas version"
+            exit 1
+          fi
+
+          echo "✓ Points d'entrée vérifiés"
