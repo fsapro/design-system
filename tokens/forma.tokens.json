@@ -92,7 +92,7 @@
         },
         "action": {
           "$type": "color",
-          "$value": "#5b93c9",
+          "$value": "#5b96c9",
           "$extensions": {
             "fsa.pantone": null,
             "fsa.pantoneName": "dérivé de Chill Blue",
@@ -139,7 +139,7 @@
         },
         "success": {
           "$type": "color",
-          "$value": "#6ba178",
+          "$value": "#6ca279",
           "$extensions": {
             "fsa.pantone": null,
             "fsa.pantoneName": "dérivé de Sap Green",
@@ -157,7 +157,7 @@
         },
         "danger": {
           "$type": "color",
-          "$value": "#d9776a",
+          "$value": "#dc7a6d",
           "$extensions": {
             "fsa.pantone": null,
             "fsa.pantoneName": "dérivé de Marsala",
@@ -166,7 +166,7 @@
         },
         "info": {
           "$type": "color",
-          "$value": "#5b93c9",
+          "$value": "#629ad0",
           "$extensions": {
             "fsa.pantone": null,
             "fsa.pantoneName": "dérivé de Chill Blue",
@@ -213,7 +213,7 @@
         },
         "border": {
           "$type": "color",
-          "$value": "#e2e2dd",
+          "$value": "#e1e1dc",
           "$extensions": {
             "fsa.pantone": "13-4108 TCX",
             "fsa.pantoneName": "Nimbus Cloud",

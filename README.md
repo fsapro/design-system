@@ -3,13 +3,13 @@
 Design system centralisé — peau **Foundation**. Une source de vérité (`tokens/forma.tokens.json`, format DTCG), un fichier CSS à charger, aucune dépendance et aucun build côté consommateur.
 
 - **Thème par défaut :** dark. Light disponible, et suivi automatique des préférences système.
-- **Contrastes :** toutes les paires de texte passent WCAG AA, vérifié en CI.
+- **Accessibilité :** toutes les paires de texte atteignent le niveau AA (4,5:1), vérifié automatiquement en CI. Les bords structurels maintiennent un seuil de 1,3:1 pour préserver la légèreté visuelle.
 - **Stacks :** React, Vue, HTML nu, Power Apps — c'est du CSS et des variables, rien d'autre.
 
 ## Installation
 
 ```bash
-npm install github:fsapro/design-system#v0.3.0
+npm install github:fsapro/design-system#v0.4.0
 ```
 
 ```js
@@ -45,7 +45,7 @@ Le catalogue complet des classes est dans [`docs/usage.md`](docs/usage.md), et l
 ```js
 import tokens, { cssVar, version } from "@fsapro/forma";
 
-tokens["theme.dark.color.action"]; // "#5b93c9"
+tokens["theme.dark.color.action"]; // "#5b96c9"
 cssVar("color.action");            // "var(--forma-color-action)"
 ```
 

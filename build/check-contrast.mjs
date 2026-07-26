@@ -38,6 +38,30 @@ const v = (theme, path) => {
 
 const AA = 4.5, AA_LARGE = 3;
 let failed = 0;
+const reportMode = process.argv.includes("--report");
+
+// Pairs qui seront affichés dans le tableau de documentation
+const docPairs = [
+  ["Texte sur fond", "text", "bg"],
+  ["Texte sur surface", "text", "surface"],
+  ["Texte secondaire sur surface", "text.muted", "surface"],
+  ["Texte secondaire sur surface creuse", "text.muted", "surface.sunken"],
+  ["Métadonnée sur fond", "text.faint", "bg"],
+  ["Métadonnée sur surface", "text.faint", "surface"],
+  ["Métadonnée sur surface creuse", "text.faint", "surface.sunken"],
+  ["Action sur fond", "action", "bg"],
+  ["Action sur surface", "action", "surface"],
+  ["Action sur fond sélectionné", "action", "action.quiet"],
+  ["Texte sur aplat d'action", "on.action", "action"],
+  ["Texte sur aplat destructif", "on.danger", "danger"],
+  ["Succès sur surface", "success", "surface"],
+  ["Succès sur fond de badge", "success", "badge:success"],
+  ["Attention sur fond de badge", "warning", "badge:warning"],
+  ["Critique sur fond de badge", "danger", "badge:danger"],
+  ["Information sur fond de badge", "info", "badge:info"],
+];
+
+const getColorForBadge = (theme, color) => mix(v(theme, color), v(theme, "surface"), 0.14);
 
 for (const theme of ["dark", "light"]) {
   const bg = v(theme, "bg");
@@ -66,9 +90,44 @@ for (const theme of ["dark", "light"]) {
     const r = ratio(fg, back);
     const ok = r >= min;
     if (!ok) failed++;
-    console.log(`${ok ? "OK  " : "ÉCHEC"} ${theme.padEnd(5)} ${label.padEnd(30)} ${r.toFixed(2)}:1 (min ${min})`);
+    if (!reportMode) console.log(`${ok ? "OK  " : "ÉCHEC"} ${theme.padEnd(5)} ${label.padEnd(30)} ${r.toFixed(2)}:1 (min ${min})`);
   }
 }
 
-console.log(failed ? `\n${failed} paire(s) sous le seuil.` : "\nToutes les paires atteignent leur seuil.");
+if (reportMode) {
+  // Générer le tableau Markdown pour la documentation
+  console.log("| Paire | Dark | | Light | |");
+  console.log("| --- | --- | --- | --- | --- |");
+  for (const [label, fgPath, bgPath] of docPairs) {
+    const isDark = !bgPath.startsWith("badge:");
+    const getBg = (theme) => {
+      if (bgPath.startsWith("badge:")) {
+        const colorName = bgPath.replace("badge:", "");
+        return getColorForBadge(theme, colorName);
+      }
+      let n = tokens.color.theme[theme];
+      for (const k of bgPath.split(".")) n = n[k];
+      return n.$value;
+    };
+    const getFg = (theme) => {
+      let n = tokens.color.theme[theme];
+      for (const k of fgPath.split(".")) n = n[k];
+      return n.$value;
+    };
+
+    const darkFg = getFg("dark");
+    const darkBg = getBg("dark");
+    const darkRatio = ratio(darkFg, darkBg);
+    const darkLevel = darkRatio >= 4.5 ? "AA" : darkRatio >= 3 ? "AA Large" : "Fail";
+
+    const lightFg = getFg("light");
+    const lightBg = getBg("light");
+    const lightRatio = ratio(lightFg, lightBg);
+    const lightLevel = lightRatio >= 4.5 ? "AA" : lightRatio >= 3 ? "AA Large" : "Fail";
+
+    console.log(`| ${label} | ${darkRatio.toFixed(2)} | ${darkLevel} | ${lightRatio.toFixed(2)} | ${lightLevel} |`);
+  }
+} else {
+  console.log(failed ? `\n${failed} paire(s) sous le seuil.` : "\nToutes les paires atteignent leur seuil.");
+}
 process.exit(failed ? 1 : 0);

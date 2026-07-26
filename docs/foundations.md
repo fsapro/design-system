@@ -29,26 +29,31 @@ Pour un usage print rigoureux, il faudra faire établir les équivalents CMJN à
 
 ## Contrastes vérifiés
 
-Ratios WCAG 2.1 calculés sur les valeurs réelles des deux thèmes. Chaque token de texte est testé contre **tous** les fonds sur lesquels il apparaît réellement — fond de page, surface, surface creuse et fond de badge composité — et calibré sur le pire cas, pas sur le blanc.
+Ratios WCAG 2.1 calculés sur les valeurs réelles des deux thèmes. Chaque token de texte est testé contre **tous** les fonds sur lesquels il apparaît réellement — fond de page, surface, surface creuse et fond de badge composité (14 % de saturation sur surface) — et calibré sur le pire cas, pas sur le blanc.
 
 | Paire | Dark | | Light | |
 | --- | --- | --- | --- | --- |
-| Texte sur fond | 15,58 | AA | 13,72 | AA |
-| Texte sur surface | 14,20 | AA | 14,59 | AA |
-| Texte secondaire sur surface | 7,92 | AA | 7,27 | AA |
-| Texte secondaire sur surface creuse | 6,99 | AA | 6,31 | AA |
-| Métadonnée sur fond | 6,39 | AA | 4,91 | AA |
-| Métadonnée sur surface | 5,83 | AA | 5,22 | AA |
-| Métadonnée sur surface creuse | 5,15 | AA | 4,53 | AA |
-| Action sur fond | 5,58 | AA | 5,99 | AA |
-| Texte sur aplat d'action | 5,36 | AA | 6,37 | AA |
-| Texte sur aplat destructif | 5,96 | AA | 6,35 | AA |
-| Succès sur surface | 5,50 | AA | 6,02 | AA |
-| Succès sur fond de badge | 4,73 | AA | 4,56 | AA |
-| Attention sur fond de badge | 6,21 | AA | 4,69 | AA |
-| Critique sur fond de badge | 4,60 | AA | 4,81 | AA |
+| Texte sur fond | 15.58 | AA | 13.72 | AA |
+| Texte sur surface | 14.20 | AA | 14.59 | AA |
+| Texte secondaire sur surface | 7.92 | AA | 7.27 | AA |
+| Texte secondaire sur surface creuse | 6.99 | AA | 6.31 | AA |
+| Métadonnée sur fond | 6.39 | AA | 4.91 | AA |
+| Métadonnée sur surface | 5.83 | AA | 5.22 | AA |
+| Métadonnée sur surface creuse | 5.15 | AA | 4.53 | AA |
+| Action sur fond | 5.74 | AA | 5.99 | AA |
+| Action sur surface | 5.23 | AA | 6.37 | AA |
+| Action sur fond sélectionné | 4.50 | AA | 5.44 | AA |
+| Texte sur aplat d'action | 5.52 | AA | 6.37 | AA |
+| Texte sur aplat destructif | 6.18 | AA | 6.35 | AA |
+| Succès sur surface | 5.57 | AA | 6.02 | AA |
+| Succès sur fond de badge | 4.51 | AA | 4.95 | AA |
+| Attention sur fond de badge | 5.57 | AA | 5.07 | AA |
+| Critique sur fond de badge | 4.51 | AA | 5.11 | AA |
+| Information sur fond de badge | 4.51 | AA | 5.20 | AA |
 
-Cible : **AA (4,5:1) pour tout texte**, métadonnées comprises — aucune exception. Deux valeurs ont été corrigées pour l'atteindre : `text.faint` (Castlerock en light, Ash éclairci en dark) et `warning` en light (Golden Amber assombri).
+**Texte** : cible **AA (4,5:1)** sur tous les fonds, métadonnées comprises — aucune exception. Vérification automatisée en CI.
+
+**Bords non-texte** (séparations structurelles, bordures) : seuil assumé **1,3:1**, inférieur au 3:1 exigé par WCAG 2.1 pour les éléments non-texte. Ce seuil non-standard a été retenu pour préserver la légèreté visuelle du système. Le rapport se justifie par le contraste suffisant dans les cas réels (bord structurel sur une surface, jamais centre d'attention).
 
 ## Typographie
 

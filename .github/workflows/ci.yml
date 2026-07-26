@@ -26,3 +26,13 @@ jobs:
 
       - name: Contrastes WCAG AA
         run: node build/check-contrast.mjs
+
+      - name: Régénérer la documentation de contraste
+        run: node build/update-contrast-report.mjs
+
+      - name: docs/foundations.md doit être à jour dans le commit
+        run: |
+          if ! git diff --exit-code docs/foundations.md; then
+            echo "::error::docs/foundations.md n'est pas synchronisé avec les ratios de contraste actuels — lancez 'node build/update-contrast-report.mjs' et commitez."
+            exit 1
+          fi
