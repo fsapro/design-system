@@ -6,6 +6,16 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versionnage s
 - **Mineur** — un token est ajouté, une valeur change sans casser l'usage.
 - **Correctif** — correction de contraste, de référence Pantone, de documentation.
 
+## [0.4.0] — 2026-07-26
+
+### Corrigé
+- **Contrastes WCAG AA** : cinq paires échouées ramenées au seuil. Ajustements minimaux : `dark action` (+3 green), `dark success/danger/info` (+1–7), `light border` (-1). Tous les 17 pairs × 2 thèmes passent AA (4,5:1 texte) ou 1,3:1 (non-texte).
+- **Documentation exacte** : tableau de contrastes dans `docs/foundations.md` régénéré automatiquement ; CI vérifie la divergence. Prose recalibrée : seuil non-texte de 1,3:1 explicitement documenté comme inférieur au 3:1 de WCAG 2.1.
+- **Installation prouvée** : job CI `npm pack` + vérification des points d'entrée (CSS, tokens module) sur chaque PR.
+
+### Ajouté
+- **Cycle de vie des tokens** : règle dans README explicite — besoin général → PR upstream, besoin local → variable préfixée au projet.
+
 ## [0.3.0] — 2026-07-26
 
 ### Ajouté

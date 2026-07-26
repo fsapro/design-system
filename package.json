@@ -1,6 +1,6 @@
 {
   "name": "@fsapro/forma",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Forma by FSA — design system, peau Foundation. Tokens DTCG + CSS de composants, sans dépendance ni build côté consommateur.",
   "license": "MIT",
   "repository": { "type": "git", "url": "git+https://github.com/fsapro/design-system.git" },
