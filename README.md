@@ -81,6 +81,10 @@ Sémantique appliqué aux **tokens**, pas au code :
 
 Historique dans [`CHANGELOG.md`](CHANGELOG.md). Chaque version est taguée `vX.Y.Z` — épinglez le tag dans vos produits.
 
+## Cycle de vie des tokens
+
+Quand un produit a besoin d'un token absent de Forma : si le besoin est **général** (couleur, espacement, typographie utiles à plusieurs produits), ouvrez une PR sur ce repository et nous l'évaluerons pour une future version. Si le besoin est **propre au projet**, définissez une variable CSS locale avec un préfixe spécifique au projet (p.ex. `--og-color-custom` pour opportunity-graph) et ne la versionnez pas dans Forma — elle restera un détail d'implémentation du produit, séparé du système.
+
 ## Ce que le système ne couvre pas encore
 
 Arbre / hiérarchie, filtres avancés sauvegardés, upload, sélecteur de date natif, table éditable en ligne, tiroir latéral. Motion non spécifié (durées et courbes). La peau **Atelier** est archivée dans `archive/`, non maintenue.
