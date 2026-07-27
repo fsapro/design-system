@@ -121,6 +121,7 @@ une CI verte.
 | **D2** | Branche par défaut. | **`master` → `main`** (délégué à Claude). Effectué au bootstrap : aucune pull request n'existait, renommage sans risque. Le workflow CI a été mis à jour en conséquence. |
 | **D3** | Slug du projet. | **`forma-design-system`** (Florent). |
 | **D4** | Premier tag. | **`v0.4.0`**, une fois la CI verte (délégué à Claude). Ne pas taguer rétroactivement `v0.3.0` sur un commit rouge : cela figerait une version installable dont la documentation est fausse. Le README est corrigé pour pointer vers le premier tag vert. |
+| **D5** | Visibilité du repository. | **`private` → `public`** (Florent, 2026-07-27), déclenchée par le premier consommateur réel (Open Product Intelligence, issue #61). Motif : les trois mécanismes de consommation d'un dépôt privé (git+ssh, GitHub Packages+token, vendoring) imposent un secret CI à provisionner pour **chaque** futur consommateur, indéfiniment — contraire à l'objectif « disponible sur étagère ». Aucun secret trouvé dans l'historique complet du repository avant bascule (vérifié). Effet vérifié : `curl` anonyme et `npm install github:fsapro/design-system#v0.4.0` résolvent sans identifiant. Axe « confidentialité » de la protection du périmètre — décision explicitement de Florent, pas déléguée. |
 
 ## 11. Décisions non résolues
 
