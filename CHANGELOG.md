@@ -8,13 +8,24 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versionnage s
 
 ## [Non publié]
 
+## [0.5.0] — 2026-11-22
+
 ### Ajouté
-- **Inventaire** `catalog/forma.catalog.json`, exporté en `@fsapro/forma/catalog.json` : chaque pièce de Forma avec son statut (`stable`, `essai`, `reserve`, `absent`), son usage et ses classes. Couvre les 85 classes livrées, les pièces décidées pour la peau Martech (coque d'application, écrans types, catalogue de graphes `fx-chart/*`) et les manques connus.
-- **Contrôle** `build/check-catalog.mjs`, bloquant en CI : inventaire et CSS doivent dire la même chose.
-- **Règle « Forma d'abord »** dans le README : la marche à suivre d'un projet avant de créer une pièce d'interface.
+- **Peau Lab** (`data-forma-skin="lab"`) pour les apps web du lab, ordinateur d'abord : surfaces 12 px, contrôles 8 px, bord + ombre légère, clair par défaut et sombre selon le système, palette sombre recalibrée (bords à 1,85:1, texte adouci), un seul accent. Les tokens de la peau (`skin.lab`) ne portent que les écarts à Foundation.
+- **Tokens communs** : `color.offline`, `elevation.3`, `motion.fast/normal/slow`, `easing.standard/exit` (nuls si mouvement réduit).
+- **Coque d'application** `fx-shell` : barre haute, menu latéral rétractable avec point « nouveau » en mode réduit, tiroir sous 1024 px, version en pied.
+- **Composants** : grille de tableau de bord, en-tête de page, chiffre clé, indicateur d'état, progression, curseur, avatar, fraîcheur des données, panneau de notifications, tiroir et fenêtre sur `<dialog>`, conteneur de graphe, écrans de connexion (Google seul) et d'accès refusé, icône d'état.
+- **`forma.js`** (`@fsapro/forma/forma.js`), sans dépendance : thème mémorisé, menu latéral, menus au clavier, fenêtres et tiroirs.
+- **Thème ECharts** et six fiches de graphes (`@fsapro/forma/echarts`), générés depuis les tokens : `trendTarget`, `kpiTrend`, `calendarHeatmap`, `lineTime`, `barCompare`, `shareDonut`, formats français.
+- **Inventaire** `catalog/forma.catalog.json`, exporté en `@fsapro/forma/catalog.json`, vérifié en CI par `build/check-catalog.mjs` ; règle « Forma d'abord » dans le README.
+- Contrastes AA vérifiés en CI pour les deux thèmes de la peau Lab ; tableau Lab dans `docs/foundations.md`.
+- Démonstration `docs/lab.html`, rendue par le paquet lui-même.
+
+### Modifié
+- Peau Foundation inchangée. `.fx-root [hidden]` force désormais `display: none` (un menu `hidden` ne s'affichait pas masqué si sa classe fixait un `display`).
 
 ### Décidé
-- Moteur de graphes unique : **Apache ECharts**, thème généré depuis les tokens (Florent, 2026-11-22). Non livré.
+- Moteur de graphes unique : Apache ECharts (Florent, 2026-11-22). Connexion Google seule, un seul accent pour toutes les apps (Florent, 2026-11-22).
 
 ## [0.4.0] — 2026-07-26
 

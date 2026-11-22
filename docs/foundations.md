@@ -51,6 +51,28 @@ Ratios WCAG 2.1 calculés sur les valeurs réelles des deux thèmes. Chaque toke
 | Critique sur fond de badge | 4.51 | AA | 5.11 | AA |
 | Information sur fond de badge | 4.51 | AA | 5.20 | AA |
 
+**Peau Lab** (`data-forma-skin="lab"`) :
+
+| Paire | Dark | | Light | |
+| --- | --- | --- | --- | --- |
+| Texte sur fond | 14.80 | AA | 13.47 | AA |
+| Texte sur surface | 12.94 | AA | 14.59 | AA |
+| Texte secondaire sur surface | 7.92 | AA | 7.27 | AA |
+| Texte secondaire sur surface creuse | 6.99 | AA | 6.31 | AA |
+| Métadonnée sur fond | 6.67 | AA | 4.82 | AA |
+| Métadonnée sur surface | 5.83 | AA | 5.22 | AA |
+| Métadonnée sur surface creuse | 5.15 | AA | 4.53 | AA |
+| Action sur fond | 6.04 | AA | 5.88 | AA |
+| Action sur surface | 5.28 | AA | 6.37 | AA |
+| Action sur fond sélectionné | 4.54 | AA | 5.44 | AA |
+| Texte sur aplat d'action | 5.57 | AA | 6.37 | AA |
+| Texte sur aplat destructif | 6.22 | AA | 6.35 | AA |
+| Succès sur surface | 5.80 | AA | 6.02 | AA |
+| Succès sur fond de badge | 4.64 | AA | 4.95 | AA |
+| Attention sur fond de badge | 5.57 | AA | 5.07 | AA |
+| Critique sur fond de badge | 4.54 | AA | 5.11 | AA |
+| Information sur fond de badge | 4.51 | AA | 5.20 | AA |
+
 **Texte** : cible **AA (4,5:1)** sur tous les fonds, métadonnées comprises — aucune exception. Vérification automatisée en CI.
 
 **Bords non-texte** (séparations structurelles, bordures) : seuil assumé **1,3:1**, inférieur au 3:1 exigé par WCAG 2.1 pour les éléments non-texte. Ce seuil non-standard a été retenu pour préserver la légèreté visuelle du système. Le rapport se justifie par le contraste suffisant dans les cas réels (bord structurel sur une surface, jamais centre d'attention).

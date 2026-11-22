@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="fr" data-forma-skin="lab">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forma Lab — démonstration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../dist/forma.css">
+<script src="../dist/forma.js"></script>
+<style>
+  /* Mise en page de la démonstration seulement — pas des classes Forma. */
+  body { margin: 0; }
+  .demo-sec { margin-top: 40px; }
+  .demo-sec > h2 { margin: 0 0 14px; font-size: 18px; font-weight: 600; }
+  .demo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .demo-stack { display: flex; flex-direction: column; gap: 14px; }
+  .demo-anchor { position: relative; }
+  .demo-anchor > .fx-popover, .demo-anchor > .fx-menu { right: 0; top: 44px; position: absolute; z-index: 30; min-width: 240px; }
+  .demo-auth { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .demo-auth .fx-auth { min-height: 0; padding: 32px; border-radius: var(--forma-radius-surface); border: 1px solid var(--forma-color-border); }
+  @media (max-width: 1023.98px) { .demo-auth { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="fx-root">
+<div class="fx-shell" data-app="Maison" data-app-version="1.2.0" data-build="2026-11-22">
+  <header class="fx-shell__top">
+    <div class="fx-shell__brand">
+      <button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" data-fx-sidebar-toggle aria-label="Menu" title="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+      <span class="fx-shell__logo" aria-hidden="true">Mn</span><span class="fx-shell__name">Maison</span>
+    </div>
+    <label class="fx-shell__search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input type="search" placeholder="Rechercher dans Maison" aria-label="Rechercher"><button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" aria-label="Filtres de recherche" title="Filtres de recherche"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></button></label>
+    <div class="fx-shell__actions">
+      <button type="button" class="fx-btn fx-btn--ghost fx-btn--icon fx-shell__search-btn" aria-label="Rechercher"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+      <button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" aria-label="Aide" title="Aide"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"></path><path d="M12 17h.01"></path></svg></button>
+      <div class="demo-anchor">
+        <button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" data-fx-menu="notifs" aria-expanded="false" aria-haspopup="menu" aria-label="Notifications, 2 non lues" title="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 8 3 8H3s3-1 3-8"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg></button>
+        <div class="fx-popover" id="notifs" role="menu" aria-label="Notifications" hidden style="width:360px">
+          <div role="menuitem" tabindex="-1" class="fx-notif fx-notif--unread"><div>NAS injoignable<span class="fx-notif__meta">Appareils · il y a 12 min</span></div></div>
+          <div role="menuitem" tabindex="-1" class="fx-notif fx-notif--unread"><div>« Le club » est prêt<span class="fx-notif__meta">Téléchargements · il y a 18 min</span></div></div>
+          <div role="menuitem" tabindex="-1" class="fx-notif"><div>Déjeuner analysé : 640 kcal<span class="fx-notif__meta">Santé · 13:05</span></div></div>
+        </div>
+      </div>
+      <button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" data-fx-theme-toggle aria-pressed="false" aria-label="Mode nuit" title="Mode nuit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg></button>
+      <div class="demo-anchor" style="margin-left:6px">
+        <button type="button" class="fx-avatar" data-fx-menu="compte" aria-expanded="false" aria-haspopup="menu" aria-label="Compte">FS</button>
+        <div class="fx-menu" id="compte" role="menu" hidden>
+          <button type="button" role="menuitem" class="fx-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Mon compte</button>
+          <button type="button" role="menuitem" class="fx-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>Préférences</button>
+          <hr class="fx-divider">
+          <button type="button" role="menuitem" class="fx-menu__item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"></path><path d="m10 17-5-5 5-5"></path><path d="M5 12h12"></path></svg>Se déconnecter</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="fx-shell__side" aria-label="Navigation">
+    <div class="fx-nav">
+      <div class="fx-nav__group">
+        <a class="fx-nav__item" href="#" aria-current="page" title="Accueil"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7"></path><path d="M5 10v10h14V10"></path></svg><span class="fx-nav__label">Accueil</span></a>
+        <a class="fx-nav__item" href="#" title="Lumières"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 21h4"></path><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3Z"></path></svg><span class="fx-nav__label">Lumières</span></a>
+        <a class="fx-nav__item" href="#" title="Santé"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1Z"></path></svg><span class="fx-nav__label">Santé</span><span class="fx-nav__dot" aria-hidden="true"></span></a>
+        <a class="fx-nav__item" href="#" title="Téléchargements"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg><span class="fx-nav__label">Téléchargements</span><span class="fx-nav__count">3</span><span class="fx-nav__dot" aria-hidden="true"></span></a>
+        <a class="fx-nav__item" href="#" title="Appareils"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"></rect><rect x="3" y="13" width="18" height="7" rx="2"></rect><path d="M7 7.5h.01M7 16.5h.01"></path></svg><span class="fx-nav__label">Appareils</span><span class="fx-nav__count">1</span><span class="fx-nav__dot" aria-hidden="true"></span></a>
+      </div>
+      <div class="fx-nav__group">
+        <div class="fx-nav__title fx-label">Administration</div>
+        <a class="fx-nav__item" href="#" title="Réglages"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg><span class="fx-nav__label">Réglages</span></a>
+      </div>
+    </div>
+    <div class="fx-shell__version" title="Maison v1.2.0 · Forma 0.5.0"><span>Maison v1.2.0 · build 22 nov.<br>Forma 0.5.0 · Lab</span><span class="fx-shell__version-short">v1.2</span></div>
+  </nav>
+  <div class="fx-shell__scrim"></div>
+
+  <main class="fx-shell__main">
+    <div class="fx-page-head">
+      <div><div class="fx-meta">Mes apps</div><h1 class="fx-page-head__title">Accueil</h1></div>
+      <div class="fx-page-head__actions">
+        <span class="fx-fresh" id="fresh">Mis à jour il y a 2 min<button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" id="refresh" aria-label="Actualiser" title="Actualiser"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"></path><path d="M3 12A9 9 0 0 1 18.5 5.7L21 8"></path><path d="M21 3v5h-5M3 21v-5h5"></path></svg></button></span>
+        <div class="fx-segments" role="group" aria-label="Période">
+          <button type="button" class="fx-segment" aria-pressed="false">Aujourd'hui</button><button type="button" class="fx-segment" aria-pressed="true">7 j</button><button type="button" class="fx-segment" aria-pressed="false">30 j</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="fx-grid">
+      <div class="fx-card fx-col-3"><div class="fx-card__body"><div class="demo-row" style="align-items:flex-end;flex-wrap:nowrap"><div class="fx-kpi"><span class="fx-kpi__label">Poids · moy. 7 j</span><span class="fx-kpi__value">78,4 kg</span><span class="fx-kpi__delta fx-kpi__delta--good">▼ 0,6 kg</span></div><div class="fx-chart fx-chart--sm" data-chart="spark" data-values="79.4,79.1,79.2,78.8,78.9,78.5,78.4" style="margin-left:auto"></div></div></div></div>
+      <div class="fx-card fx-col-3"><div class="fx-card__body"><div class="demo-row" style="align-items:flex-end;flex-wrap:nowrap"><div class="fx-kpi"><span class="fx-kpi__label">Sommeil · moy. 7 j</span><span class="fx-kpi__value">7 h 12</span><span class="fx-kpi__delta fx-kpi__delta--good">▲ 24 min</span></div><div class="fx-chart fx-chart--sm" data-chart="spark" data-values="6.5,6.8,6.7,7.1,7,7.3,7.2" style="margin-left:auto"></div></div></div></div>
+      <div class="fx-card fx-col-3"><div class="fx-card__body"><div class="fx-kpi"><span class="fx-kpi__label">Téléchargements actifs</span><span class="fx-kpi__value">3</span><span class="fx-kpi__delta">2 en pause</span></div></div></div>
+      <div class="fx-card fx-col-3"><div class="fx-card__body"><div class="fx-kpi"><span class="fx-kpi__label">Lampes allumées</span><span class="fx-kpi__value">5 / 14</span><span class="fx-kpi__delta">salon, bureau</span></div></div></div>
+
+      <section class="fx-card fx-col-8"><div class="fx-card__head">Poids<span class="fx-meta" style="margin-left:auto;font-weight:400">fx-chart/trend-target</span></div><div class="fx-card__body"><div class="fx-chart" data-chart="trend"></div></div></section>
+      <section class="fx-card fx-col-4"><div class="fx-card__head">Appareils et services</div><div class="fx-card__body">
+        <div class="demo-row"><span>Bridge Hue</span><span class="fx-status fx-status--ok" style="margin-left:auto">En ligne</span></div><hr class="fx-divider">
+        <div class="demo-row"><span>qBittorrent</span><span class="fx-status fx-status--run" style="margin-left:auto">En cours</span></div><hr class="fx-divider">
+        <div class="demo-row"><span>Gemini</span><span class="fx-status fx-status--warn" style="margin-left:auto">Dégradé</span></div><hr class="fx-divider">
+        <div class="demo-row"><span>Supabase</span><span class="fx-status fx-status--err" style="margin-left:auto">En erreur</span></div><hr class="fx-divider">
+        <div class="demo-row"><span>NAS</span><span class="fx-status fx-status--off" style="margin-left:auto">Hors ligne</span></div>
+      </div></section>
+
+      <section class="fx-card fx-col-6"><div class="fx-card__head">Repas journalisés<span class="fx-meta" style="margin-left:auto;font-weight:400">fx-chart/calendar-heatmap</span></div><div class="fx-card__body"><div class="fx-chart" data-chart="calendar" style="height:170px"></div></div></section>
+      <section class="fx-card fx-col-6"><div class="fx-card__head">Heures d'allumage par pièce<span class="fx-meta" style="margin-left:auto;font-weight:400">fx-chart/bar-compare</span></div><div class="fx-card__body"><div class="fx-chart" data-chart="bars" style="height:170px"></div></div></section>
+      <section class="fx-card fx-col-6"><div class="fx-card__head">Volume et écoute<span class="fx-meta" style="margin-left:auto;font-weight:400">fx-chart/line-time</span></div><div class="fx-card__body"><div class="fx-chart" data-chart="lines"></div></div></section>
+      <section class="fx-card fx-col-6"><div class="fx-card__head">Macros du jour<span class="fx-meta" style="margin-left:auto;font-weight:400">fx-chart/share-donut</span></div><div class="fx-card__body"><div class="fx-chart" data-chart="donut"></div></div></section>
+    </div>
+
+    <section class="demo-sec">
+      <h2>Composants</h2>
+      <div class="fx-card"><div class="fx-card__body demo-stack">
+        <div class="demo-row">
+          <button type="button" class="fx-btn fx-btn--primary">Ajouter un appareil</button>
+          <button type="button" class="fx-btn">Actualiser</button>
+          <button type="button" class="fx-btn fx-btn--ghost">Annuler</button>
+          <button type="button" class="fx-btn fx-btn--sm">Petit</button>
+          <button type="button" class="fx-btn" data-fx-open="confirm">Supprimer…</button>
+          <button type="button" class="fx-btn" data-fx-open="detail">Ouvrir le détail</button>
+        </div>
+        <div class="demo-row">
+          <span class="fx-badge">Neutre</span><span class="fx-badge fx-badge--info">Nouveau</span><span class="fx-badge fx-badge--success">Terminé</span><span class="fx-badge fx-badge--warning">En pause</span><span class="fx-badge fx-badge--danger">Échec</span>
+          <span class="fx-avatar" aria-hidden="true">FS</span>
+        </div>
+        <div class="demo-row" style="gap:28px">
+          <div style="flex:1;min-width:220px" class="demo-stack"><span class="fx-meta">Téléchargement · 64 %</span><div class="fx-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" aria-label="Documentaire océans" style="--fx-value:64%"></div><div class="fx-progress fx-progress--indeterminate" role="progressbar" aria-label="Analyse en cours"></div></div>
+          <div style="flex:1;min-width:220px" class="fx-field"><label class="fx-field__label" for="lum">Luminosité du salon</label><input id="lum" class="fx-range" type="range" min="0" max="100" value="72"></div>
+          <div style="flex:1;min-width:220px" class="fx-field fx-field--error"><label class="fx-field__label" for="ip">Adresse du bridge</label><input id="ip" class="fx-input fx-input--mono" value="192.168.1." aria-invalid="true" aria-describedby="ip-err"><span class="fx-field__error" id="ip-err">Adresse incomplète : quatre nombres séparés par des points.</span></div>
+        </div>
+      </div></div>
+
+      <div class="fx-card" style="margin-top:20px">
+        <div class="fx-toolbar" style="border-top:0;border-bottom:1px solid var(--forma-color-border)">
+          <span class="fx-chip">État : En pause<button type="button" class="fx-chip__clear" aria-label="Retirer le filtre État : En pause">×</button></span>
+          <span class="fx-chip">Ajouté : 7 derniers jours<button type="button" class="fx-chip__clear" aria-label="Retirer le filtre Ajouté">×</button></span>
+          <button type="button" class="fx-btn fx-btn--ghost fx-btn--sm">Effacer les filtres</button>
+          <span class="fx-num" style="margin-left:auto">14 résultats</span>
+        </div>
+        <table class="fx-table">
+          <thead><tr><th>Fichier</th><th>État</th><th class="fx-cell--right">Taille</th><th class="fx-cell--right">Progression</th><th>Ajouté</th><th><span class="fx-meta" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Actions</span></th></tr></thead>
+          <tbody>
+            <tr><td>Documentaire océans</td><td><span class="fx-badge fx-badge--warning">En pause</span></td><td class="fx-num">4,1 Go</td><td class="fx-num">64 %</td><td class="fx-meta">aujourd'hui, 11:20</td><td><div class="demo-anchor"><button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" data-fx-menu="row1" aria-expanded="false" aria-haspopup="menu" aria-label="Actions pour Documentaire océans"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="1.4"></circle><circle cx="12" cy="12" r="1.4"></circle><circle cx="12" cy="19" r="1.4"></circle></svg></button>
+              <div class="fx-menu" id="row1" role="menu" hidden style="top:40px;min-width:210px"><button type="button" role="menuitem" class="fx-menu__item">Reprendre</button><button type="button" role="menuitem" class="fx-menu__item">Ouvrir le dossier</button><hr class="fx-divider"><button type="button" role="menuitem" class="fx-menu__item fx-menu__item--danger" data-fx-open="confirm">Supprimer…</button></div></div></td></tr>
+            <tr><td>Concert Paris 2024</td><td><span class="fx-badge fx-badge--warning">En pause</span></td><td class="fx-num">1,8 Go</td><td class="fx-num">12 %</td><td class="fx-meta">aujourd'hui, 13:52</td><td></td></tr>
+            <tr><td>Série saison 2</td><td><span class="fx-badge fx-badge--danger">Échec</span></td><td class="fx-num">—</td><td class="fx-num">0 %</td><td class="fx-meta">hier, 21:14</td><td></td></tr>
+          </tbody>
+        </table>
+        <div class="fx-toolbar"><span class="fx-num">1–3 sur 14</span><nav class="fx-pagination" aria-label="Pagination"><button type="button" class="fx-page" disabled aria-label="Page précédente">‹</button><button type="button" class="fx-page" aria-current="page">1</button><button type="button" class="fx-page">2</button><button type="button" class="fx-page" aria-label="Page suivante">›</button></nav></div>
+      </div>
+    </section>
+
+    <section class="demo-sec">
+      <h2>États</h2>
+      <div class="fx-grid">
+        <div class="fx-card fx-col-3"><div class="fx-card__body" aria-busy="true"><span class="fx-skeleton" style="width:40%"></span><span class="fx-skeleton fx-skeleton--pill" style="width:60%;height:28px"></span><span class="fx-skeleton" style="width:80%"></span><span class="fx-skeleton" style="width:70%"></span></div></div>
+        <div class="fx-card fx-col-3"><div class="fx-empty" style="padding:28px 20px"><span class="fx-empty__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-6l-2 3h-4l-2-3H2"></path><path d="M5.5 5h13L22 12v7a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-7l3.5-7Z"></path></svg></span><div class="fx-empty__title">Aucun téléchargement</div><p class="fx-empty__body">Envoie « télécharge … » à Hermes sur WhatsApp, il apparaîtra ici.</p></div></div>
+        <div class="fx-card fx-col-3"><div class="fx-empty" style="padding:28px 20px"><span class="fx-empty__icon fx-empty__icon--danger"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 10v5M12 18h.01"></path></svg></span><div class="fx-empty__title">Impossible de charger les repas</div><p class="fx-empty__body">La base ne répond pas. Tes données sont intactes.</p><div class="fx-empty__actions"><button type="button" class="fx-btn fx-btn--sm">Réessayer</button></div><span class="fx-mono fx-meta">erreur 503 · 14:07</span></div></div>
+        <div class="fx-card fx-col-3"><div class="fx-empty" style="padding:28px 20px"><span class="fx-empty__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 4.2-2.6M10.7 5.1A15 15 0 0 1 22 8.8"></path><path d="M5 12.5a10 10 0 0 1 5.2-2.7M17.6 11.3c.5.4 1 .8 1.4 1.2"></path><path d="M8.5 16a5 5 0 0 1 7 0"></path><path d="M12 20h.01"></path><path d="m2 2 20 20"></path></svg></span><div class="fx-empty__title">NAS hors ligne</div><p class="fx-empty__body">Dernier contact à 14:02. Les téléchargements reprendront seuls à son retour.</p><span class="fx-status fx-status--off">Hors ligne</span></div></div>
+      </div>
+    </section>
+
+    <section class="demo-sec">
+      <h2>Connexion</h2>
+      <div class="demo-auth">
+        <div class="fx-auth"><div class="fx-auth__card"><span class="fx-shell__logo" aria-hidden="true">Mn</span><h3 class="fx-auth__title">Se connecter à Maison</h3><p class="fx-auth__body">Avec ton compte Google.</p><button type="button" class="fx-btn fx-btn--block"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">None</svg>Continuer avec Google</button><p class="fx-auth__foot">Maison v1.2.0 · Forma 0.5.0</p></div></div>
+        <div class="fx-auth"><div class="fx-auth__card"><span class="fx-empty__icon fx-empty__icon--danger"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"></path></svg></span><h3 class="fx-auth__title">Ce compte n'a pas accès</h3><p class="fx-auth__body">invite@exemple.fr n'est pas autorisé pour Maison.</p><button type="button" class="fx-btn fx-btn--block">Changer de compte</button><p class="fx-auth__foot">Demande l'accès à l'administrateur de l'app.</p></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog class="fx-modal" id="confirm" aria-labelledby="confirm-t">
+  <div class="fx-modal__title" id="confirm-t">Supprimer « Série saison 2 » ?</div>
+  <p class="fx-modal__body">Le téléchargement et son historique seront supprimés. Cette action est définitive.</p>
+  <div class="fx-modal__actions"><button type="button" class="fx-btn fx-btn--ghost" data-fx-close>Annuler</button><button type="button" class="fx-btn fx-btn--danger" data-fx-close>Supprimer</button></div>
+</dialog>
+
+<dialog class="fx-drawer" id="detail" aria-labelledby="detail-t">
+  <div class="fx-drawer__head"><div><div class="fx-meta">Téléchargement</div><div id="detail-t" style="font-size:17px;font-weight:600">Le club</div></div><button type="button" class="fx-btn fx-btn--ghost fx-btn--icon" data-fx-close aria-label="Fermer" style="margin-left:auto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div>
+  <div class="fx-drawer__body"><span class="fx-badge fx-badge--success" style="align-self:flex-start">Terminé</span><div><div class="fx-meta">Quand</div>Aujourd'hui, 14:20</div><div><div class="fx-meta">Source</div>Hermes · WhatsApp</div><div><div class="fx-meta">Référence</div><span class="fx-mono">qbt-7f3a91</span></div><p class="fx-muted" style="margin:0">Rangé dans Films sur le NAS.</p></div>
+  <div class="fx-drawer__foot"><button type="button" class="fx-btn" data-fx-close>Fermer</button></div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script type="module">
+  import { formaTheme, charts } from "../dist/forma.echarts.js";
+
+  // Données de démonstration, déterministes.
+  const day = (i) => new Date(Date.UTC(2026, 8, 23) + i * 864e5);
+  const raw = Array.from({ length: 60 }, (_, i) => [day(i), +(80 - i * 0.04 + Math.sin(i * 1.7) * 0.5).toFixed(1)]);
+  const avg = raw.map((p, i) => [p[0], +(raw.slice(Math.max(0, i - 6), i + 1).reduce((s, q) => s + q[1], 0) / Math.min(i + 1, 7)).toFixed(2)]);
+  const cal = Array.from({ length: 120 }, (_, i) => [day(i - 60).toISOString().slice(0, 10), (i * 7) % 5]);
+  const options = {
+    trend: () => charts.trendTarget({ points: raw, average: avg, target: [77, 78], unit: "kg" }),
+    calendar: () => charts.calendarHeatmap({ data: cal, label: "Repas", max: 4 }),
+    bars: () => charts.barCompare({ items: [{ label: "Bureau", value: 31 }, { label: "Salon", value: 42 }, { label: "Chambre", value: 10 }, { label: "Cuisine", value: 18 }], unit: "h", digits: 0 }),
+    lines: () => charts.lineTime({ series: [{ name: "Go téléchargés", data: raw.map((p, i) => [p[0], +(3 + Math.sin(i / 6) * 1.2 + (i % 3) * 0.2).toFixed(1)]) }, { name: "Heures d'écoute", data: raw.map((p, i) => [p[0], +(1.6 + Math.cos(i / 9) * 0.5).toFixed(1)]) }] }),
+    donut: () => charts.shareDonut({ items: [{ label: "Glucides", value: 48 }, { label: "Lipides", value: 31 }, { label: "Protéines", value: 21 }] }),
+    spark: (el) => charts.kpiTrend({ values: el.dataset.values.split(",").map(Number) }),
+  };
+  let instances = [];
+  function draw() {
+    instances.forEach((c) => c.dispose());
+    echarts.registerTheme("forma", formaTheme());
+    instances = [...document.querySelectorAll("[data-chart]")].map((el) => {
+      const c = echarts.init(el, "forma", { renderer: "svg" });
+      c.setOption(options[el.dataset.chart](el));
+      return c;
+    });
+  }
+  draw();
+  document.addEventListener("forma:themechange", draw);
+  // Un graphe suit la taille de son conteneur (menu réduit, fenêtre, grille).
+  new ResizeObserver(() => instances.forEach((c) => c.resize())).observe(document.querySelector(".fx-shell__main"));
+
+  // Fraîcheur : démonstration de l'état aria-busy.
+  const fresh = document.getElementById("fresh");
+  document.getElementById("refresh").addEventListener("click", () => {
+    fresh.setAttribute("aria-busy", "true");
+    fresh.firstChild.textContent = "Actualisation…";
+    setTimeout(() => { fresh.removeAttribute("aria-busy"); fresh.firstChild.textContent = "Mis à jour à l'instant"; }, 1200);
+  });
+  // Segments : un seul pressé.
+  document.querySelectorAll(".fx-segments").forEach((g) => g.addEventListener("click", (e) => {
+    const b = e.target.closest(".fx-segment"); if (!b) return;
+    g.querySelectorAll(".fx-segment").forEach((x) => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  }));
+</script>
+</body>
+</html>

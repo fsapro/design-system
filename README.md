@@ -1,6 +1,6 @@
 # Forma by FSA
 
-Design system centralisé — peau **Foundation**. Une source de vérité (`tokens/forma.tokens.json`, format DTCG), un fichier CSS à charger, aucune dépendance et aucun build côté consommateur.
+Design system centralisé, deux peaux : **Foundation** (par défaut, dense, sombre) et **Lab** (apps web du lab, ordinateur d'abord). Une source de vérité (`tokens/forma.tokens.json`, format DTCG), un fichier CSS à charger, un petit script de comportements, un thème de graphes ECharts ; aucune dépendance et aucun build côté consommateur.
 
 - **Thème par défaut :** dark. Light disponible, et suivi automatique des préférences système.
 - **Accessibilité :** toutes les paires de texte atteignent le niveau AA (4,5:1), vérifié automatiquement en CI. Les bords structurels maintiennent un seuil de 1,3:1 pour préserver la légèreté visuelle.
@@ -9,7 +9,7 @@ Design system centralisé — peau **Foundation**. Une source de vérité (`toke
 ## Installation
 
 ```bash
-npm install github:fsapro/design-system#v0.4.0
+npm install github:fsapro/design-system#v0.5.0
 ```
 
 Deux façons de consommer :
@@ -25,6 +25,19 @@ import "@fsapro/forma/css";
 ```
 
 Le CSS est autonome — aucune dépendance, aucun build requis côté consommateur. Il fonctionne partout : HTML nu, templates serveur, apps statiques, iframes.
+
+## Peau Lab en 5 lignes
+
+```html
+<html lang="fr" data-forma-skin="lab">
+<head>
+  <link rel="stylesheet" href="/assets/forma.css">
+  <script src="/assets/forma.js"></script>  <!-- sans defer : thème appliqué avant le rendu -->
+</head>
+<body class="fx-root"> <div class="fx-shell">…</div> </body>
+```
+
+Clair par défaut, sombre selon le système, bascule mémorisée par `data-fx-theme-toggle`. Coque, composants, comportements et graphes : [`docs/usage.md`](docs/usage.md#peau-lab). Démonstration rendue par le paquet lui-même : [`docs/lab.html`](docs/lab.html). Graphes : `import { formaTheme, charts } from "@fsapro/forma/echarts"` (ECharts est installé par l'app).
 
 ## Démarrage rapide
 
@@ -128,9 +141,11 @@ import "@fsapro/forma/css";
 ## Structure
 
 ```
-tokens/forma.tokens.json   Source de vérité. Toute valeur se change ICI.
+tokens/forma.tokens.json   Source de vérité. Toute valeur se change ICI (skin.lab : écarts de la peau Lab).
 catalog/forma.catalog.json Inventaire : tout ce que Forma fournit, prévoit ou ne couvre pas.
 src/components.css         CSS de composants, écrit à la main.
+src/forma.js               Comportements (thème, menu latéral, menus, fenêtres), copié dans dist/.
+src/forma.echarts.js       Thème ECharts et fiches fx-chart/* ; les couleurs y sont injectées depuis les tokens.
 build/build-tokens.mjs     Génère dist/. Zéro dépendance.
 build/check-contrast.mjs   Vérifie WCAG AA sur toutes les paires.
 build/check-catalog.mjs    Vérifie que l'inventaire et le CSS disent la même chose.
@@ -176,4 +191,4 @@ Quand un produit a besoin d'un token absent de Forma : si le besoin est **géné
 
 ## Ce que le système ne couvre pas encore
 
-Arbre / hiérarchie, filtres avancés sauvegardés, upload, sélecteur de date natif, table éditable en ligne, tiroir latéral. Motion non spécifié (durées et courbes). La peau **Atelier** est archivée dans `archive/`, non maintenue.
+Arbre / hiérarchie, filtres avancés sauvegardés, upload, sélecteur de date, table éditable en ligne, palette de commandes ⌘K, utilisateurs et rôles, connexion par e-mail. Graphes entonnoir, cohortes, attribution et objectif : en réserve. Apps embarquées (comme Ntaker) : hors du périmètre de Forma. La peau **Atelier** est archivée dans `archive/`, non maintenue.

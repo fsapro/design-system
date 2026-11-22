@@ -30,8 +30,22 @@ const mix = (fg, bg, pct) => {
   return "#" + a.map((v, i) => Math.round(v * pct + b[i] * (1 - pct)).toString(16).padStart(2, "0")).join("");
 };
 
+/** Peau Lab : écarts fusionnés sur Foundation, comme dans build-tokens.mjs. */
+function merge(base, over) {
+  const out = structuredClone(base);
+  for (const [k, x] of Object.entries(over)) {
+    const both = out[k] && typeof out[k] === "object" && x && typeof x === "object" && !Array.isArray(x);
+    out[k] = both ? merge(out[k], x) : structuredClone(x);
+  }
+  return out;
+}
+const palettes = {
+  foundation: tokens.color.theme,
+  lab: Object.fromEntries(["dark", "light"].map((t) => [t, merge(tokens.color.theme[t], tokens.skin.lab.color.theme[t] ?? {})])),
+};
+let skin = "foundation";
 const v = (theme, path) => {
-  let n = tokens.color.theme[theme];
+  let n = palettes[skin][theme];
   for (const k of path.split(".")) n = n[k];
   return n.$value;
 };
@@ -63,7 +77,8 @@ const docPairs = [
 
 const getColorForBadge = (theme, color) => mix(v(theme, color), v(theme, "surface"), 0.14);
 
-for (const theme of ["dark", "light"]) {
+for (const [sk, theme] of [["foundation", "dark"], ["foundation", "light"], ["lab", "dark"], ["lab", "light"]]) {
+  skin = sk;
   const bg = v(theme, "bg");
   const sf = v(theme, "surface");
   const sunken = v(theme, "surface.sunken");
@@ -85,17 +100,21 @@ for (const theme of ["dark", "light"]) {
     ["danger / badge", v(theme, "danger"), mix(v(theme, "danger"), sf, 0.14), AA],
     ["info / badge", v(theme, "info"), mix(v(theme, "info"), sf, 0.14), AA],
     ["border / surface (non-texte)", v(theme, "border"), sf, 1.3],
+    ["offline / surface (graphique)", v(theme, "offline"), sf, AA_LARGE],
   ];
   for (const [label, fg, back, min] of pairs) {
     const r = ratio(fg, back);
     const ok = r >= min;
     if (!ok) failed++;
-    if (!reportMode) console.log(`${ok ? "OK  " : "ÉCHEC"} ${theme.padEnd(5)} ${label.padEnd(30)} ${r.toFixed(2)}:1 (min ${min})`);
+    if (!reportMode) console.log(`${ok ? "OK  " : "ÉCHEC"} ${(skin + " " + theme).padEnd(16)} ${label.padEnd(30)} ${r.toFixed(2)}:1 (min ${min})`);
   }
 }
 
 if (reportMode) {
   // Générer le tableau Markdown pour la documentation
+  for (const sk of ["foundation", "lab"]) {
+  skin = sk;
+  if (sk === "lab") console.log("\n**Peau Lab** (`data-forma-skin=\"lab\"`) :\n");
   console.log("| Paire | Dark | | Light | |");
   console.log("| --- | --- | --- | --- | --- |");
   for (const [label, fgPath, bgPath] of docPairs) {
@@ -105,15 +124,9 @@ if (reportMode) {
         const colorName = bgPath.replace("badge:", "");
         return getColorForBadge(theme, colorName);
       }
-      let n = tokens.color.theme[theme];
-      for (const k of bgPath.split(".")) n = n[k];
-      return n.$value;
+      return v(theme, bgPath);
     };
-    const getFg = (theme) => {
-      let n = tokens.color.theme[theme];
-      for (const k of fgPath.split(".")) n = n[k];
-      return n.$value;
-    };
+    const getFg = (theme) => v(theme, fgPath);
 
     const darkFg = getFg("dark");
     const darkBg = getBg("dark");
@@ -126,6 +139,7 @@ if (reportMode) {
     const lightLevel = lightRatio >= 4.5 ? "AA" : lightRatio >= 3 ? "AA Large" : "Fail";
 
     console.log(`| ${label} | ${darkRatio.toFixed(2)} | ${darkLevel} | ${lightRatio.toFixed(2)} | ${lightLevel} |`);
+  }
   }
 } else {
   console.log(failed ? `\n${failed} paire(s) sous le seuil.` : "\nToutes les paires atteignent leur seuil.");

@@ -4,7 +4,7 @@
 | --- | --- |
 | **Projet** | `forma-design-system` |
 | **Repository** | `fsapro/design-system` (existant, adopté) |
-| **Version du PRD** | 1.1 (avenant du 2026-11-22, section 13) |
+| **Version du PRD** | 1.2 (avenants du 2026-11-22, sections 13 et 14) |
 | **Statut** | `approved` |
 | **Approbateur** | Florent |
 | **Date d'approbation** | 2026-07-26 |
@@ -63,7 +63,7 @@ projet, indépendamment.
 - Composants packagés React ou Vue. Le contrat reste CSS + tokens, sans build côté consommateur.
 - Équivalents CMJN pour l'impression.
 - Outillage designer (Figma, synchronisation de bibliothèque).
-- Support multi-marques ou multi-peaux. Foundation reste la peau unique ; Atelier reste archivée.
+- Support multi-marques. *(v1.2)* Deux peaux seulement : Foundation et Lab (section 14). Atelier reste archivée.
 
 ## 6. Hypothèses et éléments confrontés
 
@@ -86,6 +86,7 @@ projet, indépendamment.
 4. Le repository porte `CLAUDE.md`, `docs/learnings/` et `.mcp.json` conformes au template du lab.
 5. Une règle écrite, tenant en un paragraphe, dit quoi faire quand un projet a besoin d'un token absent.
 6. *(v1.1)* Un inventaire lisible par machine liste chaque pièce de Forma avec son statut ; un contrôle bloquant en CI garantit qu'il couvre toutes les classes livrées et n'en cite aucune inexistante. Le README porte la règle « Forma d'abord ».
+7. *(v1.2)* La peau Lab est livrée en `v0.5.0` : tokens, classes, comportements et thème de graphes installables par `npm i github:fsapro/design-system#v0.5.0`, contrastes AA vérifiés en CI dans ses deux thèmes, inventaire à jour. Une page de démonstration rend la coque et les composants avec le paquet lui-même.
 
 ## 8. Premier milestone
 
@@ -124,11 +125,12 @@ une CI verte.
 | **D4** | Premier tag. | **`v0.4.0`**, une fois la CI verte (délégué à Claude). Ne pas taguer rétroactivement `v0.3.0` sur un commit rouge : cela figerait une version installable dont la documentation est fausse. Le README est corrigé pour pointer vers le premier tag vert. |
 | **D6** | Moteur de graphes. | **Apache ECharts seul** (Florent, 2026-11-22), thème généré depuis les tokens. Vega-Lite écarté des apps, réservé à un éventuel usage d'analyse hors produit. Dépendance structurante : décision du PM, non déléguée. Non livrée à ce stade. |
 | **D7** | Inventaire et règle « Forma d'abord ». | **Lancés** (Florent, 2026-11-22) : inventaire `catalog/forma.catalog.json` vérifié en CI, règle dans le README, et règle miroir dans `fsapro/project-template`. |
+| **D8** | Peau Lab. | **Livrée en v0.5.0** (Florent, 2026-11-22) : deuxième peau pour les apps web du lab, ordinateur d'abord ; un seul accent pour toutes les apps ; connexion Google seule (la double authentification est celle du compte Google) ; thème qui suit le système. Maquette de référence : page « Forma Lab » de l'atelier visuel. |
 | **D5** | Visibilité du repository. | **`private` → `public`** (Florent, 2026-07-27), déclenchée par le premier consommateur réel (Open Product Intelligence, issue #61). Motif : les trois mécanismes de consommation d'un dépôt privé (git+ssh, GitHub Packages+token, vendoring) imposent un secret CI à provisionner pour **chaque** futur consommateur, indéfiniment — contraire à l'objectif « disponible sur étagère ». Aucun secret trouvé dans l'historique complet du repository avant bascule (vérifié). Effet vérifié : `curl` anonyme et `npm install github:fsapro/design-system#v0.4.0` résolvent sans identifiant. Axe « confidentialité » de la protection du périmètre — décision explicitement de Florent, pas déléguée. |
 
 ## 11. Décisions non résolues
 
-- **Peau Martech** *(ouverte le 2026-11-22)* — la section 5 exclut le multi-peaux. Les essais de la peau Martech (atelier visuel) sont décidés côté design mais **ne peuvent pas être livrés** sans un avenant qui lève cette exclusion et cadre la v0.5.0. L'inventaire les liste au statut `essai`, sans aucune classe livrée.
+- *(Résolue le 2026-11-22 par l'avenant v1.2, section 14 : la « peau Martech » est devenue la peau Lab.)*
 
 ## 12. Traçabilité
 
@@ -145,3 +147,18 @@ bootstrap → milestone M1 → issues → pull requests → validation PM.
 
 **Critère.** Critère 6 (section 7). **Approbation.** Florent, en session, le 2026-11-22.
 
+
+## 14. Avenant v1.2 — peau Lab, v0.5.0 (2026-11-22)
+
+**Problème.** Les apps web du lab (tableaux de bord pour consulter et régler ce qui tourne à la maison) n'ont pas de peau adaptée : Foundation est dense, sombre par défaut, sans coque d'application ni graphes. Chaque app réinventerait sa barre, son menu, ses états et ses graphes.
+
+**Périmètre ajouté.**
+1. Peau `data-forma-skin="lab"` : tokens dérivés de Foundation (surfaces 12 px, contrôles 8 px, bord + ombre légère, thème qui suit le système, tokens d'animation, couleur « hors ligne »).
+2. Classes nouvelles : coque d'application (barre haute, menu latéral rétractable, version en pied), grille de tableau de bord, indicateur d'état, progression, curseur, avatar, chiffre clé, fraîcheur des données, panneau de notifications, tiroir, écrans de connexion et d'accès refusé.
+3. `forma.js`, sans dépendance : thème, menu latéral, menus, fenêtres et tiroirs (sur `<dialog>` natif).
+4. Thème Apache ECharts généré depuis les tokens, et six fiches de graphes (`fx-chart/*`). ECharts reste une dépendance **de l'app**, jamais du paquet.
+5. Inventaire, documentation, page de démonstration `docs/lab.html`.
+
+**Hors périmètre.** Migration des apps existantes (au cas par cas, plus tard) ; apps embarquées (comme Ntaker) ; utilisateurs et rôles ; connexion par e-mail ou mot de passe ; graphes entonnoir, cohortes, attribution et objectif (réserve) ; composants React ou Vue.
+
+**Critère.** Critère 7 (section 7). **Approbation.** Florent, en session, le 2026-11-22 (« Oui, livre », après validation de la maquette).
