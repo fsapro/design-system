@@ -1,7 +1,7 @@
 # Forma by FSA — fondations
 
-Peau unique : **Foundation**. Thème **dark par défaut**, light dérivé des mêmes tokens sémantiques.
-Version 0.2.0.
+Deux peaux : **Foundation** (par défaut, thème dark par défaut, light dérivé des mêmes tokens sémantiques) et **Lab** (`data-forma-skin="lab"`, clair par défaut, écarts déclarés dans `skin.lab`).
+Version 0.5.0.
 
 ## Principe
 

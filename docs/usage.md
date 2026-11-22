@@ -139,7 +139,7 @@ Connexion : **Google uniquement**, par le fournisseur d'identité de l'app (Supa
 | --- | --- |
 | `data-fx-theme-toggle` | Bascule clair / sombre, mémorise le choix, tient `aria-pressed` à jour. Émet `forma:themechange` sur `document`. |
 | `data-fx-sidebar-toggle` | Réduit / déplie `.fx-shell` (`data-collapsed`, mémorisé) ; sous 1024 px, ouvre le tiroir (`data-nav-open`). Échap et le voile le ferment. |
-| `data-fx-menu="id"` | Ouvre le menu `id` (`hidden` retiré) : focus sur le premier `role="menuitem"`, flèches, Échap, clic dehors. |
+| `data-fx-menu="id"` | Ouvre le menu `id` (`hidden` retiré) : focus sur le premier `role="menuitem"`, flèches, Début / Fin, Échap, clic dehors ; `aria-expanded` et `aria-controls` tenus à jour. |
 | `data-fx-open="id"` / `data-fx-close` | Ouvre un `<dialog>` en modal / ferme le `<dialog>` parent ; clic sur le voile aussi. Focus piégé, Échap et retour du focus : fournis par le navigateur. |
 
 Le reste (filtres, pagination, fraîcheur, données) appartient à l'app : Forma en donne la forme.
