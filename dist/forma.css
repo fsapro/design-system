@@ -1,30 +1,30 @@
-/*! Forma by FSA v0.5.0 — peaux Foundation (par défaut) et Lab.
+/*! Forma by FSA v1.0.0 — design system du lab.
  *  Généré depuis tokens/forma.tokens.json — ne pas éditer à la main.
- *  Foundation : dark par défaut, <html data-forma-theme="light"> pour basculer.
- *  Lab : <html data-forma-skin="lab">, clair par défaut, sombre selon le système ou data-forma-theme="dark".
+ *  Thème clair par défaut ; sombre selon le système, ou forcé par data-forma-theme="dark" | "light".
  */
 
-:root, [data-forma-theme='dark'] {
-  --forma-color-bg: #161614;
-  --forma-color-surface: #1f1f1c;
-  --forma-color-surface-sunken: #292926;
-  --forma-color-surface-hover: #31312d;
-  --forma-color-border: #3a3a35;
-  --forma-color-border-subtle: #2c2c28;
-  --forma-color-text: #eeeeea;
-  --forma-color-text-muted: #b4b4ac;
-  --forma-color-text-faint: #9a9a92;
-  --forma-color-action: #5b96c9;
-  --forma-color-action-hover: #7aabd8;
-  --forma-color-action-quiet: #1c2c3d;
-  --forma-color-on-action: #0f1b26;
-  --forma-color-on-danger: #20100c;
-  --forma-color-success: #6ca279;
-  --forma-color-warning: #cfa63e;
-  --forma-color-danger: #dc7a6d;
-  --forma-color-info: #629ad0;
-  --forma-color-offline: #7c7c75;
-  --forma-color-scrim: rgba(0, 0, 0, 0.5);
+:root,
+[data-forma-theme='light'] {
+  --forma-color-bg: #f6f6f3;
+  --forma-color-surface: #ffffff;
+  --forma-color-surface-sunken: #efefec;
+  --forma-color-surface-hover: #efefec;
+  --forma-color-border: #e1e1dc;
+  --forma-color-border-subtle: #efefec;
+  --forma-color-text: #292926;
+  --forma-color-text-muted: #575751;
+  --forma-color-text-faint: #6d6d65;
+  --forma-color-action: #2d6296;
+  --forma-color-action-hover: #24507c;
+  --forma-color-action-quiet: #e7eef5;
+  --forma-color-on-action: #ffffff;
+  --forma-color-on-danger: #ffffff;
+  --forma-color-success: #396e44;
+  --forma-color-warning: #7e5b0f;
+  --forma-color-danger: #a83a2c;
+  --forma-color-info: #2d6296;
+  --forma-color-offline: #8a8a82;
+  --forma-color-scrim: rgba(20, 20, 18, 0.28);
   --forma-color-viz-cat-1: #ff7420;
   --forma-color-viz-cat-2: #008684;
   --forma-color-viz-cat-3: #bcca25;
@@ -46,7 +46,7 @@
   --forma-color-viz-seq-7: #0c1f33;
   --forma-font-sans: 'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif;
   --forma-font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
-  --forma-font-num: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --forma-font-num: 'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif;
   --forma-space-1: 4px;
   --forma-space-2: 8px;
   --forma-space-3: 12px;
@@ -54,19 +54,19 @@
   --forma-space-6: 24px;
   --forma-space-8: 32px;
   --forma-space-12: 48px;
-  --forma-radius-control: 3px;
-  --forma-radius-surface: 6px;
+  --forma-radius-control: 8px;
+  --forma-radius-surface: 12px;
   --forma-radius-pill: 999px;
-  --forma-size-control: 34px;
+  --forma-size-control: 36px;
   --forma-motion-fast: 120ms;
   --forma-motion-normal: 200ms;
   --forma-motion-slow: 320ms;
   --forma-easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --forma-easing-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
   --forma-elevation-0: none;
-  --forma-elevation-1: none;
-  --forma-elevation-2: 0 6px 20px -8px rgba(22,22,20,.22);
-  --forma-elevation-3: 0 16px 40px -12px rgba(22,22,20,.30);
+  --forma-elevation-1: 0 1px 2px rgba(22,22,20,.06), 0 2px 8px -2px rgba(22,22,20,.06);
+  --forma-elevation-2: 0 4px 10px -2px rgba(22,22,20,.10), 0 12px 28px -8px rgba(22,22,20,.14);
+  --forma-elevation-3: 0 12px 24px -6px rgba(22,22,20,.18), 0 32px 64px -16px rgba(22,22,20,.26);
   --forma-type-2xl-family: var(--forma-font-sans);
   --forma-type-2xl-size: 31px;
   --forma-type-2xl-line: 1.15;
@@ -102,99 +102,9 @@
   --forma-type-mono-line: 1.5;
   --forma-type-mono-weight: 400;
   --forma-type-mono-tracking: 0;
-  --forma-elevation-2: 0 10px 26px -10px rgba(0,0,0,.8);
-  --forma-elevation-3: 0 20px 48px -12px rgba(0,0,0,.85);
 }
 
-[data-forma-theme='light'] {
-  --forma-color-bg: #f8f8f6;
-  --forma-color-surface: #ffffff;
-  --forma-color-surface-sunken: #efefec;
-  --forma-color-surface-hover: #efefec;
-  --forma-color-border: #e1e1dc;
-  --forma-color-border-subtle: #efefec;
-  --forma-color-text: #292926;
-  --forma-color-text-muted: #575751;
-  --forma-color-text-faint: #6d6d65;
-  --forma-color-action: #2d6296;
-  --forma-color-action-hover: #24507c;
-  --forma-color-action-quiet: #e7eef5;
-  --forma-color-on-action: #ffffff;
-  --forma-color-on-danger: #ffffff;
-  --forma-color-success: #396e44;
-  --forma-color-warning: #7e5b0f;
-  --forma-color-danger: #a83a2c;
-  --forma-color-info: #2d6296;
-  --forma-color-offline: #8a8a82;
-  --forma-color-scrim: rgba(20, 20, 18, 0.28);
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-forma-theme]) {
-    --forma-color-bg: #f8f8f6;
-    --forma-color-surface: #ffffff;
-    --forma-color-surface-sunken: #efefec;
-    --forma-color-surface-hover: #efefec;
-    --forma-color-border: #e1e1dc;
-    --forma-color-border-subtle: #efefec;
-    --forma-color-text: #292926;
-    --forma-color-text-muted: #575751;
-    --forma-color-text-faint: #6d6d65;
-    --forma-color-action: #2d6296;
-    --forma-color-action-hover: #24507c;
-    --forma-color-action-quiet: #e7eef5;
-    --forma-color-on-action: #ffffff;
-    --forma-color-on-danger: #ffffff;
-    --forma-color-success: #396e44;
-    --forma-color-warning: #7e5b0f;
-    --forma-color-danger: #a83a2c;
-    --forma-color-info: #2d6296;
-    --forma-color-offline: #8a8a82;
-    --forma-color-scrim: rgba(20, 20, 18, 0.28);
-}
-}
-
-/* ---------- Peau Lab (spécificité 0,2,0 : passe devant Foundation sans la modifier) ---------- */
-
-[data-forma-skin='lab']:not([data-forma-theme='dark']),
-[data-forma-skin='lab'] [data-forma-theme='light'] {
-  --forma-color-bg: #f6f6f3;
-  --forma-color-surface: #ffffff;
-  --forma-color-surface-sunken: #efefec;
-  --forma-color-surface-hover: #efefec;
-  --forma-color-border: #e1e1dc;
-  --forma-color-border-subtle: #efefec;
-  --forma-color-text: #292926;
-  --forma-color-text-muted: #575751;
-  --forma-color-text-faint: #6d6d65;
-  --forma-color-action: #2d6296;
-  --forma-color-action-hover: #24507c;
-  --forma-color-action-quiet: #e7eef5;
-  --forma-color-on-action: #ffffff;
-  --forma-color-on-danger: #ffffff;
-  --forma-color-success: #396e44;
-  --forma-color-warning: #7e5b0f;
-  --forma-color-danger: #a83a2c;
-  --forma-color-info: #2d6296;
-  --forma-color-offline: #8a8a82;
-  --forma-color-scrim: rgba(20, 20, 18, 0.28);
-  --forma-radius-control: 8px;
-  --forma-radius-surface: 12px;
-  --forma-size-control: 36px;
-  --forma-elevation-1: 0 1px 2px rgba(22,22,20,.06), 0 2px 8px -2px rgba(22,22,20,.06);
-  --forma-elevation-2: 0 4px 10px -2px rgba(22,22,20,.10), 0 12px 28px -8px rgba(22,22,20,.14);
-  --forma-elevation-3: 0 12px 24px -6px rgba(22,22,20,.18), 0 32px 64px -16px rgba(22,22,20,.26);
-  --forma-color-viz-seq-0: #e7eef5;
-  --forma-color-viz-seq-1: #a9c3da;
-  --forma-color-viz-seq-2: #5b89ad;
-  --forma-color-viz-seq-3: #2d6296;
-  --forma-color-viz-seq-4: #1a3b5c;
-  --forma-color-viz-seq-5: #13273d;
-  --forma-color-viz-seq-6: #0c1f33;
-}
-
-[data-forma-skin='lab'][data-forma-theme='dark'],
-[data-forma-skin='lab'] [data-forma-theme='dark'] {
+[data-forma-theme='dark'] {
   --forma-color-bg: #111110;
   --forma-color-surface: #1f1f1c;
   --forma-color-surface-sunken: #292926;
@@ -215,9 +125,6 @@
   --forma-color-info: #629ad0;
   --forma-color-offline: #7c7c75;
   --forma-color-scrim: rgba(0, 0, 0, 0.5);
-  --forma-radius-control: 8px;
-  --forma-radius-surface: 12px;
-  --forma-size-control: 36px;
   --forma-elevation-1: 0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.45);
   --forma-elevation-2: 0 4px 10px -2px rgba(0,0,0,.45), 0 12px 28px -8px rgba(0,0,0,.55);
   --forma-elevation-3: 0 12px 24px -6px rgba(0,0,0,.55), 0 32px 64px -16px rgba(0,0,0,.7);
@@ -229,7 +136,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  [data-forma-skin='lab']:not([data-forma-theme]) {
+  :root:not([data-forma-theme]) {
     --forma-color-bg: #111110;
     --forma-color-surface: #1f1f1c;
     --forma-color-surface-sunken: #292926;
@@ -250,9 +157,6 @@
     --forma-color-info: #629ad0;
     --forma-color-offline: #7c7c75;
     --forma-color-scrim: rgba(0, 0, 0, 0.5);
-    --forma-radius-control: 8px;
-    --forma-radius-surface: 12px;
-    --forma-size-control: 36px;
     --forma-elevation-1: 0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.45);
     --forma-elevation-2: 0 4px 10px -2px rgba(0,0,0,.45), 0 12px 28px -8px rgba(0,0,0,.55);
     --forma-elevation-3: 0 12px 24px -6px rgba(0,0,0,.55), 0 32px 64px -16px rgba(0,0,0,.7);
@@ -273,7 +177,7 @@
 }
 }
 
-/*! Forma by FSA — composants, peaux Foundation et Lab.
+/*! Forma by FSA — composants du design system du lab.
  *  Ne consomme que la couche sémantique (var(--forma-*)). Aucune valeur en dur.
  *  Préfixe de classe : fx-
  */
@@ -346,7 +250,6 @@
 .fx-btn--block { width: 100%; }
 .fx-btn--icon { width: var(--forma-size-control); padding: 0; }
 .fx-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.fx-btn:disabled:hover { background: transparent; }
 
 .fx-link {
   background: none;
@@ -771,8 +674,7 @@
 .fx-empty__actions { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; }
 
 /* =====================================================================
- *  v0.5.0 — pièces ajoutées pour les apps web du lab.
- *  Écrites sur tokens : utilisables dans les deux peaux, dessinées pour Lab.
+ *  Coque, tableaux de bord et pièces des apps web du lab (depuis v0.5.0).
  * ===================================================================== */
 
 /* ---------- Coque d'application ---------- */
@@ -1068,39 +970,45 @@ dialog.fx-modal::backdrop, dialog.fx-drawer::backdrop { background: var(--forma-
 }
 
 /* =====================================================================
- *  Peau Lab — écarts de forme des composants existants.
+ *  Formes du design system du lab, appliquées aux composants d'origine.
+ *  Placées après les règles de base, qu'elles précisent (même spécificité).
  * ===================================================================== */
 
-[data-forma-skin='lab'] .fx-btn { background: var(--forma-color-surface); height: var(--forma-size-control); font-size: 14px; transition: background-color var(--forma-motion-fast) var(--forma-easing-standard), border-color var(--forma-motion-fast) var(--forma-easing-standard); }
-[data-forma-skin='lab'] .fx-btn:hover { background: var(--forma-color-surface-sunken); }
-[data-forma-skin='lab'] .fx-btn--primary { background: var(--forma-color-action); }
-[data-forma-skin='lab'] .fx-btn--primary:hover { background: var(--forma-color-action-hover); }
-[data-forma-skin='lab'] .fx-btn--danger { background: var(--forma-color-danger); }
-[data-forma-skin='lab'] .fx-btn--ghost { background: transparent; }
-[data-forma-skin='lab'] .fx-btn--ghost:hover { background: var(--forma-color-surface-sunken); color: var(--forma-color-text); }
-[data-forma-skin='lab'] .fx-btn--sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: calc(var(--forma-radius-control) - 1px); }
-[data-forma-skin='lab'] .fx-input,
-[data-forma-skin='lab'] .fx-select { height: 38px; padding: 0 12px; }
-[data-forma-skin='lab'] .fx-input:focus,
-[data-forma-skin='lab'] .fx-select:focus,
-[data-forma-skin='lab'] .fx-textarea:focus { outline: none; border-color: var(--forma-color-action); box-shadow: 0 0 0 3px var(--forma-color-action-quiet); }
-[data-forma-skin='lab'] .fx-badge { height: 24px; padding: 0 10px; border-color: transparent; border-radius: var(--forma-radius-pill); }
-[data-forma-skin='lab'] .fx-chip { height: 30px; padding: 0 6px 0 12px; border-color: transparent; border-radius: var(--forma-radius-pill); background: var(--forma-color-action-quiet); color: var(--forma-color-action); font-size: 13px; font-weight: 500; }
-[data-forma-skin='lab'] .fx-segments { display: inline-flex; gap: 2px; padding: 3px; border-radius: calc(var(--forma-radius-control) + 2px); background: var(--forma-color-surface-sunken); }
-[data-forma-skin='lab'] .fx-segment { height: 30px; padding: 0 12px; border: 0; border-radius: calc(var(--forma-radius-control) - 1px); font-weight: 500; }
-[data-forma-skin='lab'] .fx-segment[aria-pressed="true"] { background: var(--forma-color-surface); box-shadow: var(--forma-elevation-1); }
-[data-forma-skin='lab'] .fx-card__head { padding: 18px 20px 0; border-bottom: 0; font-size: 16px; }
-[data-forma-skin='lab'] .fx-card__body { padding: var(--forma-space-4) 20px 20px; }
-[data-forma-skin='lab'] .fx-table { font-size: 14px; }
-[data-forma-skin='lab'] .fx-table th { padding: 10px 14px; background: transparent; font-size: 12.5px; font-weight: 500; text-transform: none; letter-spacing: 0; }
-[data-forma-skin='lab'] .fx-table td { padding: 11px 14px; }
-[data-forma-skin='lab'] .fx-toolbar { padding: 10px 14px; }
-[data-forma-skin='lab'] .fx-page { min-width: 32px; height: 32px; border-color: transparent; font-size: 13px; font-variant-numeric: tabular-nums; }
-[data-forma-skin='lab'] .fx-page[aria-current="page"] { border-color: transparent; color: var(--forma-color-action); font-weight: 600; }
-[data-forma-skin='lab'] .fx-menu { border-radius: var(--forma-radius-surface); }
-[data-forma-skin='lab'] .fx-menu__item { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: var(--forma-radius-control); font-size: 14px; }
-[data-forma-skin='lab'] .fx-modal { padding: 24px; border-radius: calc(var(--forma-radius-surface) + 2px); box-shadow: var(--forma-elevation-3); }
-[data-forma-skin='lab'] .fx-toast { border-left-width: 1px; border-radius: var(--forma-radius-surface); }
-[data-forma-skin='lab'] .fx-skeleton { border-radius: 6px; }
-[data-forma-skin='lab'] .fx-nav__item[aria-current="page"] { color: var(--forma-color-action); font-weight: 600; }
-[data-forma-skin='lab'] .fx-num { font-family: inherit; font-variant-numeric: tabular-nums; }
+.fx-btn { background: var(--forma-color-surface); height: var(--forma-size-control); font-size: 14px; transition: background-color var(--forma-motion-fast) var(--forma-easing-standard), border-color var(--forma-motion-fast) var(--forma-easing-standard); }
+.fx-btn:hover { background: var(--forma-color-surface-sunken); }
+.fx-btn--primary { background: var(--forma-color-action); }
+.fx-btn--primary:hover { background: var(--forma-color-action-hover); }
+.fx-btn--danger { background: var(--forma-color-danger); }
+.fx-btn--ghost { background: transparent; }
+.fx-btn--ghost:hover { background: var(--forma-color-surface-sunken); color: var(--forma-color-text); }
+.fx-btn--danger:hover { background: var(--forma-color-danger); filter: brightness(1.08); }
+/* Désactivé : le survol ne change rien (chaque variante garde son fond et son encre). */
+.fx-btn:disabled:hover { background: var(--forma-color-surface); color: var(--forma-color-text); }
+.fx-btn--primary:disabled:hover { background: var(--forma-color-action); color: var(--forma-color-on-action); }
+.fx-btn--danger:disabled:hover { background: var(--forma-color-danger); color: var(--forma-color-on-danger); filter: none; }
+.fx-btn--ghost:disabled:hover { background: transparent; color: var(--forma-color-text-muted); }
+.fx-btn--sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: calc(var(--forma-radius-control) - 1px); }
+.fx-input,
+.fx-select { height: 38px; padding: 0 12px; }
+.fx-input:focus,
+.fx-select:focus,
+.fx-textarea:focus { outline: none; border-color: var(--forma-color-action); box-shadow: 0 0 0 3px var(--forma-color-action-quiet); }
+.fx-badge { height: 24px; padding: 0 10px; border-color: transparent; border-radius: var(--forma-radius-pill); }
+.fx-chip { height: 30px; padding: 0 6px 0 12px; border-color: transparent; border-radius: var(--forma-radius-pill); background: var(--forma-color-action-quiet); color: var(--forma-color-action); font-size: 13px; font-weight: 500; }
+.fx-segments { display: inline-flex; gap: 2px; padding: 3px; border-radius: calc(var(--forma-radius-control) + 2px); background: var(--forma-color-surface-sunken); }
+.fx-segment { height: 30px; padding: 0 12px; border: 0; border-radius: calc(var(--forma-radius-control) - 1px); font-weight: 500; }
+.fx-segment[aria-pressed="true"] { background: var(--forma-color-surface); box-shadow: var(--forma-elevation-1); }
+.fx-card__head { padding: 18px 20px 0; border-bottom: 0; font-size: 16px; }
+.fx-card__body { padding: var(--forma-space-4) 20px 20px; }
+.fx-table { font-size: 14px; }
+.fx-table th { padding: 10px 14px; background: transparent; font-size: 12.5px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.fx-table td { padding: 11px 14px; }
+.fx-toolbar { padding: 10px 14px; }
+.fx-page { min-width: 32px; height: 32px; border-color: transparent; font-size: 13px; font-variant-numeric: tabular-nums; }
+.fx-page[aria-current="page"] { border-color: transparent; color: var(--forma-color-action); font-weight: 600; }
+.fx-menu { border-radius: var(--forma-radius-surface); }
+.fx-menu__item { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: var(--forma-radius-control); font-size: 14px; }
+.fx-modal { padding: 24px; border-radius: calc(var(--forma-radius-surface) + 2px); box-shadow: var(--forma-elevation-3); }
+.fx-toast { border-left-width: 1px; border-radius: var(--forma-radius-surface); }
+.fx-skeleton { border-radius: 6px; }
+.fx-nav__item[aria-current="page"] { color: var(--forma-color-action); font-weight: 600; }

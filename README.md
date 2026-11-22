@@ -1,147 +1,72 @@
 # Forma by FSA
 
-Design system centralisé, deux peaux : **Foundation** (par défaut, dense, sombre) et **Lab** (apps web du lab, ordinateur d'abord). Une source de vérité (`tokens/forma.tokens.json`, format DTCG), un fichier CSS à charger, un petit script de comportements, un thème de graphes ECharts ; aucune dépendance et aucun build côté consommateur.
+Le design system des apps web du lab : des tableaux de bord pour consulter et régler ce qui tourne à la maison, sur l'ordinateur d'abord. Une source de vérité (`tokens/forma.tokens.json`, format DTCG), un fichier CSS, un petit script de comportements, un thème de graphes ECharts ; aucune dépendance et aucun build côté consommateur.
 
-- **Thème par défaut :** dark. Light disponible, et suivi automatique des préférences système.
-- **Accessibilité :** toutes les paires de texte atteignent le niveau AA (4,5:1), vérifié automatiquement en CI. Les bords structurels maintiennent un seuil de 1,3:1 pour préserver la légèreté visuelle.
-- **Stacks :** React, Vue, HTML nu, Power Apps — c'est du CSS et des variables, rien d'autre.
+- **Thème :** clair par défaut, sombre selon le système, bascule mémorisée. Un seul accent pour toutes les apps.
+- **Accessibilité :** toutes les paires de texte atteignent le niveau AA (4,5:1), vérifié automatiquement en CI dans les deux thèmes. Les bords structurels maintiennent un seuil de 1,3:1 pour préserver la légèreté visuelle.
+- **Stacks :** HTML nu, React, Vue, Astro… c'est du CSS, des variables et un script sans dépendance.
+- **Référence visuelle :** page « Forma Lab » de l'atelier visuel ; démonstration rendue par le paquet lui-même : [`docs/index.html`](docs/index.html) (servir le dossier, par exemple `python3 -m http.server`).
+
+Depuis la `v1.0.0`, Forma est ce système unique. L'ancienne peau Foundation est archivée dans [`archive/foundation/`](archive/foundation/README.md) : une app qui l'utilise reste épinglée sur `v0.5.0` ou `v0.4.0` et migre au cas par cas.
 
 ## Installation
 
 ```bash
-npm install github:fsapro/design-system#v0.5.0
+npm install github:fsapro/design-system#v1.0.0
 ```
 
-Deux façons de consommer :
-
-**Avec bundler (React, Vue, Svelte, Next.js, Astro…)**
-```js
-import "@fsapro/forma/css";
-```
-
-**Sans bundler — copiez le fichier CSS dans vos assets**
-```html
-<link rel="stylesheet" href="/assets/forma.css">
-```
-
-Le CSS est autonome — aucune dépendance, aucun build requis côté consommateur. Il fonctionne partout : HTML nu, templates serveur, apps statiques, iframes.
-
-## Peau Lab en 5 lignes
+**Sans bundler** : copiez `dist/forma.css` et `dist/forma.js` dans vos assets.
 
 ```html
-<html lang="fr" data-forma-skin="lab">
+<!doctype html>
+<html lang="fr">
 <head>
   <link rel="stylesheet" href="/assets/forma.css">
-  <script src="/assets/forma.js"></script>  <!-- sans defer : thème appliqué avant le rendu -->
+  <script src="/assets/forma.js"></script>  <!-- dans <head>, sans defer : thème appliqué avant l'affichage -->
 </head>
-<body class="fx-root"> <div class="fx-shell">…</div> </body>
-```
-
-Clair par défaut, sombre selon le système, bascule mémorisée par `data-fx-theme-toggle`. Coque, composants, comportements et graphes : [`docs/usage.md`](docs/usage.md#peau-lab). Démonstration rendue par le paquet lui-même : [`docs/lab.html`](docs/lab.html). Graphes : `import { formaTheme, charts } from "@fsapro/forma/echarts"` (ECharts est installé par l'app).
-
-## Démarrage rapide
-
-Trois étapes pour une interface Forma :
-
-```html
-<!-- 1. Charger le CSS -->
-<link rel="stylesheet" href="/assets/forma.css">
-
-<!-- 2. Envelopper votre app avec .fx-root et data-forma-theme -->
-<html data-forma-theme="dark">
-  <body class="fx-root">
-    
-    <!-- 3. Utiliser les classes fx-* -->
-    <button class="fx-btn fx-btn--primary">Publier</button>
-    <input type="text" class="fx-input" placeholder="Nom">
-    
-  </body>
+<body class="fx-root">
+  <div class="fx-shell">…</div>
+</body>
 </html>
 ```
 
-**Pour swapper les thèmes :** `data-forma-theme="light"` sur n'importe quel élément (inclus les sous-arbres).  
-**Sans l'attribut :** le thème suit `prefers-color-scheme` de l'OS.
+**Avec bundler** (Vite, Next.js, Astro…) :
 
-Catalogue complet des composants et tokens dans [`docs/usage.md`](docs/usage.md). Galerie vivante : ouvrez [`docs/index.html`](docs/index.html) dans un navigateur pour voir tous les composants avec les deux thèmes.
+```js
+import "@fsapro/forma/css";
+import "@fsapro/forma/forma.js"; // côté navigateur uniquement
+```
+
+Thème : sans attribut, il suit `prefers-color-scheme` ; `data-forma-theme="dark"` ou `"light"` le force, sur `<html>` ou sur un sous-arbre. Un bouton `data-fx-theme-toggle` bascule et mémorise.
+
+Coque d'application, composants, comportements, graphes et règles de rédaction : [`docs/usage.md`](docs/usage.md).
+
+## Graphes
+
+```js
+import * as echarts from "echarts";                 // dépendance de l'app
+import { formaTheme, charts } from "@fsapro/forma/echarts";
+
+echarts.registerTheme("forma", formaTheme());
+const chart = echarts.init(el, "forma");
+chart.setOption(charts.trendTarget({ points, average, target: [77, 78], unit: "kg" }));
+```
 
 ## Consommer les tokens en JS
 
 ```js
 import tokens, { cssVar, version } from "@fsapro/forma";
 
-tokens["theme.dark.color.action"]; // "#5b96c9"
-cssVar("color.action");            // "var(--forma-color-action)"
+tokens["theme.light.color.action"]; // "#2d6296"
+cssVar("color.action");             // "var(--forma-color-action)"
 ```
 
-Pour un outil de design ou un autre générateur, partez de `tokens/forma.tokens.json` (DTCG, avec les correspondances Pantone dans `$extensions.fsa`).
-
-## Consommer par stack
-
-**React / Next.js**
-```jsx
-import "@fsapro/forma/css";
-import { tokens, cssVar } from "@fsapro/forma";
-
-export default function App() {
-  return (
-    <html data-forma-theme="dark">
-      <body className="fx-root">
-        <button className="fx-btn fx-btn--primary">Publier</button>
-        <style>{`
-          .custom { background: ${tokens["theme.dark.color.action"]}; }
-        `}</style>
-      </body>
-    </html>
-  );
-}
-```
-
-**Vue**
-```vue
-<template>
-  <html :data-forma-theme="theme">
-    <body class="fx-root">
-      <button class="fx-btn fx-btn--primary">Publier</button>
-    </body>
-  </html>
-</template>
-
-<script setup>
-import "@fsapro/forma/css";
-const theme = "dark"; // ou "light", ou réactif
-</script>
-```
-
-**HTML nu / templates serveur**
-```html
-<!DOCTYPE html>
-<html data-forma-theme="dark">
-<head>
-  <link rel="stylesheet" href="/assets/forma.css">
-</head>
-<body class="fx-root">
-  <button class="fx-btn fx-btn--primary">Publier</button>
-</body>
-</html>
-```
-
-**Astro / Static sites**
-```astro
----
-import "@fsapro/forma/css";
----
-
-<html data-forma-theme="dark">
-  <body class="fx-root">
-    <button class="fx-btn fx-btn--primary">Publier</button>
-  </body>
-</html>
-```
+Pour un outil de design ou un autre générateur, partez de `tokens/forma.tokens.json` (DTCG, avec les correspondances Pantone dans `$extensions.fsa` quand elles existent).
 
 ## Structure
 
 ```
-tokens/forma.tokens.json   Source de vérité. Toute valeur se change ICI (skin.lab : écarts de la peau Lab).
+tokens/forma.tokens.json   Source de vérité. Toute valeur se change ICI.
 catalog/forma.catalog.json Inventaire : tout ce que Forma fournit, prévoit ou ne couvre pas.
 src/components.css         CSS de composants, écrit à la main.
 src/forma.js               Comportements (thème, menu latéral, menus, fenêtres), copié dans dist/.
@@ -150,7 +75,8 @@ build/build-tokens.mjs     Génère dist/. Zéro dépendance.
 build/check-contrast.mjs   Vérifie WCAG AA sur toutes les paires.
 build/check-catalog.mjs    Vérifie que l'inventaire et le CSS disent la même chose.
 dist/                      Généré et commité — ne pas éditer.
-docs/                      Doc vivante + fondations.
+docs/                      Démonstration (index.html), catalogue (usage.md), fondations.
+archive/                   Peaux retirées (Foundation, Atelier), non maintenues.
 ```
 
 ## Modifier le système
@@ -191,4 +117,4 @@ Quand un produit a besoin d'un token absent de Forma : si le besoin est **géné
 
 ## Ce que le système ne couvre pas encore
 
-Arbre / hiérarchie, filtres avancés sauvegardés, upload, sélecteur de date, table éditable en ligne, palette de commandes ⌘K, utilisateurs et rôles, connexion par e-mail. Graphes entonnoir, cohortes, attribution et objectif : en réserve. Apps embarquées (comme Ntaker) : hors du périmètre de Forma. La peau **Atelier** est archivée dans `archive/`, non maintenue.
+Arbre / hiérarchie, filtres avancés sauvegardés, upload, sélecteur de date, table éditable en ligne, palette de commandes ⌘K, utilisateurs et rôles, connexion par e-mail. Graphes entonnoir, cohortes, attribution et objectif : en réserve. Apps embarquées (comme Ntaker) : hors du périmètre de Forma. Les peaux **Foundation** et **Atelier** sont archivées dans `archive/`, non maintenues.

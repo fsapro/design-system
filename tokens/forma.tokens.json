@@ -1,20 +1,19 @@
 {
   "$schema": "https://design-tokens.org/dtcg",
-  "$description": "Forma by FSA — peaux Foundation (par défaut) et Lab. Source unique de vérité des valeurs ; dist/ en est dérivé par build/build-tokens.mjs.",
+  "$description": "Forma by FSA — design system du lab. Source unique de vérité des valeurs ; dist/ en est dérivé par build/build-tokens.mjs.",
   "$extensions": {
-    "fsa.version": "0.5.0",
-    "fsa.skin": "foundation",
-    "fsa.defaultTheme": "dark"
+    "fsa.version": "1.0.0",
+    "fsa.defaultTheme": "light"
   },
   "color": {
     "theme": {
       "dark": {
         "bg": {
           "$type": "color",
-          "$value": "#161614",
+          "$value": "#111110",
           "$extensions": {
-            "fsa.pantone": "19-4005 TCX",
-            "fsa.pantoneName": "Stretch Limo",
+            "fsa.pantone": null,
+            "fsa.pantoneName": "ajusté pour le design system du lab",
             "fsa.usage": "Fond de page"
           }
         },
@@ -37,39 +36,39 @@
           },
           "hover": {
             "$type": "color",
-            "$value": "#31312d",
+            "$value": "#32322e",
             "$extensions": {
               "fsa.pantone": null,
-              "fsa.pantoneName": null,
-              "fsa.usage": "Survol de ligne"
+              "fsa.pantoneName": "ajusté pour le design system du lab",
+              "fsa.usage": "Survol"
             }
           }
         },
         "border": {
           "$type": "color",
-          "$value": "#3a3a35",
+          "$value": "#4a4a43",
           "$extensions": {
             "fsa.pantone": null,
-            "fsa.pantoneName": "dérivé de Jet Black",
-            "fsa.usage": "Séparation structurelle"
+            "fsa.pantoneName": "ajusté pour le design system du lab",
+            "fsa.usage": "Bord de carte, lisible sur fond très sombre"
           },
           "subtle": {
             "$type": "color",
-            "$value": "#2c2c28",
+            "$value": "#31312d",
             "$extensions": {
               "fsa.pantone": null,
-              "fsa.pantoneName": null,
+              "fsa.pantoneName": "ajusté pour le design system du lab",
               "fsa.usage": "Séparation interne"
             }
           }
         },
         "text": {
           "$type": "color",
-          "$value": "#eeeeea",
+          "$value": "#e4e4de",
           "$extensions": {
             "fsa.pantone": null,
-            "fsa.pantoneName": "dérivé de Snow White",
-            "fsa.usage": "Texte principal"
+            "fsa.pantoneName": "ajusté pour le design system du lab",
+            "fsa.usage": "Texte principal, adouci pour la lecture de nuit"
           },
           "muted": {
             "$type": "color",
@@ -92,11 +91,11 @@
         },
         "action": {
           "$type": "color",
-          "$value": "#5b96c9",
+          "$value": "#5e96cc",
           "$extensions": {
             "fsa.pantone": null,
-            "fsa.pantoneName": "dérivé de Chill Blue",
-            "fsa.usage": "Bouton, lien, focus, série active"
+            "fsa.pantoneName": "ajusté pour le design system du lab",
+            "fsa.usage": "Accent unique"
           },
           "hover": {
             "$type": "color",
@@ -139,11 +138,11 @@
         },
         "success": {
           "$type": "color",
-          "$value": "#6ca279",
+          "$value": "#6ca679",
           "$extensions": {
             "fsa.pantone": null,
-            "fsa.pantoneName": "dérivé de Sap Green",
-            "fsa.usage": "Statut abouti"
+            "fsa.pantoneName": "ajusté pour le design system du lab",
+            "fsa.usage": "Succès"
           }
         },
         "warning": {
@@ -157,11 +156,11 @@
         },
         "danger": {
           "$type": "color",
-          "$value": "#dc7a6d",
+          "$value": "#dc7b6e",
           "$extensions": {
             "fsa.pantone": null,
-            "fsa.pantoneName": "dérivé de Marsala",
-            "fsa.usage": "Statut critique, action destructive"
+            "fsa.pantoneName": "ajusté pour le design system du lab",
+            "fsa.usage": "Danger"
           }
         },
         "info": {
@@ -191,11 +190,11 @@
       "light": {
         "bg": {
           "$type": "color",
-          "$value": "#f8f8f6",
+          "$value": "#f6f6f3",
           "$extensions": {
-            "fsa.pantone": "11-0602 TCX",
-            "fsa.pantoneName": "Snow White",
-            "fsa.usage": "Fond de page"
+            "fsa.pantone": null,
+            "fsa.pantoneName": "ajusté pour le design system du lab",
+            "fsa.usage": "Fond de page, un ton sous les cartes blanches"
           }
         },
         "surface": {
@@ -544,6 +543,43 @@
             "fsa.usage": "Échelle séquentielle, pas 7"
           }
         }
+      ],
+      "sequentialDark": [
+        {
+          "$type": "color",
+          "$value": "#34342f",
+          "$extensions": {
+            "fsa.usage": "Intensité 0 en thème sombre ; plus fort = plus clair"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#264a70",
+          "$extensions": {
+            "fsa.usage": "1"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#3a73ab",
+          "$extensions": {
+            "fsa.usage": "2"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#6aa1d6",
+          "$extensions": {
+            "fsa.usage": "3"
+          }
+        },
+        {
+          "$type": "color",
+          "$value": "#b3d0ec",
+          "$extensions": {
+            "fsa.usage": "4 : plus fort = plus clair"
+          }
+        }
       ]
     }
   },
@@ -569,13 +605,13 @@
     "num": {
       "$type": "fontFamily",
       "$value": [
-        "ui-monospace",
-        "SFMono-Regular",
-        "Consolas",
-        "monospace"
+        "IBM Plex Sans",
+        "system-ui",
+        "Segoe UI",
+        "sans-serif"
       ],
       "$extensions": {
-        "fsa.usage": "Valeurs chiffrées des cartes de statistiques"
+        "fsa.usage": "Valeurs chiffrées : même famille que le texte, chiffres tabulaires par .fx-num"
       }
     }
   },
@@ -705,14 +741,14 @@
   "radius": {
     "control": {
       "$type": "dimension",
-      "$value": "3px",
+      "$value": "8px",
       "$extensions": {
         "fsa.usage": "Bouton, champ, badge"
       }
     },
     "surface": {
       "$type": "dimension",
-      "$value": "6px",
+      "$value": "12px",
       "$extensions": {
         "fsa.usage": "Carte, panneau, overlay"
       }
@@ -728,7 +764,7 @@
   "size": {
     "control": {
       "$type": "dimension",
-      "$value": "34px",
+      "$value": "36px",
       "$extensions": {
         "fsa.usage": "Hauteur de contrôle à densité 75"
       }
@@ -739,30 +775,31 @@
       "$type": "shadow",
       "$value": "none",
       "$extensions": {
-        "fsa.usage": "Bord seul — défaut de la peau"
+        "fsa.usage": "Aucune ombre"
       }
     },
     "1": {
       "$type": "shadow",
-      "$value": "none",
+      "$value": "0 1px 2px rgba(22,22,20,.06), 0 2px 8px -2px rgba(22,22,20,.06)",
       "$extensions": {
-        "fsa.usage": "Carte : aucune ombre, le bord suffit"
+        "fsa.usage": "Carte",
+        "fsa.dark": "0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.45)"
       }
     },
     "2": {
       "$type": "shadow",
-      "$value": "0 6px 20px -8px rgba(22,22,20,.22)",
+      "$value": "0 4px 10px -2px rgba(22,22,20,.10), 0 12px 28px -8px rgba(22,22,20,.14)",
       "$extensions": {
-        "fsa.usage": "Overlay uniquement",
-        "fsa.dark": "0 10px 26px -10px rgba(0,0,0,.8)"
+        "fsa.usage": "Menu, panneau",
+        "fsa.dark": "0 4px 10px -2px rgba(0,0,0,.45), 0 12px 28px -8px rgba(0,0,0,.55)"
       }
     },
     "3": {
       "$type": "shadow",
-      "$value": "0 16px 40px -12px rgba(22,22,20,.30)",
+      "$value": "0 12px 24px -6px rgba(22,22,20,.18), 0 32px 64px -16px rgba(22,22,20,.26)",
       "$extensions": {
         "fsa.usage": "Fenêtre, tiroir",
-        "fsa.dark": "0 20px 48px -12px rgba(0,0,0,.85)"
+        "fsa.dark": "0 12px 24px -6px rgba(0,0,0,.55), 0 32px 64px -16px rgba(0,0,0,.7)"
       }
     }
   },
@@ -813,207 +850,6 @@
       ],
       "$extensions": {
         "fsa.usage": "Sortie"
-      }
-    }
-  },
-  "skin": {
-    "lab": {
-      "$description": "Peau Lab : apps web du lab, ordinateur d'abord. Ne porte que les écarts à Foundation. Thème clair par défaut, sombre selon le système ou data-forma-theme.",
-      "color": {
-        "theme": {
-          "light": {
-            "bg": {
-              "$type": "color",
-              "$value": "#f6f6f3",
-              "$extensions": {
-                "fsa.usage": "Fond de page, un ton sous les cartes blanches"
-              }
-            }
-          },
-          "dark": {
-            "bg": {
-              "$type": "color",
-              "$value": "#111110",
-              "$extensions": {
-                "fsa.usage": "Fond de page"
-              }
-            },
-            "surface": {
-              "$type": "color",
-              "$value": "#1f1f1c",
-              "$extensions": {
-                "fsa.usage": "Carte, panneau"
-              },
-              "sunken": {
-                "$type": "color",
-                "$value": "#292926",
-                "$extensions": {
-                  "fsa.usage": "Zone creuse"
-                }
-              },
-              "hover": {
-                "$type": "color",
-                "$value": "#32322e",
-                "$extensions": {
-                  "fsa.usage": "Survol"
-                }
-              }
-            },
-            "border": {
-              "$type": "color",
-              "$value": "#4a4a43",
-              "$extensions": {
-                "fsa.usage": "Bord de carte, lisible sur fond très sombre"
-              },
-              "subtle": {
-                "$type": "color",
-                "$value": "#31312d",
-                "$extensions": {
-                  "fsa.usage": "Séparation interne"
-                }
-              }
-            },
-            "text": {
-              "$type": "color",
-              "$value": "#e4e4de",
-              "$extensions": {
-                "fsa.usage": "Texte principal, adouci pour la lecture de nuit"
-              },
-              "muted": {
-                "$type": "color",
-                "$value": "#b4b4ac",
-                "$extensions": {
-                  "fsa.usage": "Texte secondaire"
-                }
-              },
-              "faint": {
-                "$type": "color",
-                "$value": "#9a9a92",
-                "$extensions": {
-                  "fsa.usage": "Métadonnée"
-                }
-              }
-            },
-            "action": {
-              "$type": "color",
-              "$value": "#5e96cc",
-              "$extensions": {
-                "fsa.usage": "Accent unique"
-              },
-              "hover": {
-                "$type": "color",
-                "$value": "#7aabd8",
-                "$extensions": {
-                  "fsa.usage": "Survol"
-                }
-              },
-              "quiet": {
-                "$type": "color",
-                "$value": "#1c2c3d",
-                "$extensions": {
-                  "fsa.usage": "Sélection"
-                }
-              }
-            },
-            "success": {
-              "$type": "color",
-              "$value": "#6ca679",
-              "$extensions": {
-                "fsa.usage": "Succès"
-              }
-            },
-            "danger": {
-              "$type": "color",
-              "$value": "#dc7b6e",
-              "$extensions": {
-                "fsa.usage": "Danger"
-              }
-            }
-          }
-        },
-        "viz": {
-          "dark": {
-            "sequential": [
-              {
-                "$type": "color",
-                "$value": "#34342f",
-                "$extensions": {
-                  "fsa.usage": "Intensité 0"
-                }
-              },
-              {
-                "$type": "color",
-                "$value": "#264a70",
-                "$extensions": {
-                  "fsa.usage": "1"
-                }
-              },
-              {
-                "$type": "color",
-                "$value": "#3a73ab",
-                "$extensions": {
-                  "fsa.usage": "2"
-                }
-              },
-              {
-                "$type": "color",
-                "$value": "#6aa1d6",
-                "$extensions": {
-                  "fsa.usage": "3"
-                }
-              },
-              {
-                "$type": "color",
-                "$value": "#b3d0ec",
-                "$extensions": {
-                  "fsa.usage": "4 : plus fort = plus clair"
-                }
-              }
-            ]
-          }
-        }
-      },
-      "radius": {
-        "control": {
-          "$type": "dimension",
-          "$value": "8px"
-        },
-        "surface": {
-          "$type": "dimension",
-          "$value": "12px"
-        }
-      },
-      "size": {
-        "control": {
-          "$type": "dimension",
-          "$value": "36px"
-        }
-      },
-      "elevation": {
-        "1": {
-          "$type": "shadow",
-          "$value": "0 1px 2px rgba(22,22,20,.06), 0 2px 8px -2px rgba(22,22,20,.06)",
-          "$extensions": {
-            "fsa.usage": "Carte",
-            "fsa.dark": "0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.45)"
-          }
-        },
-        "2": {
-          "$type": "shadow",
-          "$value": "0 4px 10px -2px rgba(22,22,20,.10), 0 12px 28px -8px rgba(22,22,20,.14)",
-          "$extensions": {
-            "fsa.usage": "Menu, panneau",
-            "fsa.dark": "0 4px 10px -2px rgba(0,0,0,.45), 0 12px 28px -8px rgba(0,0,0,.55)"
-          }
-        },
-        "3": {
-          "$type": "shadow",
-          "$value": "0 12px 24px -6px rgba(22,22,20,.18), 0 32px 64px -16px rgba(22,22,20,.26)",
-          "$extensions": {
-            "fsa.usage": "Fenêtre, tiroir",
-            "fsa.dark": "0 12px 24px -6px rgba(0,0,0,.55), 0 32px 64px -16px rgba(0,0,0,.7)"
-          }
-        }
       }
     }
   }

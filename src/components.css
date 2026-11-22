@@ -1,4 +1,4 @@
-/*! Forma by FSA — composants, peaux Foundation et Lab.
+/*! Forma by FSA — composants du design system du lab.
  *  Ne consomme que la couche sémantique (var(--forma-*)). Aucune valeur en dur.
  *  Préfixe de classe : fx-
  */
@@ -71,7 +71,6 @@
 .fx-btn--block { width: 100%; }
 .fx-btn--icon { width: var(--forma-size-control); padding: 0; }
 .fx-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.fx-btn:disabled:hover { background: transparent; }
 
 .fx-link {
   background: none;
@@ -496,8 +495,7 @@
 .fx-empty__actions { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; }
 
 /* =====================================================================
- *  v0.5.0 — pièces ajoutées pour les apps web du lab.
- *  Écrites sur tokens : utilisables dans les deux peaux, dessinées pour Lab.
+ *  Coque, tableaux de bord et pièces des apps web du lab (depuis v0.5.0).
  * ===================================================================== */
 
 /* ---------- Coque d'application ---------- */
@@ -793,39 +791,45 @@ dialog.fx-modal::backdrop, dialog.fx-drawer::backdrop { background: var(--forma-
 }
 
 /* =====================================================================
- *  Peau Lab — écarts de forme des composants existants.
+ *  Formes du design system du lab, appliquées aux composants d'origine.
+ *  Placées après les règles de base, qu'elles précisent (même spécificité).
  * ===================================================================== */
 
-[data-forma-skin='lab'] .fx-btn { background: var(--forma-color-surface); height: var(--forma-size-control); font-size: 14px; transition: background-color var(--forma-motion-fast) var(--forma-easing-standard), border-color var(--forma-motion-fast) var(--forma-easing-standard); }
-[data-forma-skin='lab'] .fx-btn:hover { background: var(--forma-color-surface-sunken); }
-[data-forma-skin='lab'] .fx-btn--primary { background: var(--forma-color-action); }
-[data-forma-skin='lab'] .fx-btn--primary:hover { background: var(--forma-color-action-hover); }
-[data-forma-skin='lab'] .fx-btn--danger { background: var(--forma-color-danger); }
-[data-forma-skin='lab'] .fx-btn--ghost { background: transparent; }
-[data-forma-skin='lab'] .fx-btn--ghost:hover { background: var(--forma-color-surface-sunken); color: var(--forma-color-text); }
-[data-forma-skin='lab'] .fx-btn--sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: calc(var(--forma-radius-control) - 1px); }
-[data-forma-skin='lab'] .fx-input,
-[data-forma-skin='lab'] .fx-select { height: 38px; padding: 0 12px; }
-[data-forma-skin='lab'] .fx-input:focus,
-[data-forma-skin='lab'] .fx-select:focus,
-[data-forma-skin='lab'] .fx-textarea:focus { outline: none; border-color: var(--forma-color-action); box-shadow: 0 0 0 3px var(--forma-color-action-quiet); }
-[data-forma-skin='lab'] .fx-badge { height: 24px; padding: 0 10px; border-color: transparent; border-radius: var(--forma-radius-pill); }
-[data-forma-skin='lab'] .fx-chip { height: 30px; padding: 0 6px 0 12px; border-color: transparent; border-radius: var(--forma-radius-pill); background: var(--forma-color-action-quiet); color: var(--forma-color-action); font-size: 13px; font-weight: 500; }
-[data-forma-skin='lab'] .fx-segments { display: inline-flex; gap: 2px; padding: 3px; border-radius: calc(var(--forma-radius-control) + 2px); background: var(--forma-color-surface-sunken); }
-[data-forma-skin='lab'] .fx-segment { height: 30px; padding: 0 12px; border: 0; border-radius: calc(var(--forma-radius-control) - 1px); font-weight: 500; }
-[data-forma-skin='lab'] .fx-segment[aria-pressed="true"] { background: var(--forma-color-surface); box-shadow: var(--forma-elevation-1); }
-[data-forma-skin='lab'] .fx-card__head { padding: 18px 20px 0; border-bottom: 0; font-size: 16px; }
-[data-forma-skin='lab'] .fx-card__body { padding: var(--forma-space-4) 20px 20px; }
-[data-forma-skin='lab'] .fx-table { font-size: 14px; }
-[data-forma-skin='lab'] .fx-table th { padding: 10px 14px; background: transparent; font-size: 12.5px; font-weight: 500; text-transform: none; letter-spacing: 0; }
-[data-forma-skin='lab'] .fx-table td { padding: 11px 14px; }
-[data-forma-skin='lab'] .fx-toolbar { padding: 10px 14px; }
-[data-forma-skin='lab'] .fx-page { min-width: 32px; height: 32px; border-color: transparent; font-size: 13px; font-variant-numeric: tabular-nums; }
-[data-forma-skin='lab'] .fx-page[aria-current="page"] { border-color: transparent; color: var(--forma-color-action); font-weight: 600; }
-[data-forma-skin='lab'] .fx-menu { border-radius: var(--forma-radius-surface); }
-[data-forma-skin='lab'] .fx-menu__item { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: var(--forma-radius-control); font-size: 14px; }
-[data-forma-skin='lab'] .fx-modal { padding: 24px; border-radius: calc(var(--forma-radius-surface) + 2px); box-shadow: var(--forma-elevation-3); }
-[data-forma-skin='lab'] .fx-toast { border-left-width: 1px; border-radius: var(--forma-radius-surface); }
-[data-forma-skin='lab'] .fx-skeleton { border-radius: 6px; }
-[data-forma-skin='lab'] .fx-nav__item[aria-current="page"] { color: var(--forma-color-action); font-weight: 600; }
-[data-forma-skin='lab'] .fx-num { font-family: inherit; font-variant-numeric: tabular-nums; }
+.fx-btn { background: var(--forma-color-surface); height: var(--forma-size-control); font-size: 14px; transition: background-color var(--forma-motion-fast) var(--forma-easing-standard), border-color var(--forma-motion-fast) var(--forma-easing-standard); }
+.fx-btn:hover { background: var(--forma-color-surface-sunken); }
+.fx-btn--primary { background: var(--forma-color-action); }
+.fx-btn--primary:hover { background: var(--forma-color-action-hover); }
+.fx-btn--danger { background: var(--forma-color-danger); }
+.fx-btn--ghost { background: transparent; }
+.fx-btn--ghost:hover { background: var(--forma-color-surface-sunken); color: var(--forma-color-text); }
+.fx-btn--danger:hover { background: var(--forma-color-danger); filter: brightness(1.08); }
+/* Désactivé : le survol ne change rien (chaque variante garde son fond et son encre). */
+.fx-btn:disabled:hover { background: var(--forma-color-surface); color: var(--forma-color-text); }
+.fx-btn--primary:disabled:hover { background: var(--forma-color-action); color: var(--forma-color-on-action); }
+.fx-btn--danger:disabled:hover { background: var(--forma-color-danger); color: var(--forma-color-on-danger); filter: none; }
+.fx-btn--ghost:disabled:hover { background: transparent; color: var(--forma-color-text-muted); }
+.fx-btn--sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: calc(var(--forma-radius-control) - 1px); }
+.fx-input,
+.fx-select { height: 38px; padding: 0 12px; }
+.fx-input:focus,
+.fx-select:focus,
+.fx-textarea:focus { outline: none; border-color: var(--forma-color-action); box-shadow: 0 0 0 3px var(--forma-color-action-quiet); }
+.fx-badge { height: 24px; padding: 0 10px; border-color: transparent; border-radius: var(--forma-radius-pill); }
+.fx-chip { height: 30px; padding: 0 6px 0 12px; border-color: transparent; border-radius: var(--forma-radius-pill); background: var(--forma-color-action-quiet); color: var(--forma-color-action); font-size: 13px; font-weight: 500; }
+.fx-segments { display: inline-flex; gap: 2px; padding: 3px; border-radius: calc(var(--forma-radius-control) + 2px); background: var(--forma-color-surface-sunken); }
+.fx-segment { height: 30px; padding: 0 12px; border: 0; border-radius: calc(var(--forma-radius-control) - 1px); font-weight: 500; }
+.fx-segment[aria-pressed="true"] { background: var(--forma-color-surface); box-shadow: var(--forma-elevation-1); }
+.fx-card__head { padding: 18px 20px 0; border-bottom: 0; font-size: 16px; }
+.fx-card__body { padding: var(--forma-space-4) 20px 20px; }
+.fx-table { font-size: 14px; }
+.fx-table th { padding: 10px 14px; background: transparent; font-size: 12.5px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.fx-table td { padding: 11px 14px; }
+.fx-toolbar { padding: 10px 14px; }
+.fx-page { min-width: 32px; height: 32px; border-color: transparent; font-size: 13px; font-variant-numeric: tabular-nums; }
+.fx-page[aria-current="page"] { border-color: transparent; color: var(--forma-color-action); font-weight: 600; }
+.fx-menu { border-radius: var(--forma-radius-surface); }
+.fx-menu__item { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: var(--forma-radius-control); font-size: 14px; }
+.fx-modal { padding: 24px; border-radius: calc(var(--forma-radius-surface) + 2px); box-shadow: var(--forma-elevation-3); }
+.fx-toast { border-left-width: 1px; border-radius: var(--forma-radius-surface); }
+.fx-skeleton { border-radius: 6px; }
+.fx-nav__item[aria-current="page"] { color: var(--forma-color-action); font-weight: 600; }

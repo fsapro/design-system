@@ -1,4 +1,4 @@
-/*! Forma by FSA v0.5.0 — comportements des classes fx-*. Aucune dépendance.
+/*! Forma by FSA v1.0.0 — comportements des classes fx-*. Aucune dépendance.
  *  À charger dans <head> SANS defer : le thème mémorisé est appliqué avant le premier rendu,
  *  le reste se branche au chargement du document par délégation d'événements.
  *
@@ -30,8 +30,7 @@
   function currentTheme() {
     var set = root.getAttribute("data-forma-theme");
     if (set === "light" || set === "dark") return set;
-    if (root.getAttribute("data-forma-skin") === "lab") return mq && mq.matches ? "dark" : "light";
-    return mq && !mq.matches ? "light" : "dark"; // Foundation : sombre par défaut
+    return mq && mq.matches ? "dark" : "light"; // clair par défaut, sombre si le système l'est
   }
 
   function syncThemeButtons() {
@@ -193,5 +192,5 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.Forma = { version: "0.5.0", theme: currentTheme, toggleTheme: toggleTheme };
+  window.Forma = { version: "1.0.0", theme: currentTheme, toggleTheme: toggleTheme };
 })();

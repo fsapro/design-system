@@ -1,5 +1,5 @@
-// Forma by FSA v0.5.0 — généré depuis src/forma.echarts.js et les tokens, ne pas éditer.
-/*! Forma by FSA v0.5.0 — thème Apache ECharts et fiches de graphes fx-chart/*.
+// Forma by FSA v1.0.0 — généré depuis src/forma.echarts.js et les tokens, ne pas éditer.
+/*! Forma by FSA v1.0.0 — thème Apache ECharts et fiches de graphes fx-chart/*.
  *  Le paquet n'importe pas ECharts : l'app l'installe et l'initialise.
  *
  *    import * as echarts from "echarts";
@@ -13,191 +13,101 @@
  */
 
 const PALETTES = {
-  "foundation": {
-    "light": {
-      "bg": "#f8f8f6",
-      "surface": "#ffffff",
-      "sunken": "#efefec",
-      "border": "#e1e1dc",
-      "borderSubtle": "#efefec",
-      "text": "#292926",
-      "muted": "#575751",
-      "faint": "#6d6d65",
-      "action": "#2d6296",
-      "actionQuiet": "#e7eef5",
-      "success": "#396e44",
-      "warning": "#7e5b0f",
-      "danger": "#a83a2c",
-      "offline": "#8a8a82",
-      "categorical": [
-        "#ff7420",
-        "#008684",
-        "#bcca25",
-        "#592147",
-        "#c67fae",
-        "#d8ae48",
-        "#506e91",
-        "#f19035",
-        "#9a2b2e",
-        "#a5b2aa",
-        "#7391c8",
-        "#9c4c8d"
-      ],
-      "sequential": [
-        "#e7eef5",
-        "#a9c3da",
-        "#5b89ad",
-        "#2d6296",
-        "#1a3b5c"
-      ],
-      "font": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
-      "fontNum": "ui-monospace, SFMono-Regular, Consolas, monospace",
-      "radius": 3
-    },
-    "dark": {
-      "bg": "#161614",
-      "surface": "#1f1f1c",
-      "sunken": "#292926",
-      "border": "#3a3a35",
-      "borderSubtle": "#2c2c28",
-      "text": "#eeeeea",
-      "muted": "#b4b4ac",
-      "faint": "#9a9a92",
-      "action": "#5b96c9",
-      "actionQuiet": "#1c2c3d",
-      "success": "#6ca279",
-      "warning": "#cfa63e",
-      "danger": "#dc7a6d",
-      "offline": "#7c7c75",
-      "categorical": [
-        "#ff7420",
-        "#008684",
-        "#bcca25",
-        "#592147",
-        "#c67fae",
-        "#d8ae48",
-        "#506e91",
-        "#f19035",
-        "#9a2b2e",
-        "#a5b2aa",
-        "#7391c8",
-        "#9c4c8d"
-      ],
-      "sequential": [
-        "#e7eef5",
-        "#a9c3da",
-        "#5b89ad",
-        "#2d6296",
-        "#1a3b5c"
-      ],
-      "font": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
-      "fontNum": "ui-monospace, SFMono-Regular, Consolas, monospace",
-      "radius": 3
-    }
+  "light": {
+    "bg": "#f6f6f3",
+    "surface": "#ffffff",
+    "sunken": "#efefec",
+    "border": "#e1e1dc",
+    "borderSubtle": "#efefec",
+    "text": "#292926",
+    "muted": "#575751",
+    "faint": "#6d6d65",
+    "action": "#2d6296",
+    "actionQuiet": "#e7eef5",
+    "success": "#396e44",
+    "warning": "#7e5b0f",
+    "danger": "#a83a2c",
+    "offline": "#8a8a82",
+    "categorical": [
+      "#ff7420",
+      "#008684",
+      "#bcca25",
+      "#592147",
+      "#c67fae",
+      "#d8ae48",
+      "#506e91",
+      "#f19035",
+      "#9a2b2e",
+      "#a5b2aa",
+      "#7391c8",
+      "#9c4c8d"
+    ],
+    "sequential": [
+      "#e7eef5",
+      "#a9c3da",
+      "#5b89ad",
+      "#2d6296",
+      "#1a3b5c"
+    ],
+    "font": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
+    "fontNum": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
+    "radius": 8
   },
-  "lab": {
-    "light": {
-      "bg": "#f6f6f3",
-      "surface": "#ffffff",
-      "sunken": "#efefec",
-      "border": "#e1e1dc",
-      "borderSubtle": "#efefec",
-      "text": "#292926",
-      "muted": "#575751",
-      "faint": "#6d6d65",
-      "action": "#2d6296",
-      "actionQuiet": "#e7eef5",
-      "success": "#396e44",
-      "warning": "#7e5b0f",
-      "danger": "#a83a2c",
-      "offline": "#8a8a82",
-      "categorical": [
-        "#ff7420",
-        "#008684",
-        "#bcca25",
-        "#592147",
-        "#c67fae",
-        "#d8ae48",
-        "#506e91",
-        "#f19035",
-        "#9a2b2e",
-        "#a5b2aa",
-        "#7391c8",
-        "#9c4c8d"
-      ],
-      "sequential": [
-        "#e7eef5",
-        "#a9c3da",
-        "#5b89ad",
-        "#2d6296",
-        "#1a3b5c"
-      ],
-      "font": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
-      "fontNum": "ui-monospace, SFMono-Regular, Consolas, monospace",
-      "radius": 8
-    },
-    "dark": {
-      "bg": "#111110",
-      "surface": "#1f1f1c",
-      "sunken": "#292926",
-      "border": "#4a4a43",
-      "borderSubtle": "#31312d",
-      "text": "#e4e4de",
-      "muted": "#b4b4ac",
-      "faint": "#9a9a92",
-      "action": "#5e96cc",
-      "actionQuiet": "#1c2c3d",
-      "success": "#6ca679",
-      "warning": "#cfa63e",
-      "danger": "#dc7b6e",
-      "offline": "#7c7c75",
-      "categorical": [
-        "#ff7420",
-        "#008684",
-        "#bcca25",
-        "#592147",
-        "#c67fae",
-        "#d8ae48",
-        "#506e91",
-        "#f19035",
-        "#9a2b2e",
-        "#a5b2aa",
-        "#7391c8",
-        "#9c4c8d"
-      ],
-      "sequential": [
-        "#34342f",
-        "#264a70",
-        "#3a73ab",
-        "#6aa1d6",
-        "#b3d0ec"
-      ],
-      "font": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
-      "fontNum": "ui-monospace, SFMono-Regular, Consolas, monospace",
-      "radius": 8
-    }
+  "dark": {
+    "bg": "#111110",
+    "surface": "#1f1f1c",
+    "sunken": "#292926",
+    "border": "#4a4a43",
+    "borderSubtle": "#31312d",
+    "text": "#e4e4de",
+    "muted": "#b4b4ac",
+    "faint": "#9a9a92",
+    "action": "#5e96cc",
+    "actionQuiet": "#1c2c3d",
+    "success": "#6ca679",
+    "warning": "#cfa63e",
+    "danger": "#dc7b6e",
+    "offline": "#7c7c75",
+    "categorical": [
+      "#ff7420",
+      "#008684",
+      "#bcca25",
+      "#592147",
+      "#c67fae",
+      "#d8ae48",
+      "#506e91",
+      "#f19035",
+      "#9a2b2e",
+      "#a5b2aa",
+      "#7391c8",
+      "#9c4c8d"
+    ],
+    "sequential": [
+      "#34342f",
+      "#264a70",
+      "#3a73ab",
+      "#6aa1d6",
+      "#b3d0ec"
+    ],
+    "font": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
+    "fontNum": "'IBM Plex Sans', system-ui, 'Segoe UI', sans-serif",
+    "radius": 8
   }
 };
 
-/* ---------- Contexte : peau et thème courants ---------- */
+/* ---------- Contexte : thème courant ---------- */
 
 function detect(opts = {}) {
+  if (opts.theme === "light" || opts.theme === "dark") return opts.theme;
   const doc = typeof document !== "undefined" ? document.documentElement : null;
-  const skin = opts.skin === "lab" || opts.skin === "foundation" ? opts.skin
-    : doc && doc.getAttribute("data-forma-skin") === "lab" ? "lab" : "foundation";
-  let theme = opts.theme === "light" || opts.theme === "dark" ? opts.theme : doc && doc.getAttribute("data-forma-theme");
-  if (theme !== "light" && theme !== "dark") {
-    const prefersDark = typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: dark)").matches;
-    const prefersLight = typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: light)").matches;
-    theme = skin === "lab" ? (prefersDark ? "dark" : "light") : (prefersLight ? "light" : "dark");
-  }
-  return { skin, theme };
+  const set = doc && doc.getAttribute("data-forma-theme");
+  if (set === "light" || set === "dark") return set;
+  return typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-/** Couleurs de la peau et du thème demandés (par défaut : ceux de la page). */
+/** Couleurs du thème demandé ({ theme: "light" | "dark" }) ; par défaut celui de la page. */
 export function formaPalette(opts = {}) {
-  const ctx = detect(opts || {}); // valeurs inconnues ignorées : peau et thème de la page
-  return PALETTES[ctx.skin][ctx.theme];
+  return PALETTES[detect(opts || {})];
 }
 
 /* ---------- Formats français ---------- */
@@ -374,5 +284,5 @@ export const charts = {
   },
 };
 
-export const version = "0.5.0";
+export const version = "1.0.0";
 export default formaTheme;

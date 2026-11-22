@@ -37,19 +37,6 @@ function cssValue(token) {
   return v;
 }
 
-/** Fusion profonde : une peau ne porte que ses écarts à Foundation. */
-function merge(base, over) {
-  const out = structuredClone(base);
-  for (const [k, v] of Object.entries(over)) {
-    const both = out[k] && typeof out[k] === "object" && v && typeof v === "object" && !Array.isArray(v);
-    out[k] = both ? merge(out[k], v) : structuredClone(v);
-  }
-  return out;
-}
-const lab = tokens.skin.lab;
-const palette = (skin, theme) =>
-  skin === "lab" ? merge(tokens.color.theme[theme], lab.color.theme[theme] ?? {}) : tokens.color.theme[theme];
-
 /** Les tokens typographiques composites éclatent en -size / -line / -weight / -tracking. */
 function typographyDecls() {
   const out = [];
@@ -66,13 +53,14 @@ function typographyDecls() {
   return out;
 }
 
-function themeDecls(theme, skin = "foundation") {
-  return flatten(palette(skin, theme), ["color"]).map(([n, t]) => [n, cssValue(t)]);
+function themeDecls(theme) {
+  return flatten(tokens.color.theme[theme], ["color"]).map(([n, t]) => [n, cssValue(t)]);
 }
 
 function globalDecls() {
   const out = [];
-  for (const [n, t] of flatten(tokens.color.viz, ["color", "viz"])) out.push([n.replace("categorical", "cat").replace("sequential", "seq"), cssValue(t)]);
+  const { sequentialDark, ...viz } = tokens.color.viz; // l'échelle sombre ne sert qu'au thème sombre
+  for (const [n, t] of flatten(viz, ["color", "viz"])) out.push([n.replace("categorical", "cat").replace("sequential", "seq"), cssValue(t)]);
   for (const group of ["font", "space", "radius", "size", "motion", "easing"]) {
     for (const [n, t] of flatten(tokens[group], [group])) out.push([n, cssValue(t)]);
   }
@@ -88,45 +76,27 @@ const darkElevation = Object.entries(tokens.elevation)
 const block = (sel, decls, indent = "  ") =>
   `${sel} {\n${decls.map(([n, v]) => `${indent}${P}${n}: ${v};`).join("\n")}\n}`;
 
-/** Peau Lab : formes, ombres du thème, échelle séquentielle sombre. Répétées dans chaque bloc
- *  pour qu'un sous-arbre data-forma-theme (qui reçoit aussi les valeurs Foundation) reste en Lab. */
-function labShape(theme) {
-  const out = [];
-  for (const group of ["radius", "size"]) for (const [n, t] of flatten(lab[group], [group])) out.push([n, cssValue(t)]);
-  for (const [k, t] of Object.entries(lab.elevation)) {
-    if (!k.startsWith("$")) out.push([`elevation-${k}`, theme === "dark" ? t.$extensions["fsa.dark"] : t.$value]);
-  }
-  if (theme === "dark") lab.color.viz.dark.sequential.forEach((t, i) => out.push([`color-viz-seq-${i + 1}`, t.$value]));
-  else flatten(tokens.color.viz.sequential, ["color", "viz", "seq"]).forEach(([n, t]) => out.push([n, cssValue(t)]));
-  return out;
-}
-const labDecls = (theme) => [...themeDecls(theme, "lab"), ...labShape(theme)];
-const L = "[data-forma-skin='lab']";
+/** Thème sombre : couleurs, ombres et échelle séquentielle sombre (plus fort = plus clair). */
+const seqDark = tokens.color.viz.sequentialDark.map((t, i) => [`color-viz-seq-${i + 1}`, t.$value]);
+const darkDecls = [...themeDecls("dark"), ...darkElevation, ...seqDark];
 
-const header = `/*! Forma by FSA v${version} — peaux Foundation (par défaut) et Lab.
+const header = `/*! Forma by FSA v${version} — design system du lab.
  *  Généré depuis tokens/forma.tokens.json — ne pas éditer à la main.
- *  Foundation : dark par défaut, <html data-forma-theme="light"> pour basculer.
- *  Lab : <html data-forma-skin="lab">, clair par défaut, sombre selon le système ou data-forma-theme="dark".
+ *  Thème clair par défaut ; sombre selon le système, ou forcé par data-forma-theme="dark" | "light".
  */`;
 
 const tokensCss = [
   header,
-  block(":root, [data-forma-theme='dark']", [...themeDecls("dark"), ...globalDecls(), ...darkElevation]),
-  block("[data-forma-theme='light']", themeDecls("light")),
-  `@media (prefers-color-scheme: light) {\n${block("  :root:not([data-forma-theme])", themeDecls("light"), "    ")}\n}`,
-  `/* ---------- Peau Lab (spécificité 0,2,0 : passe devant Foundation sans la modifier) ---------- */`,
-  block(`${L}:not([data-forma-theme='dark']),\n${L} [data-forma-theme='light']`, labDecls("light")),
-  block(`${L}[data-forma-theme='dark'],\n${L} [data-forma-theme='dark']`, labDecls("dark")),
-  `@media (prefers-color-scheme: dark) {\n${block(`  ${L}:not([data-forma-theme])`, labDecls("dark"), "    ")}\n}`,
+  block(":root,\n[data-forma-theme='light']", [...themeDecls("light"), ...globalDecls()]),
+  block("[data-forma-theme='dark']", darkDecls),
+  `@media (prefers-color-scheme: dark) {\n${block("  :root:not([data-forma-theme])", darkDecls, "    ")}\n}`,
   `@media (prefers-reduced-motion: reduce) {\n${block("  :root,\n  [data-forma-theme]", [["motion-fast", "0ms"], ["motion-normal", "0ms"], ["motion-slow", "0ms"]], "    ")}\n}`,
 ].join("\n\n") + "\n";
 
 const flatJs = Object.fromEntries([
   ...globalDecls().map(([n, v]) => [n.replace(/-/g, "."), v]),
-  ...themeDecls("dark").map(([n, v]) => [`theme.dark.${n.replace(/-/g, ".")}`, v]),
+  ...[...themeDecls("dark"), ...darkElevation, ...seqDark].map(([n, v]) => [`theme.dark.${n.replace(/-/g, ".")}`, v]),
   ...themeDecls("light").map(([n, v]) => [`theme.light.${n.replace(/-/g, ".")}`, v]),
-  ...labDecls("light").map(([n, v]) => [`lab.light.${n.replace(/-/g, ".")}`, v]),
-  ...labDecls("dark").map(([n, v]) => [`lab.dark.${n.replace(/-/g, ".")}`, v]),
 ]);
 
 const tokensJs = `// Forma by FSA v${version} — généré, ne pas éditer.\nexport const version = ${JSON.stringify(version)};\nexport const tokens = ${JSON.stringify(flatJs, null, 2)};\nexport const cssVar = (name) => \`var(${P}\${name.replace(/\\./g, "-")})\`;\nexport default tokens;\n`;
@@ -134,11 +104,11 @@ const tokensJs = `// Forma by FSA v${version} — généré, ne pas éditer.\nex
 const components = readFileSync(join(root, "src/components.css"), "utf8");
 
 /* Thème ECharts : mêmes valeurs que le CSS, générées ici pour ne jamais diverger. */
-const chartPalette = (skin, theme) => {
-  const c = Object.fromEntries(themeDecls(theme, skin));
+const chartPalette = (theme) => {
+  const c = Object.fromEntries(themeDecls(theme));
   const g = Object.fromEntries(globalDecls());
-  const seq = skin === "lab" && theme === "dark"
-    ? lab.color.viz.dark.sequential.map((t) => t.$value)
+  const seq = theme === "dark"
+    ? tokens.color.viz.sequentialDark.map((t) => t.$value)
     : [1, 2, 3, 4, 5].map((i) => g[`color-viz-seq-${i}`]);
   return {
     bg: c["color-bg"], surface: c["color-surface"], sunken: c["color-surface-sunken"],
@@ -149,10 +119,10 @@ const chartPalette = (skin, theme) => {
     categorical: Array.from({ length: 12 }, (_, i) => g[`color-viz-cat-${i + 1}`]),
     sequential: seq,
     font: g["font-sans"], fontNum: g["font-num"],
-    radius: parseInt(skin === "lab" ? lab.radius.control.$value : g["radius-control"], 10),
+    radius: parseInt(g["radius-control"], 10),
   };
 };
-const palettes = Object.fromEntries(["foundation", "lab"].map((s) => [s, { light: chartPalette(s, "light"), dark: chartPalette(s, "dark") }]));
+const palettes = { light: chartPalette("light"), dark: chartPalette("dark") };
 const echartsSrc = readFileSync(join(root, "src/forma.echarts.js"), "utf8");
 if (!echartsSrc.includes("/*@@PALETTES@@*/null")) throw new Error("src/forma.echarts.js : marqueur /*@@PALETTES@@*/null absent");
 const echartsJs = `// Forma by FSA v${version} — généré depuis src/forma.echarts.js et les tokens, ne pas éditer.\n` +

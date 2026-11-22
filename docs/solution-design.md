@@ -3,11 +3,11 @@
 ```yaml
 solution_design:
   template_used: solution-design-lightweight
-  prd_version: "1.2"
+  prd_version: "1.3"
   status: approved
   approved_by: Florent
   approved_at: "2026-07-26"
-  sd_version: "1.2"
+  sd_version: "1.3"
 ```
 
 Projet : `forma-design-system` · Repository : `fsapro/design-system` (existant, adopté)
@@ -157,6 +157,7 @@ Niveau 0 suffit pour le tag et le job d'installation.
 | 1.0 | 2026-07-26 | Création, rattaché au PRD v1.0. Validé par Florent. | Florent |
 | 1.1 | 2026-11-22 | Avenant inventaire (PRD v1.1, critère 6) : `catalog/forma.catalog.json` écrit à la main, `build/check-catalog.mjs` sans dépendance sur le modèle de `check-contrast.mjs`, étape CI dédiée et présence vérifiée dans le paquet installé. Aucune dépendance, aucun service. Vérification : niveau 0 (contrôle déterministe, test négatif). | Florent |
 | 1.2 | 2026-11-22 | Peau Lab (PRD v1.2, critère 7), section 7 ci-dessous. Aucune dépendance ajoutée au paquet. Vérification : contrôles déterministes étendus + niveau 2 (gate de release). | Florent |
+| 1.3 | 2026-11-22 | Lab remplace Foundation (PRD v1.3, critère 8, D9), section 8 ci-dessous. Version majeure 1.0.0. Vérification : contrôles déterministes + niveau 2. | Florent |
 
 ## 7. Avenant v1.2 — peau Lab
 
@@ -169,4 +170,16 @@ Niveau 0 suffit pour le tag et le job d'installation.
 - **Contrôles.** `check-contrast.mjs` vérifie aussi les deux thèmes Lab (mêmes 17 paires, plus « hors ligne » à 3:1) ; le rapport de `docs/foundations.md` gagne un tableau Lab ; la CI vérifie la présence de `forma.js` et `forma.echarts.js` dans le paquet ; `docs/lab.html` est inspectée dans les deux thèmes.
 
 **Impacts.** Contrat public : **oui** — nouveaux points d'entrée (`./forma.js`, `./echarts`), nouvelles classes, nouveaux tokens ; aucun renommage, aucune suppression : version mineure `0.5.0`. Données, sécurité, coût : non. Réversibilité : élevée ; le tag publié reste immuable.
+
+## 8. Avenant v1.3 — Lab devient Forma
+
+**Approche.** Plier la surcouche dans la base plutôt que garder deux systèmes.
+
+- **Tokens.** Les écarts `skin.lab` sont fusionnés dans `color.theme.{light,dark}`, `radius`, `size`, `elevation` ; le sous-arbre `skin` disparaît. L'échelle séquentielle sombre devient `color.viz.sequentialDark`. `font.num` passe en IBM Plex Sans (chiffres tabulaires par `.fx-num`). `fsa.defaultTheme` = `light`.
+- **CSS.** `:root` porte le thème clair ; `[data-forma-theme='dark']` et `prefers-color-scheme: dark` (sans attribut) le thème sombre. Les règles `[data-forma-skin='lab'] .fx-*` perdent leur préfixe et deviennent les formes de base, dans une section dédiée placée après les règles d'origine. Elles perdent un niveau de spécificité : là où une règle d'origine plus spécifique les dominait (bouton désactivé au survol, champ dans `.fx-search`), le comportement est tranché explicitement et documenté dans le CHANGELOG. L'attribut `data-forma-skin` n'a plus d'effet (toléré, sans règle).
+- **JS.** `forma.js` : thème clair par défaut. `forma.echarts.js` : palettes `light` / `dark` seulement ; l'option `skin` disparaît.
+- **Archive.** `archive/foundation/` reçoit les tokens, le CSS de `v0.5.0` et la galerie `docs/index.html` d'origine. `docs/lab.html` devient `docs/index.html`.
+- **Contrôles.** `check-contrast.mjs` revient à deux thèmes (18 paires chacun) ; la CI vérifie l'absence de `data-forma-skin` dans `dist/forma.css`.
+
+**Impacts.** Contrat public : **oui, rupture** — d'où `v1.0.0`. Les apps sur `v0.4.0` / `v0.5.0` ne sont pas touchées tant qu'elles ne changent pas de tag. Données, sécurité, coût : non. Réversibilité : les tags antérieurs restent installables.
 

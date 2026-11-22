@@ -1,7 +1,7 @@
 {
   "name": "@fsapro/forma",
-  "version": "0.5.0",
-  "description": "Forma by FSA — design system, peaux Foundation et Lab. Tokens DTCG, CSS de composants, comportements et thème ECharts, sans dépendance ni build côté consommateur.",
+  "version": "1.0.0",
+  "description": "Forma by FSA — design system des apps web du lab. Tokens DTCG, CSS de composants, comportements et thème ECharts, sans dépendance ni build côté consommateur.",
   "license": "MIT",
   "repository": { "type": "git", "url": "git+https://github.com/fsapro/design-system.git" },
   "type": "module",
@@ -23,7 +23,7 @@
     "build": "node build/build-tokens.mjs",
     "test:contrast": "node build/check-contrast.mjs",
     "test:catalog": "node build/check-catalog.mjs",
-    "test:js": "node --check dist/forma.js && node -e \"import('./dist/forma.echarts.js').then(m => { if (!m.formaTheme({ skin: 'lab', theme: 'dark' }).color.length) process.exit(1); })\"",
+    "test:js": "node --check dist/forma.js && node -e \"import('./dist/forma.echarts.js').then(m => { if (!m.formaTheme({ theme: 'dark' }).color.length) process.exit(1); })\"",
     "verify": "npm run build && git diff --exit-code dist && npm run test:contrast && npm run test:catalog && npm run test:js"
   },
   "engines": { "node": ">=18" },
