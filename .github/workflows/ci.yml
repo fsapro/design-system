@@ -84,8 +84,8 @@ jobs:
             echo "::error::dist/forma.echarts.js est absent du paquet"
             exit 1
           fi
-          if ! grep -q "data-forma-skin='lab'" package/dist/forma.css; then
-            echo "::error::forma.css ne contient pas la peau Lab"
+          if grep -q "data-forma-skin" package/dist/forma.css; then
+            echo "::error::forma.css contient encore une règle de peau (data-forma-skin) : depuis 1.0.0, Forma n'a qu'un système"
             exit 1
           fi
 

@@ -65,15 +65,15 @@ Deux patterns qui distinguent le système et ne doivent pas être remplacés par
 
 ## Data-viz
 
-Douze teintes catégorielles `--forma-color-viz-cat-1..12`, échelle séquentielle `--forma-color-viz-seq-1..7`. Ordre imposé : commencez à `cat-1` et suivez la série, ne piochez pas.
+Douze teintes catégorielles `--forma-color-viz-cat-1..12`, échelle séquentielle `--forma-color-viz-seq-1..7` en clair, `seq-1..5` inversée en sombre (plus fort = plus clair). Ordre imposé : commencez à `cat-1` et suivez la série, ne piochez pas.
 
 ## Animation
 
 Durées `--forma-motion-fast` (120 ms), `--forma-motion-normal` (200 ms), `--forma-motion-slow` (320 ms) ; courbes `--forma-easing-standard` (entrée, déplacement) et `--forma-easing-exit` (sortie). Elles valent 0 quand `prefers-reduced-motion` est actif : une transition écrite avec ces variables respecte la préférence sans autre code.
 
-## Peau Lab
+## Coque d'application et tableaux de bord
 
-Pour les apps web du lab, ordinateur d'abord. `data-forma-skin="lab"` sur `<html>` : la peau ne change que des variables (rayons 12 / 8 px, hauteur de contrôle 36 px, ombres, palette sombre recalibrée) et la forme de quelques composants (badge et jeton en pastille, segments groupés, en-têtes de table sans capitales). Thème **clair par défaut**, sombre selon le système ou `data-forma-theme="dark"`. **Un seul accent** pour toutes les apps : d'une app à l'autre, seuls le nom et le monogramme du logo changent. Démonstration complète : [`docs/lab.html`](lab.html) (servir le dossier, par exemple `python3 -m http.server`, puis ouvrir `/docs/lab.html`).
+Forma est le design system des apps web du lab, ordinateur d'abord : rayons 12 px (surfaces) et 8 px (contrôles), hauteur de contrôle 36 px, bord + ombre légère, thème **clair par défaut** et sombre selon le système ou `data-forma-theme="dark"`. **Un seul accent** pour toutes les apps : d'une app à l'autre, seuls le nom et le monogramme du logo changent. Démonstration complète : [`docs/index.html`](index.html) (servir le dossier, par exemple `python3 -m http.server`, puis ouvrir `/docs/`).
 
 ### Coque d'application
 
@@ -110,7 +110,7 @@ Pour les apps web du lab, ordinateur d'abord. `data-forma-skin="lab"` sur `<html
 
 La version vient de l'app au build ; `fx-shell__version-short` s'affiche quand le menu est réduit.
 
-### Pièces de la peau
+### Pièces des tableaux de bord
 
 | Classe | Rôle |
 | --- | --- |
@@ -153,7 +153,7 @@ import * as echarts from "echarts";
 import { formaTheme, charts } from "@fsapro/forma/echarts";
 
 function draw(el, option) {
-  echarts.registerTheme("forma", formaTheme()); // peau et thème lus sur <html>
+  echarts.registerTheme("forma", formaTheme()); // thème clair ou sombre lu sur <html>
   const chart = echarts.init(el, "forma");
   chart.setOption(option);
   new ResizeObserver(() => chart.resize()).observe(el);

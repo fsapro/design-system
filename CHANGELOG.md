@@ -8,6 +8,22 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versionnage s
 
 ## [Non publié]
 
+## [1.0.0] — 2026-11-22
+
+Forma devient le design system des apps web du lab : l'ex-peau Lab remplace Foundation (décision D9, PRD v1.3). **Version majeure** : une app sur `v0.4.0` ou `v0.5.0` n'est pas touchée tant qu'elle garde son tag, et migre au cas par cas.
+
+### Modifié (rupture)
+- **Valeurs de base** = celles de Lab : clair par défaut (sombre selon le système ou `data-forma-theme`), palette sombre recalibrée, rayons 8 / 12 px, hauteur de contrôle 36 px, ombres à 3 niveaux, `font.num` en IBM Plex Sans à chiffres tabulaires. Les noms de tokens ne changent pas, leurs valeurs si.
+- **Formes des composants** : celles de Lab deviennent la base (badge et jeton en pastille, segments groupés, en-têtes de table sans capitales, menus et fenêtres arrondis).
+- **`forma.js`** : thème clair par défaut. **Thème ECharts** : palettes clair / sombre seulement ; l'option `skin` de `formaTheme()` / `formaPalette()` disparaît.
+- **Démonstration** : `docs/lab.html` devient `docs/index.html`.
+
+### Retiré
+- Peau **Foundation** (tokens, CSS, galerie), archivée dans `archive/foundation/` ; sous-arbre `skin.lab` des tokens ; attribut `data-forma-skin` (sans effet, toléré) ; clés `lab.*` du module `@fsapro/forma`.
+
+### Ajouté
+- Token `color.viz.sequentialDark` (échelle séquentielle sombre, plus fort = plus clair).
+
 ## [0.5.0] — 2026-11-22
 
 ### Ajouté

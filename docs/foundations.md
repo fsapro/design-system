@@ -1,7 +1,7 @@
 # Forma by FSA — fondations
 
-Deux peaux : **Foundation** (par défaut, thème dark par défaut, light dérivé des mêmes tokens sémantiques) et **Lab** (`data-forma-skin="lab"`, clair par défaut, écarts déclarés dans `skin.lab`).
-Version 0.5.0.
+Design system des apps web du lab, ordinateur d'abord. Thème **clair par défaut**, sombre dérivé des mêmes tokens sémantiques et appliqué selon le système ou `data-forma-theme`.
+Version 1.0.0. L'ancienne peau Foundation est archivée dans `archive/foundation/`.
 
 ## Principe
 
@@ -20,7 +20,7 @@ Pour un usage print rigoureux, il faudra faire établir les équivalents CMJN à
 
 ## Couleur — règles
 
-- L'**accent** (`color.action`, Directoire Blue `#2D6296`) ne dit qu'une chose : *ceci est actionnable*. Bouton, lien, focus, identifiant cliquable, série active. Jamais décoratif.
+- Un **seul accent** pour toutes les apps. L'**accent** (`color.action`, Directoire Blue `#2D6296`) ne dit qu'une chose : *ceci est actionnable*. Bouton, lien, focus, identifiant cliquable, série active. Jamais décoratif.
 - Un aplat de couleur porte toujours son token d'encre dédié (`on.action`, `on.danger`) — jamais du blanc en dur : en dark les valeurs de statut sont des teintes claires, conçues pour être du texte, pas des fonds.
 - Les **couleurs de statut** ne disent que l'état d'un objet. Elles n'habillent jamais un bouton, sauf action destructive.
 - Les **catégorielles** (12 teintes) ne servent qu'à la data-viz. Aucune ne doit être réutilisée pour un statut ou une action.
@@ -30,28 +30,6 @@ Pour un usage print rigoureux, il faudra faire établir les équivalents CMJN à
 ## Contrastes vérifiés
 
 Ratios WCAG 2.1 calculés sur les valeurs réelles des deux thèmes. Chaque token de texte est testé contre **tous** les fonds sur lesquels il apparaît réellement — fond de page, surface, surface creuse et fond de badge composité (14 % de saturation sur surface) — et calibré sur le pire cas, pas sur le blanc.
-
-| Paire | Dark | | Light | |
-| --- | --- | --- | --- | --- |
-| Texte sur fond | 15.58 | AA | 13.72 | AA |
-| Texte sur surface | 14.20 | AA | 14.59 | AA |
-| Texte secondaire sur surface | 7.92 | AA | 7.27 | AA |
-| Texte secondaire sur surface creuse | 6.99 | AA | 6.31 | AA |
-| Métadonnée sur fond | 6.39 | AA | 4.91 | AA |
-| Métadonnée sur surface | 5.83 | AA | 5.22 | AA |
-| Métadonnée sur surface creuse | 5.15 | AA | 4.53 | AA |
-| Action sur fond | 5.74 | AA | 5.99 | AA |
-| Action sur surface | 5.23 | AA | 6.37 | AA |
-| Action sur fond sélectionné | 4.50 | AA | 5.44 | AA |
-| Texte sur aplat d'action | 5.52 | AA | 6.37 | AA |
-| Texte sur aplat destructif | 6.18 | AA | 6.35 | AA |
-| Succès sur surface | 5.57 | AA | 6.02 | AA |
-| Succès sur fond de badge | 4.51 | AA | 4.95 | AA |
-| Attention sur fond de badge | 5.57 | AA | 5.07 | AA |
-| Critique sur fond de badge | 4.51 | AA | 5.11 | AA |
-| Information sur fond de badge | 4.51 | AA | 5.20 | AA |
-
-**Peau Lab** (`data-forma-skin="lab"`) :
 
 | Paire | Dark | | Light | |
 | --- | --- | --- | --- | --- |
@@ -83,7 +61,7 @@ Appariement **T2** : une seule superfamille, proportions partagées entre texte 
 
 - `font.sans` — IBM Plex Sans : interface, titres, texte courant.
 - `font.mono` — IBM Plex Mono : tout identifiant, version, horodatage, clé technique. Jamais tronqué.
-- `font.num` — mono système : valeurs chiffrées des cartes de statistiques (hérité de la peau Atelier archivée).
+- `font.num` — IBM Plex Sans, chiffres tabulaires (`.fx-num`) : valeurs chiffrées, chiffres clés, colonnes de table.
 
 - `type.2xl` — 31px / 1.15 / 600 — Titre de vue principale.
 - `type.xl` — 25px / 1.2 / 600 — Titre d'écran.
@@ -98,23 +76,26 @@ Minimum absolu : 11,5 px, réservé aux métadonnées.
 ## Espace, formes, élévation
 
 - Base **4 px** : 4px · 8px · 12px · 16px · 24px · 32px · 48px.
-- Rayons : contrôles **3 px**, surfaces **6 px**, pastilles **999 px**. Angles francs — registre documentaire.
-- Hauteur de contrôle : **34 px** (densité 75 / 100).
-- Élévation : **aucune ombre** hors overlay. Le bord suffit à séparer.
+- Rayons : contrôles **8 px**, surfaces **12 px**, pastilles **999 px**.
+- Hauteur de contrôle : **36 px** ; densité moyenne, contenu limité à 1440 px.
+- Élévation : **bord 1 px + ombre légère** sur les cartes (`elevation.1`), ombre moyenne pour menus et panneaux (`elevation.2`), forte pour fenêtres et tiroirs (`elevation.3`). En sombre, les bords sont renforcés (1,85:1) pour que les cartes restent lisibles sur un fond très sombre.
+- Animation : `motion.fast` 120 ms, `motion.normal` 200 ms, `motion.slow` 320 ms ; nulles si mouvement réduit.
+- Largeurs : 1280 px et plus, menu ouvert ; 1024 à 1279 px, menu réduit ; sous 1024 px, menu en tiroir et une colonne.
 
 ## Iconographie
 
-Grille 14 px, trait 1,6 px, bouts arrondis, géométrie minimale. Une icône ne porte **jamais** une couleur de statut : elle hérite de `currentColor`.
+Style Lucide : trait 1,8 px, 18 px par défaut (16 px dans les menus), bouts arrondis. Une icône ne porte **jamais** une couleur de statut : elle hérite de `currentColor`.
 
 ## Patterns de signature
 
-Deux règles non négociables, qui distinguent le système :
+Deux patterns hérités, toujours disponibles pour les écrans qui affichent des assertions vérifiables :
 
 1. **Provenance** — toute assertion affiche règle, version, exécution et horodatage. Une occurrence sans provenance ne s'affiche pas.
 2. **Absence** — un écran sans résultat explique *pourquoi* (règle sans résultat, hors périmètre, non publiée, objet non couvert) et ne présente jamais l'absence comme une conformité.
 
 ## Décisions écartées
 
+- **Peau Foundation** (dense, sombre par défaut, angles francs) — peau par défaut jusqu'à la v0.5.0, remplacée en v1.0.0 par le design system du lab (décision D9). Archivée dans `archive/foundation/`.
 - **Peau Atelier** (neutres chauds, teal minéral) — archivée dans les sources ; seule sa mono survit en `font.num`.
 - **Skin C** — calque d'un système tiers, jamais repris comme fondation.
 - **Stack Sans / Stack Sans Notch** — licence OFL compatible, mais police de marque d'un tiers : écartée pour éviter un système lu comme un dérivé.
@@ -124,10 +105,10 @@ Deux règles non négociables, qui distinguent le système :
 
 | Fichier | Rôle |
 | --- | --- |
-| `tokens.json` | Source unique, format DTCG. Toute valeur part d'ici. |
-| `tokens.css` | Traduction consommée par les produits. Généré, non éditable. |
-| `foundations.md` | Ce document : règles d'usage et gouvernance. |
+| `tokens/forma.tokens.json` | Source unique, format DTCG. Toute valeur part d'ici. |
+| `dist/forma.css`, `dist/forma.js`, `dist/forma.echarts.js` | Générés depuis les tokens et `src/`, non éditables. |
+| `docs/foundations.md` | Ce document : règles d'usage et gouvernance. |
+| `docs/usage.md` | Catalogue des classes, comportements, graphes, rédaction. |
+| `docs/index.html` | Démonstration rendue par le paquet. |
+| `catalog/forma.catalog.json` | Inventaire : ce que Forma fournit, réserve ou ne couvre pas. |
 | `CHANGELOG.md` | Contrat de version. |
-| `Forma by FSA.dc.html` | Documentation vivante et galerie de composants. |
-| `Bench couleur.dc.html` | Arbitrage de l'accent (archivé, décision prise). |
-| `Bench typo.dc.html` | Arbitrage typographique (archivé, décision prise). |

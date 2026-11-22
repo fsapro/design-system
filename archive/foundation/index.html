@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr" data-forma-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forma by FSA — documentation vivante</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="forma.css">
+<style>
+  body { margin: 0; }
+  .doc { max-width: 1080px; margin: 0 auto; padding: 32px 24px 96px; display: flex; flex-direction: column; gap: 44px; }
+  .doc header { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  section { display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; align-items: start; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 8px; }
+  .swatch { display: flex; flex-direction: column; gap: 6px; }
+  .swatch i { display: block; height: 44px; border-radius: var(--forma-radius-control); border: 1px solid var(--forma-color-border); }
+  code { font-family: var(--forma-font-mono); font-size: 12.5px; color: var(--forma-color-text-muted); }
+</style>
+</head>
+<body class="fx-root">
+<div class="doc">
+
+  <header>
+    <div>
+      <h1 class="fx-title-xl">Forma by FSA</h1>
+      <p class="fx-muted" style="margin:4px 0 0;font-size:13.5px">Peau Foundation · v0.3.0 · documentation vivante, rendue par <code>dist/forma.css</code></p>
+    </div>
+    <span style="flex:1"></span>
+    <button class="fx-btn fx-btn--sm" id="theme">Passer en light</button>
+  </header>
+
+  <section>
+    <h2 class="fx-title-lg">Couleur sémantique</h2>
+    <p class="fx-muted" style="margin:0;max-width:66ch;font-size:13.5px">Les composants ne consomment que cette couche. Changer de thème ne re-mappe qu'elle.</p>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <section>
+    <h2 class="fx-title-lg">Action</h2>
+    <div class="row">
+      <button class="fx-btn fx-btn--primary">Publier</button>
+      <button class="fx-btn">Modifier</button>
+      <button class="fx-btn fx-btn--ghost">Différer</button>
+      <button class="fx-btn fx-btn--danger">Rejeter</button>
+      <button class="fx-btn" disabled>Indisponible</button>
+      <button class="fx-link">Tout effacer</button>
+    </div>
+    <p class="fx-meta" style="margin:0">Une seule action primaire par vue. <code>.fx-btn--primary</code></p>
+  </section>
+
+  <section>
+    <h2 class="fx-title-lg">Saisie</h2>
+    <div class="grid2">
+      <label class="fx-field">
+        <span class="fx-field__label">Objet couvert</span>
+        <input class="fx-input" value="Shipment">
+        <span class="fx-field__help">Type d'entité évalué par la règle.</span>
+      </label>
+      <label class="fx-field">
+        <span class="fx-field__label">Périmètre</span>
+        <select class="fx-select"><option>ACME-EU — tous comptes</option><option>ACME-FR</option></select>
+        <span class="fx-field__help">Restreint l'évaluation aux objets du périmètre.</span>
+      </label>
+      <label class="fx-field fx-field--error">
+        <span class="fx-field__label">Seuil de retard</span>
+        <input class="fx-input" value="48 h">
+        <span class="fx-field__error">Doit être un entier de minutes.</span>
+      </label>
+      <label class="fx-field">
+        <span class="fx-field__label">Fenêtre d'évaluation</span>
+        <span class="row" style="gap:8px;flex-wrap:nowrap">
+          <input class="fx-input fx-input--mono" value="2026-07-01">
+          <span class="fx-meta">→</span>
+          <input class="fx-input fx-input--mono" value="2026-07-25">
+        </span>
+        <span class="fx-field__help">Bornes incluses, fuseau UTC.</span>
+      </label>
+    </div>
+    <div class="row" style="gap:24px">
+      <label class="fx-choice"><input type="checkbox" class="fx-check" checked><span class="fx-choice__text">Rouvrir automatiquement</span></label>
+      <label class="fx-choice"><input type="radio" name="d" class="fx-check fx-check--radio" checked><span class="fx-choice__text">Quotidien</span></label>
+      <label class="fx-choice"><input type="radio" name="d" class="fx-check fx-check--radio"><span class="fx-choice__text">Hebdomadaire</span></label>
+      <label class="fx-choice"><input type="checkbox" class="fx-switch" checked><span class="fx-choice__text">Notifier le propriétaire</span></label>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fx-title-lg">Statut</h2>
+    <div class="row">
+      <span class="fx-badge fx-badge--info">Active</span>
+      <span class="fx-badge fx-badge--warning">Reopened</span>
+      <span class="fx-badge fx-badge--success">Done</span>
+      <span class="fx-badge fx-badge--danger">Failed</span>
+      <span class="fx-badge">Ignored</span>
+      <span class="fx-dot">Exécution en cours</span>
+      <span class="fx-chip">Périmètre : ACME-EU <button class="fx-chip__clear" aria-label="Retirer">×</button></span>
+    </div>
+    <div class="fx-callout fx-callout--ai">Suggestion inférée par modèle — confiance 0,72. À valider par un humain avant décision.</div>
+  </section>
+
+  <section>
+    <h2 class="fx-title-lg">Navigation et filtres</h2>
+    <div class="grid2">
+      <nav class="fx-nav fx-card">
+        <div class="fx-nav__group">
+          <div class="fx-label fx-nav__title">Registre</div>
+          <a class="fx-nav__item" href="#" aria-current="page">Ouvertes <span class="fx-nav__count">34</span></a>
+          <a class="fx-nav__item" href="#">À clarifier <span class="fx-nav__count">12</span></a>
+          <a class="fx-nav__item" href="#">Statuées <span class="fx-nav__count">96</span></a>
+        </div>
+        <div class="fx-nav__group">
+          <div class="fx-label fx-nav__title">Gouvernance</div>
+          <a class="fx-nav__item" href="#">Définitions <span class="fx-nav__count">21</span></a>
+          <a class="fx-nav__item" href="#">Exécutions <span class="fx-nav__count">142</span></a>
+        </div>
+      </nav>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="fx-segments">
+          <button class="fx-segment" aria-pressed="true">Ouvertes <span class="fx-segment__count">34</span></button>
+          <button class="fx-segment" aria-pressed="false">À clarifier <span class="fx-segment__count">12</span></button>
+          <span class="fx-divider-v"></span>
+          <span class="fx-chip">Recherche : SHP <button class="fx-chip__clear" aria-label="Retirer">×</button></span>
+        </div>
+        <div class="fx-card">
+          <div class="fx-tabs" role="tablist">
+            <button class="fx-tab" role="tab" aria-selected="true">Provenance</button>
+            <button class="fx-tab" role="tab" aria-selected="false">Définition</button>
+            <button class="fx-tab" role="tab" aria-selected="false">Historique</button>
+          </div>
+          <div class="fx-card__body">
+            <div class="fx-provenance">
+              <div class="fx-provenance__cell"><span class="fx-label">Règle</span><span class="fx-provenance__value">OVERDUE_TO_COMMITMENT v4</span></div>
+              <div class="fx-provenance__cell"><span class="fx-label">Exécution</span><span class="fx-provenance__value">EC-2026-0714-0031</span></div>
+              <div class="fx-provenance__cell"><span class="fx-label">Horodatage</span><span class="fx-provenance__value">2026-07-14 09:22 UTC</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fx-title-lg">Table dense</h2>
+    <div class="fx-card" style="overflow:hidden">
+      <table class="fx-table">
+        <thead>
+          <tr>
+            <th style="width:26px"></th>
+            <th aria-sort="descending">Occurrence</th>
+            <th>Règle</th>
+            <th>Statut</th>
+            <th class="fx-cell--right">Âge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr aria-selected="true">
+            <td><input type="checkbox" class="fx-check" checked></td>
+            <td><a class="fx-table__id" href="#">OCC-2026-0031</a></td>
+            <td class="fx-mono fx-truncate">OVERDUE_TO_COMMITMENT v4</td>
+            <td><span class="fx-badge fx-badge--info">Active</span></td>
+            <td class="fx-num">3 j</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="fx-check"></td>
+            <td><a class="fx-table__id" href="#">OCC-2026-0033</a></td>
+            <td class="fx-mono fx-truncate">MISSING_PROOF v2</td>
+            <td><span class="fx-badge fx-badge--warning">Reopened</span></td>
+            <td class="fx-num">2 j</td>
+          </tr>
+          <tr>
+            <td><span class="fx-skeleton fx-skeleton--box"></span></td>
+            <td><span class="fx-skeleton" style="width:78%"></span></td>
+            <td><span class="fx-skeleton" style="width:62%"></span></td>
+            <td><span class="fx-skeleton fx-skeleton--pill"></span></td>
+            <td><span class="fx-skeleton" style="width:44%;margin-left:auto"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="fx-toolbar">
+        <span style="color:var(--forma-color-text);font-weight:500">1 sélectionnée</span>
+        <button class="fx-btn fx-btn--sm">Accepter</button>
+        <button class="fx-btn fx-btn--sm">Différer</button>
+        <span>1–10 sur 34</span>
+        <div class="fx-pagination">
+          <button class="fx-page" disabled>‹</button>
+          <button class="fx-page" aria-current="page">1</button>
+          <button class="fx-page">2</button>
+          <button class="fx-page">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fx-title-lg">Absence de résultat</h2>
+    <div class="fx-card">
+      <div class="fx-empty">
+        <div class="fx-empty__title">Aucun résultat sur ce périmètre</div>
+        <p class="fx-empty__body" style="margin:0">L'absence de résultat ne signifie pas la conformité. Elle peut venir d'une règle évaluée sans résultat, hors périmètre, non publiée, ou d'un objet non couvert par une exécution.</p>
+        <div class="fx-empty__actions">
+          <button class="fx-btn">Réinitialiser les filtres</button>
+          <button class="fx-btn">Voir les règles applicables</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fx-title-lg">Overlays</h2>
+    <div class="grid2">
+      <div class="fx-modal" style="width:auto">
+        <div class="fx-modal__title">Rejeter l'occurrence ?</div>
+        <p class="fx-modal__body" style="margin:0">Le motif est obligatoire : il est conservé dans la provenance et reste visible dans l'historique.</p>
+        <label class="fx-field">
+          <span class="fx-field__label">Motif</span>
+          <select class="fx-select"><option>Objet hors périmètre contractuel</option><option>Donnée source erronée</option></select>
+        </label>
+        <div class="fx-modal__actions">
+          <button class="fx-btn">Annuler</button>
+          <button class="fx-btn fx-btn--danger">Rejeter</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="fx-toast">Occurrence rejetée — motif conservé. <button class="fx-link" style="margin-left:auto">Annuler</button></div>
+        <div class="fx-menu">
+          <button class="fx-menu__item">Ouvrir la fiche objet</button>
+          <button class="fx-menu__item">Copier l'identifiant</button>
+          <button class="fx-menu__item">Voir l'exécution</button>
+          <button class="fx-menu__item fx-menu__item--danger">Rejeter…</button>
+        </div>
+        <span class="fx-tooltip">Dernière exécution : EC-2026-0714-0031, déclenchée par événement.</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+<script type="module">
+  const names = ["bg","surface","surface-sunken","border","text","text-muted","text-faint","action","action-quiet","success","warning","danger","info"];
+  const cs = getComputedStyle(document.documentElement);
+  const paint = () => {
+    const s = getComputedStyle(document.documentElement);
+    document.getElementById("swatches").innerHTML = names.map(n =>
+      `<div class="swatch"><i style="background:var(--forma-color-${n})"></i><code>--forma-color-${n}</code><span class="fx-meta">${s.getPropertyValue("--forma-color-" + n).trim()}</span></div>`
+    ).join("");
+  };
+  paint();
+  document.getElementById("theme").addEventListener("click", (e) => {
+    const light = document.documentElement.getAttribute("data-forma-theme") === "light";
+    document.documentElement.setAttribute("data-forma-theme", light ? "dark" : "light");
+    e.target.textContent = light ? "Passer en light" : "Passer en dark";
+    paint();
+  });
+</script>
+</body>
+</html>

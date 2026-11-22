@@ -30,8 +30,7 @@
   function currentTheme() {
     var set = root.getAttribute("data-forma-theme");
     if (set === "light" || set === "dark") return set;
-    if (root.getAttribute("data-forma-skin") === "lab") return mq && mq.matches ? "dark" : "light";
-    return mq && !mq.matches ? "light" : "dark"; // Foundation : sombre par défaut
+    return mq && mq.matches ? "dark" : "light"; // clair par défaut, sombre si le système l'est
   }
 
   function syncThemeButtons() {
