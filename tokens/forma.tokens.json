@@ -3,7 +3,6 @@
   "$description": "Forma by FSA — design system du lab. Source unique de vérité des valeurs ; dist/ en est dérivé par build/build-tokens.mjs.",
   "$extensions": {
     "fsa.version": "1.0.0",
-    "fsa.skin": "lab",
     "fsa.defaultTheme": "light"
   },
   "color": {
@@ -776,7 +775,7 @@
       "$type": "shadow",
       "$value": "none",
       "$extensions": {
-        "fsa.usage": "Bord seul — défaut de la peau"
+        "fsa.usage": "Aucune ombre"
       }
     },
     "1": {

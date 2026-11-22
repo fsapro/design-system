@@ -95,7 +95,7 @@ const tokensCss = [
 
 const flatJs = Object.fromEntries([
   ...globalDecls().map(([n, v]) => [n.replace(/-/g, "."), v]),
-  ...themeDecls("dark").map(([n, v]) => [`theme.dark.${n.replace(/-/g, ".")}`, v]),
+  ...[...themeDecls("dark"), ...darkElevation, ...seqDark].map(([n, v]) => [`theme.dark.${n.replace(/-/g, ".")}`, v]),
   ...themeDecls("light").map(([n, v]) => [`theme.light.${n.replace(/-/g, ".")}`, v]),
 ]);
 

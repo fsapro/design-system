@@ -250,7 +250,6 @@
 .fx-btn--block { width: 100%; }
 .fx-btn--icon { width: var(--forma-size-control); padding: 0; }
 .fx-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.fx-btn:disabled:hover { background: transparent; }
 
 .fx-link {
   background: none;
@@ -982,6 +981,12 @@ dialog.fx-modal::backdrop, dialog.fx-drawer::backdrop { background: var(--forma-
 .fx-btn--danger { background: var(--forma-color-danger); }
 .fx-btn--ghost { background: transparent; }
 .fx-btn--ghost:hover { background: var(--forma-color-surface-sunken); color: var(--forma-color-text); }
+.fx-btn--danger:hover { background: var(--forma-color-danger); filter: brightness(1.08); }
+/* Désactivé : le survol ne change rien (chaque variante garde son fond et son encre). */
+.fx-btn:disabled:hover { background: var(--forma-color-surface); color: var(--forma-color-text); }
+.fx-btn--primary:disabled:hover { background: var(--forma-color-action); color: var(--forma-color-on-action); }
+.fx-btn--danger:disabled:hover { background: var(--forma-color-danger); color: var(--forma-color-on-danger); filter: none; }
+.fx-btn--ghost:disabled:hover { background: transparent; color: var(--forma-color-text-muted); }
 .fx-btn--sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: calc(var(--forma-radius-control) - 1px); }
 .fx-input,
 .fx-select { height: 38px; padding: 0 12px; }

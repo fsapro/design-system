@@ -96,7 +96,7 @@ Deux patterns hérités, toujours disponibles pour les écrans qui affichent des
 ## Décisions écartées
 
 - **Peau Foundation** (dense, sombre par défaut, angles francs) — peau par défaut jusqu'à la v0.5.0, remplacée en v1.0.0 par le design system du lab (décision D9). Archivée dans `archive/foundation/`.
-- **Peau Atelier** (neutres chauds, teal minéral) — archivée dans les sources ; seule sa mono survit en `font.num`.
+- **Peau Atelier** (neutres chauds, teal minéral) — archivée dans les sources.
 - **Skin C** — calque d'un système tiers, jamais repris comme fondation.
 - **Stack Sans / Stack Sans Notch** — licence OFL compatible, mais police de marque d'un tiers : écartée pour éviter un système lu comme un dérivé.
 - **Accents alternatifs** (Lapis, Vibrant Orange, Kiwi Colada, Cattleya Orchid, Indigo, Cuivre…) — benchmarkés puis écartés au profit de Directoire Blue. Voir `Bench couleur.dc.html`.

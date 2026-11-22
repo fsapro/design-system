@@ -21,8 +21,14 @@ Forma devient le design system des apps web du lab : l'ex-peau Lab remplace Foun
 ### Retiré
 - Peau **Foundation** (tokens, CSS, galerie), archivée dans `archive/foundation/` ; sous-arbre `skin.lab` des tokens ; attribut `data-forma-skin` (sans effet, toléré) ; clés `lab.*` du module `@fsapro/forma`.
 
+### Corrigé (écarts avec la peau Lab de v0.5.0)
+- **Échelle séquentielle claire** : la v0.5.0 numérotait par erreur l'échelle Lab claire de `seq-0` à `seq-6`. Elle revient à `--forma-color-viz-seq-1..7` (comme Foundation et le module JS) : une app Lab v0.5.0 qui utilisait ces variables doit décaler ses indices de 1.
+- **Bouton désactivé au survol** : il garde son fond et son encre (primaire, destructif, secondaire, discret) ; le survol d'un bouton destructif actif garde son fond rouge.
+- **Champ dans `.fx-search`** : le champ intérieur reste sans hauteur ni marge propres (forme compacte d'origine), au lieu de 38 px avec marges.
+
 ### Ajouté
 - Token `color.viz.sequentialDark` (échelle séquentielle sombre, plus fort = plus clair).
+- Module `@fsapro/forma` : valeurs sombres des ombres et de l'échelle séquentielle, `theme.dark.elevation.1..3` et `theme.dark.color.viz.seq.1..5` (remplacent `lab.dark.*`).
 
 ## [0.5.0] — 2026-11-22
 
