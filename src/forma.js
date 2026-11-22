@@ -107,6 +107,7 @@
     if (wasOpen) return;
     menu.hidden = false;
     trigger.setAttribute("aria-expanded", "true");
+    trigger.setAttribute("aria-controls", menu.id);
     openMenu = { trigger: trigger, menu: menu };
     var first = items(menu)[0];
     if (first) first.focus();
@@ -121,9 +122,12 @@
 
   /* ---------- Fenêtres et tiroirs (<dialog> natif) ---------- */
 
-  function openDialog(trigger) {
+  function openDialog(trigger, returnTo) {
     var dialog = document.getElementById(trigger.getAttribute("data-fx-open"));
-    if (dialog && typeof dialog.showModal === "function" && !dialog.open) dialog.showModal();
+    if (!dialog || typeof dialog.showModal !== "function" || dialog.open) return;
+    // Ouvert depuis un menu (qui se referme) : rendre le focus au bouton du menu, pas à l'item masqué.
+    if (returnTo) dialog.addEventListener("close", function () { returnTo.focus(); }, { once: true });
+    dialog.showModal();
   }
 
   /* ---------- Branchements ---------- */
@@ -131,16 +135,17 @@
   document.addEventListener("click", function (e) {
     var t = e.target.closest ? e.target : e.target.parentElement;
     if (!t) return;
-    var el;
+    var el, menuTrigger = null;
     if (openMenu) {
       var inMenu = openMenu.menu.contains(t);
+      if (inMenu) menuTrigger = openMenu.trigger;
       if (!inMenu && !openMenu.trigger.contains(t)) closeMenu(false);
       else if (inMenu && t.closest("[role='menuitem']")) closeMenu(!t.closest("[data-fx-open]"));
     }
     if ((el = t.closest("[data-fx-theme-toggle]"))) return toggleTheme();
     if ((el = t.closest("[data-fx-sidebar-toggle]"))) return toggleSidebar(el);
     if ((el = t.closest("[data-fx-menu]"))) return toggleMenu(el);
-    if ((el = t.closest("[data-fx-open]"))) return openDialog(el);
+    if ((el = t.closest("[data-fx-open]"))) return openDialog(el, menuTrigger);
     if ((el = t.closest("[data-fx-close]"))) { var d = el.closest("dialog"); if (d) d.close(); return; }
     if (t.matches("dialog.fx-modal, dialog.fx-drawer")) { // clic sur le voile, hors du cadre
       var r = t.getBoundingClientRect();
@@ -155,6 +160,11 @@
       if (e.key === "Escape") { e.preventDefault(); closeMenu(true); }
       else if (e.key === "ArrowDown") { e.preventDefault(); moveInMenu(1); }
       else if (e.key === "ArrowUp") { e.preventDefault(); moveInMenu(-1); }
+      else if (e.key === "Home" || e.key === "End") {
+        e.preventDefault();
+        var list = items(openMenu.menu);
+        if (list.length) list[e.key === "Home" ? 0 : list.length - 1].focus();
+      }
       else if (e.key === "Tab") closeMenu(false);
       return;
     }

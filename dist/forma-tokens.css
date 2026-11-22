@@ -24,6 +24,7 @@
   --forma-color-danger: #dc7a6d;
   --forma-color-info: #629ad0;
   --forma-color-offline: #7c7c75;
+  --forma-color-scrim: rgba(0, 0, 0, 0.5);
   --forma-color-viz-cat-1: #ff7420;
   --forma-color-viz-cat-2: #008684;
   --forma-color-viz-cat-3: #bcca25;
@@ -125,6 +126,7 @@
   --forma-color-danger: #a83a2c;
   --forma-color-info: #2d6296;
   --forma-color-offline: #8a8a82;
+  --forma-color-scrim: rgba(20, 20, 18, 0.28);
 }
 
 @media (prefers-color-scheme: light) {
@@ -148,6 +150,7 @@
     --forma-color-danger: #a83a2c;
     --forma-color-info: #2d6296;
     --forma-color-offline: #8a8a82;
+    --forma-color-scrim: rgba(20, 20, 18, 0.28);
 }
 }
 
@@ -174,6 +177,7 @@
   --forma-color-danger: #a83a2c;
   --forma-color-info: #2d6296;
   --forma-color-offline: #8a8a82;
+  --forma-color-scrim: rgba(20, 20, 18, 0.28);
   --forma-radius-control: 8px;
   --forma-radius-surface: 12px;
   --forma-size-control: 36px;
@@ -210,6 +214,7 @@
   --forma-color-danger: #dc7b6e;
   --forma-color-info: #629ad0;
   --forma-color-offline: #7c7c75;
+  --forma-color-scrim: rgba(0, 0, 0, 0.5);
   --forma-radius-control: 8px;
   --forma-radius-surface: 12px;
   --forma-size-control: 36px;
@@ -244,6 +249,7 @@
     --forma-color-danger: #dc7b6e;
     --forma-color-info: #629ad0;
     --forma-color-offline: #7c7c75;
+    --forma-color-scrim: rgba(0, 0, 0, 0.5);
     --forma-radius-control: 8px;
     --forma-radius-surface: 12px;
     --forma-size-control: 36px;
@@ -259,7 +265,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root {
+  :root,
+  [data-forma-theme] {
     --forma-motion-fast: 0ms;
     --forma-motion-normal: 0ms;
     --forma-motion-slow: 0ms;

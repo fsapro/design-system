@@ -12,7 +12,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versionnage s
 
 ### Ajouté
 - **Peau Lab** (`data-forma-skin="lab"`) pour les apps web du lab, ordinateur d'abord : surfaces 12 px, contrôles 8 px, bord + ombre légère, clair par défaut et sombre selon le système, palette sombre recalibrée (bords à 1,85:1, texte adouci), un seul accent. Les tokens de la peau (`skin.lab`) ne portent que les écarts à Foundation.
-- **Tokens communs** : `color.offline`, `elevation.3`, `motion.fast/normal/slow`, `easing.standard/exit` (nuls si mouvement réduit).
+- **Tokens communs** : `color.offline`, `color.scrim`, `elevation.3`, `motion.fast/normal/slow`, `easing.standard/exit` (nuls si mouvement réduit).
 - **Coque d'application** `fx-shell` : barre haute, menu latéral rétractable avec point « nouveau » en mode réduit, tiroir sous 1024 px, version en pied.
 - **Composants** : grille de tableau de bord, en-tête de page, chiffre clé, indicateur d'état, progression, curseur, avatar, fraîcheur des données, panneau de notifications, tiroir et fenêtre sur `<dialog>`, conteneur de graphe, écrans de connexion (Google seul) et d'accès refusé, icône d'état.
 - **`forma.js`** (`@fsapro/forma/forma.js`), sans dépendance : thème mémorisé, menu latéral, menus au clavier, fenêtres et tiroirs.
@@ -22,7 +22,7 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versionnage s
 - Démonstration `docs/lab.html`, rendue par le paquet lui-même.
 
 ### Modifié
-- Peau Foundation inchangée. `.fx-root [hidden]` force désormais `display: none` (un menu `hidden` ne s'affichait pas masqué si sa classe fixait un `display`).
+- Variables de la peau Foundation inchangées (ajouts seulement). Trois règles touchent des classes existantes sans `data-forma-skin` : `.fx-root [hidden]` force `display: none` (un menu `hidden` restait visible si sa classe fixait un `display`) ; `<dialog class="fx-modal">` reçoit marges, largeur maximale, couleur, voile (`--forma-color-scrim`), animation d'entrée, et reste masqué fermé ; les durées `motion` passent à 0 sous `prefers-reduced-motion`, sous-arbres `data-forma-theme` compris.
 
 ### Décidé
 - Moteur de graphes unique : Apache ECharts (Florent, 2026-11-22). Connexion Google seule, un seul accent pour toutes les apps (Florent, 2026-11-22).

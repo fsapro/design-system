@@ -179,6 +179,13 @@
           "$extensions": {
             "fsa.usage": "Appareil ou service hors ligne (graphique, 3:1)"
           }
+        },
+        "scrim": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.5)",
+          "$extensions": {
+            "fsa.usage": "Voile sous une fenêtre, un tiroir, le menu en tiroir"
+          }
         }
       },
       "light": {
@@ -351,6 +358,13 @@
           "$value": "#8a8a82",
           "$extensions": {
             "fsa.usage": "Appareil ou service hors ligne (graphique, 3:1)"
+          }
+        },
+        "scrim": {
+          "$type": "color",
+          "$value": "rgba(20, 20, 18, 0.28)",
+          "$extensions": {
+            "fsa.usage": "Voile sous une fenêtre, un tiroir, le menu en tiroir"
           }
         }
       }

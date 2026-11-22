@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": { "type": "git", "url": "git+https://github.com/fsapro/design-system.git" },
   "type": "module",
-  "sideEffects": ["*.css"],
+  "sideEffects": ["*.css", "./dist/forma.js"],
   "main": "./dist/forma.tokens.js",
   "exports": {
     ".": "./dist/forma.tokens.js",

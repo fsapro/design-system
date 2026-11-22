@@ -24,6 +24,7 @@
   --forma-color-danger: #dc7a6d;
   --forma-color-info: #629ad0;
   --forma-color-offline: #7c7c75;
+  --forma-color-scrim: rgba(0, 0, 0, 0.5);
   --forma-color-viz-cat-1: #ff7420;
   --forma-color-viz-cat-2: #008684;
   --forma-color-viz-cat-3: #bcca25;
@@ -125,6 +126,7 @@
   --forma-color-danger: #a83a2c;
   --forma-color-info: #2d6296;
   --forma-color-offline: #8a8a82;
+  --forma-color-scrim: rgba(20, 20, 18, 0.28);
 }
 
 @media (prefers-color-scheme: light) {
@@ -148,6 +150,7 @@
     --forma-color-danger: #a83a2c;
     --forma-color-info: #2d6296;
     --forma-color-offline: #8a8a82;
+    --forma-color-scrim: rgba(20, 20, 18, 0.28);
 }
 }
 
@@ -174,6 +177,7 @@
   --forma-color-danger: #a83a2c;
   --forma-color-info: #2d6296;
   --forma-color-offline: #8a8a82;
+  --forma-color-scrim: rgba(20, 20, 18, 0.28);
   --forma-radius-control: 8px;
   --forma-radius-surface: 12px;
   --forma-size-control: 36px;
@@ -210,6 +214,7 @@
   --forma-color-danger: #dc7b6e;
   --forma-color-info: #629ad0;
   --forma-color-offline: #7c7c75;
+  --forma-color-scrim: rgba(0, 0, 0, 0.5);
   --forma-radius-control: 8px;
   --forma-radius-surface: 12px;
   --forma-size-control: 36px;
@@ -244,6 +249,7 @@
     --forma-color-danger: #dc7b6e;
     --forma-color-info: #629ad0;
     --forma-color-offline: #7c7c75;
+    --forma-color-scrim: rgba(0, 0, 0, 0.5);
     --forma-radius-control: 8px;
     --forma-radius-surface: 12px;
     --forma-size-control: 36px;
@@ -259,7 +265,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root {
+  :root,
+  [data-forma-theme] {
     --forma-motion-fast: 0ms;
     --forma-motion-normal: 0ms;
     --forma-motion-slow: 0ms;
@@ -879,7 +886,7 @@
     transition: transform var(--forma-motion-slow) var(--forma-easing-standard);
   }
   .fx-shell[data-nav-open] .fx-shell__side { transform: none; }
-  .fx-shell[data-nav-open] .fx-shell__scrim { display: block; position: fixed; inset: 64px 0 0 0; z-index: 25; background: rgb(20 20 18 / 0.28); }
+  .fx-shell[data-nav-open] .fx-shell__scrim { display: block; position: fixed; inset: 64px 0 0 0; z-index: 25; background: var(--forma-color-scrim); }
   .fx-shell[data-collapsed] .fx-nav__item { justify-content: flex-start; width: 100%; padding: 0 var(--forma-space-3); }
   .fx-shell[data-collapsed] .fx-nav__label, .fx-shell[data-collapsed] .fx-nav__count, .fx-shell[data-collapsed] .fx-nav__title { display: revert; }
   .fx-shell[data-collapsed] .fx-nav__dot { display: none; }
@@ -992,8 +999,9 @@
 /* ---------- Fenêtre et tiroir sur <dialog> natif (forma.js : data-fx-open / data-fx-close) ---------- */
 
 dialog.fx-modal { margin: auto; max-width: calc(100% - 32px); color: var(--forma-color-text); }
+dialog.fx-modal:not([open]), dialog.fx-drawer:not([open]) { display: none; } /* .fx-modal fixe display: flex */
 dialog.fx-modal[open] { animation: fx-pop var(--forma-motion-normal) var(--forma-easing-standard); }
-dialog.fx-modal::backdrop, dialog.fx-drawer::backdrop { background: rgb(20 20 18 / 0.28); }
+dialog.fx-modal::backdrop, dialog.fx-drawer::backdrop { background: var(--forma-color-scrim); }
 .fx-drawer {
   width: min(440px, 100%);
   height: 100%;

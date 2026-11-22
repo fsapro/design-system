@@ -15,10 +15,11 @@ const PALETTES = /*@@PALETTES@@*/null;
 
 /* ---------- Contexte : peau et thème courants ---------- */
 
-function detect() {
+function detect(opts = {}) {
   const doc = typeof document !== "undefined" ? document.documentElement : null;
-  const skin = doc && doc.getAttribute("data-forma-skin") === "lab" ? "lab" : "foundation";
-  let theme = doc && doc.getAttribute("data-forma-theme");
+  const skin = opts.skin === "lab" || opts.skin === "foundation" ? opts.skin
+    : doc && doc.getAttribute("data-forma-skin") === "lab" ? "lab" : "foundation";
+  let theme = opts.theme === "light" || opts.theme === "dark" ? opts.theme : doc && doc.getAttribute("data-forma-theme");
   if (theme !== "light" && theme !== "dark") {
     const prefersDark = typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: dark)").matches;
     const prefersLight = typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: light)").matches;
@@ -29,7 +30,7 @@ function detect() {
 
 /** Couleurs de la peau et du thème demandés (par défaut : ceux de la page). */
 export function formaPalette(opts = {}) {
-  const ctx = { ...detect(), ...opts };
+  const ctx = detect(opts || {}); // valeurs inconnues ignorées : peau et thème de la page
   return PALETTES[ctx.skin][ctx.theme];
 }
 

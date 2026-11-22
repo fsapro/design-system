@@ -118,7 +118,7 @@ const tokensCss = [
   block(`${L}:not([data-forma-theme='dark']),\n${L} [data-forma-theme='light']`, labDecls("light")),
   block(`${L}[data-forma-theme='dark'],\n${L} [data-forma-theme='dark']`, labDecls("dark")),
   `@media (prefers-color-scheme: dark) {\n${block(`  ${L}:not([data-forma-theme])`, labDecls("dark"), "    ")}\n}`,
-  `@media (prefers-reduced-motion: reduce) {\n${block("  :root", [["motion-fast", "0ms"], ["motion-normal", "0ms"], ["motion-slow", "0ms"]], "    ")}\n}`,
+  `@media (prefers-reduced-motion: reduce) {\n${block("  :root,\n  [data-forma-theme]", [["motion-fast", "0ms"], ["motion-normal", "0ms"], ["motion-slow", "0ms"]], "    ")}\n}`,
 ].join("\n\n") + "\n";
 
 const flatJs = Object.fromEntries([
