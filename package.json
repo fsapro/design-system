@@ -1,27 +1,32 @@
 {
   "name": "@fsapro/forma",
-  "version": "0.4.0",
-  "description": "Forma by FSA — design system, peau Foundation. Tokens DTCG + CSS de composants, sans dépendance ni build côté consommateur.",
+  "version": "0.5.0",
+  "description": "Forma by FSA — design system, peaux Foundation et Lab. Tokens DTCG, CSS de composants, comportements et thème ECharts, sans dépendance ni build côté consommateur.",
   "license": "MIT",
   "repository": { "type": "git", "url": "git+https://github.com/fsapro/design-system.git" },
   "type": "module",
-  "sideEffects": ["*.css"],
+  "sideEffects": ["*.css", "./dist/forma.js"],
   "main": "./dist/forma.tokens.js",
   "exports": {
     ".": "./dist/forma.tokens.js",
     "./css": "./dist/forma.css",
     "./tokens.css": "./dist/forma-tokens.css",
     "./components.css": "./dist/forma-components.css",
+    "./forma.js": "./dist/forma.js",
+    "./echarts": "./dist/forma.echarts.js",
     "./tokens.json": "./tokens/forma.tokens.json",
+    "./catalog.json": "./catalog/forma.catalog.json",
     "./package.json": "./package.json"
   },
-  "files": ["dist", "tokens", "src", "build", "docs/foundations.md", "CHANGELOG.md", "README.md"],
+  "files": ["dist", "tokens", "catalog", "src", "build", "docs/foundations.md", "CHANGELOG.md", "README.md"],
   "scripts": {
     "build": "node build/build-tokens.mjs",
     "test:contrast": "node build/check-contrast.mjs",
-    "verify": "npm run build && git diff --exit-code dist && npm run test:contrast"
+    "test:catalog": "node build/check-catalog.mjs",
+    "test:js": "node --check dist/forma.js && node -e \"import('./dist/forma.echarts.js').then(m => { if (!m.formaTheme({ skin: 'lab', theme: 'dark' }).color.length) process.exit(1); })\"",
+    "verify": "npm run build && git diff --exit-code dist && npm run test:contrast && npm run test:catalog && npm run test:js"
   },
   "engines": { "node": ">=18" },
-  "keywords": ["design-system", "design-tokens", "dtcg", "css", "fsa", "forma"],
+  "keywords": ["design-system", "design-tokens", "dtcg", "css", "echarts", "fsa", "forma"],
   "publishConfig": { "access": "restricted" }
 }

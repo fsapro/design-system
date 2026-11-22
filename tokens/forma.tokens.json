@@ -1,8 +1,8 @@
 {
   "$schema": "https://design-tokens.org/dtcg",
-  "$description": "Forma by FSA — peau Foundation. Source unique de vérité des valeurs ; dist/ en est dérivé par build/build-tokens.mjs.",
+  "$description": "Forma by FSA — peaux Foundation (par défaut) et Lab. Source unique de vérité des valeurs ; dist/ en est dérivé par build/build-tokens.mjs.",
   "$extensions": {
-    "fsa.version": "0.4.0",
+    "fsa.version": "0.5.0",
     "fsa.skin": "foundation",
     "fsa.defaultTheme": "dark"
   },
@@ -172,6 +172,20 @@
             "fsa.pantoneName": "dérivé de Chill Blue",
             "fsa.usage": "Statut actif, information"
           }
+        },
+        "offline": {
+          "$type": "color",
+          "$value": "#7c7c75",
+          "$extensions": {
+            "fsa.usage": "Appareil ou service hors ligne (graphique, 3:1)"
+          }
+        },
+        "scrim": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.5)",
+          "$extensions": {
+            "fsa.usage": "Voile sous une fenêtre, un tiroir, le menu en tiroir"
+          }
         }
       },
       "light": {
@@ -337,6 +351,20 @@
             "fsa.pantone": "18-4244 TCX",
             "fsa.pantoneName": "Directoire Blue",
             "fsa.usage": "Statut actif, information"
+          }
+        },
+        "offline": {
+          "$type": "color",
+          "$value": "#8a8a82",
+          "$extensions": {
+            "fsa.usage": "Appareil ou service hors ligne (graphique, 3:1)"
+          }
+        },
+        "scrim": {
+          "$type": "color",
+          "$value": "rgba(20, 20, 18, 0.28)",
+          "$extensions": {
+            "fsa.usage": "Voile sous une fenêtre, un tiroir, le menu en tiroir"
           }
         }
       }
@@ -727,6 +755,265 @@
       "$extensions": {
         "fsa.usage": "Overlay uniquement",
         "fsa.dark": "0 10px 26px -10px rgba(0,0,0,.8)"
+      }
+    },
+    "3": {
+      "$type": "shadow",
+      "$value": "0 16px 40px -12px rgba(22,22,20,.30)",
+      "$extensions": {
+        "fsa.usage": "Fenêtre, tiroir",
+        "fsa.dark": "0 20px 48px -12px rgba(0,0,0,.85)"
+      }
+    }
+  },
+  "motion": {
+    "$description": "Durées d'animation. Réduites à 0 si prefers-reduced-motion.",
+    "fast": {
+      "$type": "duration",
+      "$value": "120ms",
+      "$extensions": {
+        "fsa.usage": "Survol, bascule"
+      }
+    },
+    "normal": {
+      "$type": "duration",
+      "$value": "200ms",
+      "$extensions": {
+        "fsa.usage": "Menu, panneau, thème"
+      }
+    },
+    "slow": {
+      "$type": "duration",
+      "$value": "320ms",
+      "$extensions": {
+        "fsa.usage": "Tiroir, fenêtre"
+      }
+    }
+  },
+  "easing": {
+    "standard": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.2,
+        0,
+        0,
+        1
+      ],
+      "$extensions": {
+        "fsa.usage": "Entrée, déplacement"
+      }
+    },
+    "exit": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.3,
+        0,
+        0.8,
+        0.15
+      ],
+      "$extensions": {
+        "fsa.usage": "Sortie"
+      }
+    }
+  },
+  "skin": {
+    "lab": {
+      "$description": "Peau Lab : apps web du lab, ordinateur d'abord. Ne porte que les écarts à Foundation. Thème clair par défaut, sombre selon le système ou data-forma-theme.",
+      "color": {
+        "theme": {
+          "light": {
+            "bg": {
+              "$type": "color",
+              "$value": "#f6f6f3",
+              "$extensions": {
+                "fsa.usage": "Fond de page, un ton sous les cartes blanches"
+              }
+            }
+          },
+          "dark": {
+            "bg": {
+              "$type": "color",
+              "$value": "#111110",
+              "$extensions": {
+                "fsa.usage": "Fond de page"
+              }
+            },
+            "surface": {
+              "$type": "color",
+              "$value": "#1f1f1c",
+              "$extensions": {
+                "fsa.usage": "Carte, panneau"
+              },
+              "sunken": {
+                "$type": "color",
+                "$value": "#292926",
+                "$extensions": {
+                  "fsa.usage": "Zone creuse"
+                }
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "#32322e",
+                "$extensions": {
+                  "fsa.usage": "Survol"
+                }
+              }
+            },
+            "border": {
+              "$type": "color",
+              "$value": "#4a4a43",
+              "$extensions": {
+                "fsa.usage": "Bord de carte, lisible sur fond très sombre"
+              },
+              "subtle": {
+                "$type": "color",
+                "$value": "#31312d",
+                "$extensions": {
+                  "fsa.usage": "Séparation interne"
+                }
+              }
+            },
+            "text": {
+              "$type": "color",
+              "$value": "#e4e4de",
+              "$extensions": {
+                "fsa.usage": "Texte principal, adouci pour la lecture de nuit"
+              },
+              "muted": {
+                "$type": "color",
+                "$value": "#b4b4ac",
+                "$extensions": {
+                  "fsa.usage": "Texte secondaire"
+                }
+              },
+              "faint": {
+                "$type": "color",
+                "$value": "#9a9a92",
+                "$extensions": {
+                  "fsa.usage": "Métadonnée"
+                }
+              }
+            },
+            "action": {
+              "$type": "color",
+              "$value": "#5e96cc",
+              "$extensions": {
+                "fsa.usage": "Accent unique"
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "#7aabd8",
+                "$extensions": {
+                  "fsa.usage": "Survol"
+                }
+              },
+              "quiet": {
+                "$type": "color",
+                "$value": "#1c2c3d",
+                "$extensions": {
+                  "fsa.usage": "Sélection"
+                }
+              }
+            },
+            "success": {
+              "$type": "color",
+              "$value": "#6ca679",
+              "$extensions": {
+                "fsa.usage": "Succès"
+              }
+            },
+            "danger": {
+              "$type": "color",
+              "$value": "#dc7b6e",
+              "$extensions": {
+                "fsa.usage": "Danger"
+              }
+            }
+          }
+        },
+        "viz": {
+          "dark": {
+            "sequential": [
+              {
+                "$type": "color",
+                "$value": "#34342f",
+                "$extensions": {
+                  "fsa.usage": "Intensité 0"
+                }
+              },
+              {
+                "$type": "color",
+                "$value": "#264a70",
+                "$extensions": {
+                  "fsa.usage": "1"
+                }
+              },
+              {
+                "$type": "color",
+                "$value": "#3a73ab",
+                "$extensions": {
+                  "fsa.usage": "2"
+                }
+              },
+              {
+                "$type": "color",
+                "$value": "#6aa1d6",
+                "$extensions": {
+                  "fsa.usage": "3"
+                }
+              },
+              {
+                "$type": "color",
+                "$value": "#b3d0ec",
+                "$extensions": {
+                  "fsa.usage": "4 : plus fort = plus clair"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "radius": {
+        "control": {
+          "$type": "dimension",
+          "$value": "8px"
+        },
+        "surface": {
+          "$type": "dimension",
+          "$value": "12px"
+        }
+      },
+      "size": {
+        "control": {
+          "$type": "dimension",
+          "$value": "36px"
+        }
+      },
+      "elevation": {
+        "1": {
+          "$type": "shadow",
+          "$value": "0 1px 2px rgba(22,22,20,.06), 0 2px 8px -2px rgba(22,22,20,.06)",
+          "$extensions": {
+            "fsa.usage": "Carte",
+            "fsa.dark": "0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.45)"
+          }
+        },
+        "2": {
+          "$type": "shadow",
+          "$value": "0 4px 10px -2px rgba(22,22,20,.10), 0 12px 28px -8px rgba(22,22,20,.14)",
+          "$extensions": {
+            "fsa.usage": "Menu, panneau",
+            "fsa.dark": "0 4px 10px -2px rgba(0,0,0,.45), 0 12px 28px -8px rgba(0,0,0,.55)"
+          }
+        },
+        "3": {
+          "$type": "shadow",
+          "$value": "0 12px 24px -6px rgba(22,22,20,.18), 0 32px 64px -16px rgba(22,22,20,.26)",
+          "$extensions": {
+            "fsa.usage": "Fenêtre, tiroir",
+            "fsa.dark": "0 12px 24px -6px rgba(0,0,0,.55), 0 32px 64px -16px rgba(0,0,0,.7)"
+          }
+        }
       }
     }
   }

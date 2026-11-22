@@ -1,6 +1,7 @@
-/*! Forma by FSA — peau Foundation, v0.4.0
+/*! Forma by FSA v0.5.0 — peaux Foundation (par défaut) et Lab.
  *  Généré depuis tokens/forma.tokens.json — ne pas éditer à la main.
- *  Thème par défaut : dark. Bascule : <html data-forma-theme="light">
+ *  Foundation : dark par défaut, <html data-forma-theme="light"> pour basculer.
+ *  Lab : <html data-forma-skin="lab">, clair par défaut, sombre selon le système ou data-forma-theme="dark".
  */
 
 :root, [data-forma-theme='dark'] {
@@ -22,6 +23,8 @@
   --forma-color-warning: #cfa63e;
   --forma-color-danger: #dc7a6d;
   --forma-color-info: #629ad0;
+  --forma-color-offline: #7c7c75;
+  --forma-color-scrim: rgba(0, 0, 0, 0.5);
   --forma-color-viz-cat-1: #ff7420;
   --forma-color-viz-cat-2: #008684;
   --forma-color-viz-cat-3: #bcca25;
@@ -55,9 +58,15 @@
   --forma-radius-surface: 6px;
   --forma-radius-pill: 999px;
   --forma-size-control: 34px;
+  --forma-motion-fast: 120ms;
+  --forma-motion-normal: 200ms;
+  --forma-motion-slow: 320ms;
+  --forma-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --forma-easing-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
   --forma-elevation-0: none;
   --forma-elevation-1: none;
   --forma-elevation-2: 0 6px 20px -8px rgba(22,22,20,.22);
+  --forma-elevation-3: 0 16px 40px -12px rgba(22,22,20,.30);
   --forma-type-2xl-family: var(--forma-font-sans);
   --forma-type-2xl-size: 31px;
   --forma-type-2xl-line: 1.15;
@@ -94,6 +103,7 @@
   --forma-type-mono-weight: 400;
   --forma-type-mono-tracking: 0;
   --forma-elevation-2: 0 10px 26px -10px rgba(0,0,0,.8);
+  --forma-elevation-3: 0 20px 48px -12px rgba(0,0,0,.85);
 }
 
 [data-forma-theme='light'] {
@@ -115,6 +125,8 @@
   --forma-color-warning: #7e5b0f;
   --forma-color-danger: #a83a2c;
   --forma-color-info: #2d6296;
+  --forma-color-offline: #8a8a82;
+  --forma-color-scrim: rgba(20, 20, 18, 0.28);
 }
 
 @media (prefers-color-scheme: light) {
@@ -137,5 +149,126 @@
     --forma-color-warning: #7e5b0f;
     --forma-color-danger: #a83a2c;
     --forma-color-info: #2d6296;
+    --forma-color-offline: #8a8a82;
+    --forma-color-scrim: rgba(20, 20, 18, 0.28);
+}
+}
+
+/* ---------- Peau Lab (spécificité 0,2,0 : passe devant Foundation sans la modifier) ---------- */
+
+[data-forma-skin='lab']:not([data-forma-theme='dark']),
+[data-forma-skin='lab'] [data-forma-theme='light'] {
+  --forma-color-bg: #f6f6f3;
+  --forma-color-surface: #ffffff;
+  --forma-color-surface-sunken: #efefec;
+  --forma-color-surface-hover: #efefec;
+  --forma-color-border: #e1e1dc;
+  --forma-color-border-subtle: #efefec;
+  --forma-color-text: #292926;
+  --forma-color-text-muted: #575751;
+  --forma-color-text-faint: #6d6d65;
+  --forma-color-action: #2d6296;
+  --forma-color-action-hover: #24507c;
+  --forma-color-action-quiet: #e7eef5;
+  --forma-color-on-action: #ffffff;
+  --forma-color-on-danger: #ffffff;
+  --forma-color-success: #396e44;
+  --forma-color-warning: #7e5b0f;
+  --forma-color-danger: #a83a2c;
+  --forma-color-info: #2d6296;
+  --forma-color-offline: #8a8a82;
+  --forma-color-scrim: rgba(20, 20, 18, 0.28);
+  --forma-radius-control: 8px;
+  --forma-radius-surface: 12px;
+  --forma-size-control: 36px;
+  --forma-elevation-1: 0 1px 2px rgba(22,22,20,.06), 0 2px 8px -2px rgba(22,22,20,.06);
+  --forma-elevation-2: 0 4px 10px -2px rgba(22,22,20,.10), 0 12px 28px -8px rgba(22,22,20,.14);
+  --forma-elevation-3: 0 12px 24px -6px rgba(22,22,20,.18), 0 32px 64px -16px rgba(22,22,20,.26);
+  --forma-color-viz-seq-0: #e7eef5;
+  --forma-color-viz-seq-1: #a9c3da;
+  --forma-color-viz-seq-2: #5b89ad;
+  --forma-color-viz-seq-3: #2d6296;
+  --forma-color-viz-seq-4: #1a3b5c;
+  --forma-color-viz-seq-5: #13273d;
+  --forma-color-viz-seq-6: #0c1f33;
+}
+
+[data-forma-skin='lab'][data-forma-theme='dark'],
+[data-forma-skin='lab'] [data-forma-theme='dark'] {
+  --forma-color-bg: #111110;
+  --forma-color-surface: #1f1f1c;
+  --forma-color-surface-sunken: #292926;
+  --forma-color-surface-hover: #32322e;
+  --forma-color-border: #4a4a43;
+  --forma-color-border-subtle: #31312d;
+  --forma-color-text: #e4e4de;
+  --forma-color-text-muted: #b4b4ac;
+  --forma-color-text-faint: #9a9a92;
+  --forma-color-action: #5e96cc;
+  --forma-color-action-hover: #7aabd8;
+  --forma-color-action-quiet: #1c2c3d;
+  --forma-color-on-action: #0f1b26;
+  --forma-color-on-danger: #20100c;
+  --forma-color-success: #6ca679;
+  --forma-color-warning: #cfa63e;
+  --forma-color-danger: #dc7b6e;
+  --forma-color-info: #629ad0;
+  --forma-color-offline: #7c7c75;
+  --forma-color-scrim: rgba(0, 0, 0, 0.5);
+  --forma-radius-control: 8px;
+  --forma-radius-surface: 12px;
+  --forma-size-control: 36px;
+  --forma-elevation-1: 0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.45);
+  --forma-elevation-2: 0 4px 10px -2px rgba(0,0,0,.45), 0 12px 28px -8px rgba(0,0,0,.55);
+  --forma-elevation-3: 0 12px 24px -6px rgba(0,0,0,.55), 0 32px 64px -16px rgba(0,0,0,.7);
+  --forma-color-viz-seq-1: #34342f;
+  --forma-color-viz-seq-2: #264a70;
+  --forma-color-viz-seq-3: #3a73ab;
+  --forma-color-viz-seq-4: #6aa1d6;
+  --forma-color-viz-seq-5: #b3d0ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-forma-skin='lab']:not([data-forma-theme]) {
+    --forma-color-bg: #111110;
+    --forma-color-surface: #1f1f1c;
+    --forma-color-surface-sunken: #292926;
+    --forma-color-surface-hover: #32322e;
+    --forma-color-border: #4a4a43;
+    --forma-color-border-subtle: #31312d;
+    --forma-color-text: #e4e4de;
+    --forma-color-text-muted: #b4b4ac;
+    --forma-color-text-faint: #9a9a92;
+    --forma-color-action: #5e96cc;
+    --forma-color-action-hover: #7aabd8;
+    --forma-color-action-quiet: #1c2c3d;
+    --forma-color-on-action: #0f1b26;
+    --forma-color-on-danger: #20100c;
+    --forma-color-success: #6ca679;
+    --forma-color-warning: #cfa63e;
+    --forma-color-danger: #dc7b6e;
+    --forma-color-info: #629ad0;
+    --forma-color-offline: #7c7c75;
+    --forma-color-scrim: rgba(0, 0, 0, 0.5);
+    --forma-radius-control: 8px;
+    --forma-radius-surface: 12px;
+    --forma-size-control: 36px;
+    --forma-elevation-1: 0 1px 2px rgba(0,0,0,.4), 0 2px 8px -2px rgba(0,0,0,.45);
+    --forma-elevation-2: 0 4px 10px -2px rgba(0,0,0,.45), 0 12px 28px -8px rgba(0,0,0,.55);
+    --forma-elevation-3: 0 12px 24px -6px rgba(0,0,0,.55), 0 32px 64px -16px rgba(0,0,0,.7);
+    --forma-color-viz-seq-1: #34342f;
+    --forma-color-viz-seq-2: #264a70;
+    --forma-color-viz-seq-3: #3a73ab;
+    --forma-color-viz-seq-4: #6aa1d6;
+    --forma-color-viz-seq-5: #b3d0ec;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  [data-forma-theme] {
+    --forma-motion-fast: 0ms;
+    --forma-motion-normal: 0ms;
+    --forma-motion-slow: 0ms;
 }
 }

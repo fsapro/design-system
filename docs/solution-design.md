@@ -3,11 +3,11 @@
 ```yaml
 solution_design:
   template_used: solution-design-lightweight
-  prd_version: "1.0"
+  prd_version: "1.2"
   status: approved
   approved_by: Florent
   approved_at: "2026-07-26"
-  sd_version: "1.0"
+  sd_version: "1.2"
 ```
 
 Projet : `forma-design-system` · Repository : `fsapro/design-system` (existant, adopté)
@@ -155,3 +155,18 @@ Niveau 0 suffit pour le tag et le job d'installation.
 | Version | Date | Changement | Approbateur |
 |---|---|---|---|
 | 1.0 | 2026-07-26 | Création, rattaché au PRD v1.0. Validé par Florent. | Florent |
+| 1.1 | 2026-11-22 | Avenant inventaire (PRD v1.1, critère 6) : `catalog/forma.catalog.json` écrit à la main, `build/check-catalog.mjs` sans dépendance sur le modèle de `check-contrast.mjs`, étape CI dédiée et présence vérifiée dans le paquet installé. Aucune dépendance, aucun service. Vérification : niveau 0 (contrôle déterministe, test négatif). | Florent |
+| 1.2 | 2026-11-22 | Peau Lab (PRD v1.2, critère 7), section 7 ci-dessous. Aucune dépendance ajoutée au paquet. Vérification : contrôles déterministes étendus + niveau 2 (gate de release). | Florent |
+
+## 7. Avenant v1.2 — peau Lab
+
+**Approche.** Réutiliser tout l'outillage existant ; une peau est une **surcouche de tokens**, pas une copie.
+
+- **Tokens.** Un sous-arbre `skin.lab` dans `tokens/forma.tokens.json` ne porte que les écarts à Foundation (palette sombre recalibrée, fond clair, rayons, hauteur de contrôle, ombres, échelle séquentielle sombre inversée). Ajouts communs aux deux peaux : `color.*.offline`, `color.*.scrim`, `elevation.3`, `motion.*`, `easing.*` (mineur au sens du CHANGELOG, aucun renommage).
+- **CSS.** `build-tokens.mjs` émet les blocs `[data-forma-skin='lab']` (clair par défaut, sombre selon `prefers-color-scheme` ou `data-forma-theme`). Spécificité 0,2,0 pour passer devant les règles Foundation sans les modifier. Les écarts de forme des composants existants (badge en pastille, segments groupés, en-têtes de table) sont des règles `[data-forma-skin='lab'] .fx-*` ; les composants nouveaux sont écrits une fois, sur tokens, utilisables dans les deux peaux.
+- **Comportements.** `src/forma.js`, copié dans `dist/` : délégation d'événements sur `document`, aucune dépendance. Fenêtres et tiroirs sur `<dialog>` natif (focus piégé, Échap et retour du focus fournis par le navigateur) plutôt qu'une réimplémentation.
+- **Graphes.** `dist/forma.echarts.js` est **généré** depuis les tokens (mêmes couleurs que le CSS, sans divergence possible) ; il exporte `formaTheme()` et les fiches `charts.*`. Le paquet n'importe pas ECharts : l'app l'installe, enregistre le thème (`echarts.registerTheme`) et initialise ses graphes.
+- **Contrôles.** `check-contrast.mjs` vérifie aussi les deux thèmes Lab (mêmes 17 paires, plus « hors ligne » à 3:1) ; le rapport de `docs/foundations.md` gagne un tableau Lab ; la CI vérifie la présence de `forma.js` et `forma.echarts.js` dans le paquet ; `docs/lab.html` est inspectée dans les deux thèmes.
+
+**Impacts.** Contrat public : **oui** — nouveaux points d'entrée (`./forma.js`, `./echarts`), nouvelles classes, nouveaux tokens ; aucun renommage, aucune suppression : version mineure `0.5.0`. Données, sécurité, coût : non. Réversibilité : élevée ; le tag publié reste immuable.
+

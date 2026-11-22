@@ -1,4 +1,4 @@
-/*! Forma by FSA — composants, peau Foundation.
+/*! Forma by FSA — composants, peaux Foundation et Lab.
  *  Ne consomme que la couche sémantique (var(--forma-*)). Aucune valeur en dur.
  *  Préfixe de classe : fx-
  */
@@ -16,6 +16,9 @@
 .fx-root *,
 .fx-root *::before,
 .fx-root *::after { box-sizing: border-box; }
+
+/* L'attribut hidden l'emporte toujours sur le display d'un composant (menus, panneaux). */
+.fx-root [hidden] { display: none !important; }
 
 .fx-root :focus-visible {
   outline: 2px solid var(--forma-color-action);
@@ -491,3 +494,338 @@
 .fx-empty__title { font-size: 17px; font-weight: 600; }
 .fx-empty__body { max-width: 58ch; font-size: 14px; color: var(--forma-color-text-muted); text-wrap: pretty; }
 .fx-empty__actions { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; }
+
+/* =====================================================================
+ *  v0.5.0 — pièces ajoutées pour les apps web du lab.
+ *  Écrites sur tokens : utilisables dans les deux peaux, dessinées pour Lab.
+ * ===================================================================== */
+
+/* ---------- Coque d'application ---------- */
+
+.fx-shell {
+  --fx-side: 248px;
+  display: grid;
+  grid-template-columns: var(--fx-side) minmax(0, 1fr);
+  grid-template-rows: 64px minmax(0, 1fr);
+  grid-template-areas: "top top" "side main";
+  min-height: 100vh;
+  background: var(--forma-color-bg);
+}
+.fx-shell[data-collapsed] { --fx-side: 76px; }
+
+.fx-shell__top {
+  grid-area: top;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: var(--forma-space-3);
+  padding: 0 var(--forma-space-4) 0 var(--forma-space-3);
+  background: var(--forma-color-bg);
+}
+.fx-shell__brand { display: flex; align-items: center; gap: 10px; width: calc(248px - var(--forma-space-3)); flex: none; } /* fixe : la barre ne bouge pas quand le menu se réduit */
+.fx-shell__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--forma-radius-control);
+  background: var(--forma-color-action);
+  color: var(--forma-color-on-action);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.fx-shell__name { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+.fx-shell__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  max-width: 720px;
+  height: 46px;
+  padding: 0 6px 0 16px;
+  border-radius: var(--forma-radius-pill);
+  background: var(--forma-color-surface-sunken);
+  color: var(--forma-color-text-muted);
+  transition: background-color var(--forma-motion-fast) var(--forma-easing-standard), box-shadow var(--forma-motion-fast) var(--forma-easing-standard);
+}
+.fx-shell__search:focus-within { background: var(--forma-color-surface); box-shadow: var(--forma-elevation-2); }
+.fx-shell__search input { flex: 1; min-width: 0; height: 100%; border: 0; background: none; outline: none; color: var(--forma-color-text); font: inherit; font-size: 15px; }
+.fx-shell__search input::placeholder { color: var(--forma-color-text-faint); }
+.fx-shell__actions { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+
+.fx-shell__side {
+  grid-area: side;
+  position: sticky;
+  top: 64px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  background: var(--forma-color-bg);
+}
+.fx-shell__side .fx-nav { flex: 1; padding: var(--forma-space-2) var(--forma-space-3) var(--forma-space-4); }
+.fx-shell__version { padding: var(--forma-space-3) var(--forma-space-6) var(--forma-space-4); font-family: var(--forma-font-mono); font-size: 11.5px; line-height: 1.6; color: var(--forma-color-text-faint); }
+.fx-shell__main { grid-area: main; min-width: 0; padding: var(--forma-space-2) var(--forma-space-8) var(--forma-space-12) var(--forma-space-4); }
+.fx-shell__main > * { max-width: 1440px; }
+.fx-shell__scrim { display: none; }
+
+/* Navigation dans la coque : pastille arrondie, libellé, compteur, point « nouveau » en mode réduit. */
+.fx-shell .fx-nav__item { height: 36px; padding: 0 var(--forma-space-3); border-radius: var(--forma-radius-pill); font-size: 14px; }
+.fx-shell .fx-nav__item svg { flex: none; }
+.fx-nav__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fx-nav__dot { display: none; position: absolute; top: 6px; right: 12px; width: 8px; height: 8px; border-radius: 50%; background: var(--forma-color-danger); box-shadow: 0 0 0 2px var(--forma-color-bg); }
+.fx-shell[data-collapsed] .fx-nav__item { position: relative; justify-content: center; width: 52px; margin: 0 auto; padding: 0; }
+.fx-shell[data-collapsed] .fx-nav__label,
+.fx-shell[data-collapsed] .fx-nav__count,
+.fx-shell[data-collapsed] .fx-nav__title { display: none; }
+.fx-shell[data-collapsed] .fx-nav__dot { display: block; }
+.fx-shell__version-short { display: none; }
+.fx-shell[data-collapsed] .fx-shell__version { padding: var(--forma-space-3) 0; text-align: center; }
+.fx-shell[data-collapsed] .fx-shell__version > :not(.fx-shell__version-short) { display: none; }
+.fx-shell[data-collapsed] .fx-shell__version-short { display: block; }
+
+/* Sous 1024 px : une colonne, menu en tiroir par-dessus le contenu, recherche en icône. */
+.fx-shell__search-btn { display: none; }
+@media (max-width: 1023.98px) {
+  .fx-shell, .fx-shell[data-collapsed] { --fx-side: 280px; grid-template-columns: minmax(0, 1fr); grid-template-areas: "top" "main"; }
+  .fx-shell__brand { width: auto; }
+  .fx-shell__search { display: none; }
+  .fx-shell__search-btn { display: inline-flex; }
+  .fx-shell__main { padding: var(--forma-space-2) var(--forma-space-4) var(--forma-space-12); }
+  .fx-shell__side {
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    width: var(--fx-side);
+    height: auto;
+    background: var(--forma-color-surface);
+    box-shadow: var(--forma-elevation-3);
+    transform: translateX(-105%);
+    transition: transform var(--forma-motion-slow) var(--forma-easing-standard);
+  }
+  .fx-shell[data-nav-open] .fx-shell__side { transform: none; }
+  .fx-shell[data-nav-open] .fx-shell__scrim { display: block; position: fixed; inset: 64px 0 0 0; z-index: 25; background: var(--forma-color-scrim); }
+  .fx-shell[data-collapsed] .fx-nav__item { justify-content: flex-start; width: 100%; padding: 0 var(--forma-space-3); }
+  .fx-shell[data-collapsed] .fx-nav__label, .fx-shell[data-collapsed] .fx-nav__count, .fx-shell[data-collapsed] .fx-nav__title { display: revert; }
+  .fx-shell[data-collapsed] .fx-nav__dot { display: none; }
+  .fx-shell[data-collapsed] .fx-shell__version { padding: var(--forma-space-3) var(--forma-space-6) var(--forma-space-4); text-align: left; }
+  .fx-shell[data-collapsed] .fx-shell__version > * { display: revert; }
+  .fx-shell[data-collapsed] .fx-shell__version-short { display: none; }
+}
+
+/* En-tête de contenu : titre, fraîcheur, actions. */
+.fx-page-head { display: flex; align-items: center; flex-wrap: wrap; gap: var(--forma-space-3); padding: var(--forma-space-4) 0 var(--forma-space-6); }
+.fx-page-head__title { margin: 0; font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: -0.015em; }
+.fx-page-head__actions { display: flex; align-items: center; gap: var(--forma-space-2); margin-left: auto; }
+
+/* ---------- Grille de tableau de bord (12 colonnes) ---------- */
+
+.fx-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; }
+.fx-col-3 { grid-column: span 3; }
+.fx-col-4 { grid-column: span 4; }
+.fx-col-6 { grid-column: span 6; }
+.fx-col-8 { grid-column: span 8; }
+.fx-col-12 { grid-column: span 12; }
+@media (max-width: 1279.98px) { .fx-col-3 { grid-column: span 6; } .fx-col-4, .fx-col-8 { grid-column: span 12; } }
+@media (max-width: 1023.98px) { .fx-grid > * { grid-column: span 12; } }
+
+/* ---------- Avatar ---------- */
+
+.fx-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: none;
+  overflow: hidden;
+  border: 0;
+  border-radius: 50%;
+  background: var(--forma-color-action-quiet);
+  color: var(--forma-color-action);
+  font: 600 12.5px/1 var(--forma-font-sans);
+  cursor: pointer;
+}
+.fx-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Indicateur d'état (appareil, service, traitement) ---------- */
+
+.fx-status { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--forma-color-text-muted); white-space: nowrap; }
+.fx-status::before { content: ""; width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--forma-color-offline); }
+.fx-status--ok::before { background: var(--forma-color-success); }
+.fx-status--run::before { background: var(--forma-color-action); animation: fx-pulse-ring 1.6s var(--forma-easing-standard) infinite; }
+.fx-status--warn::before { background: var(--forma-color-warning); }
+.fx-status--err::before { background: var(--forma-color-danger); }
+.fx-status--off::before { background: transparent; box-shadow: inset 0 0 0 2px var(--forma-color-offline); }
+@keyframes fx-pulse-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--forma-color-action) 45%, transparent); }
+  100% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--forma-color-action) 0%, transparent); }
+}
+
+/* ---------- Progression : style="--fx-value: 64%" ---------- */
+
+.fx-progress { position: relative; height: 8px; overflow: hidden; border-radius: var(--forma-radius-pill); background: var(--forma-color-surface-hover); }
+.fx-progress::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--fx-value, 0%);
+  border-radius: inherit;
+  background: var(--forma-color-action);
+  transition: width var(--forma-motion-normal) var(--forma-easing-standard);
+}
+.fx-progress--indeterminate::before { width: 35%; animation: fx-indeterminate 1.4s var(--forma-easing-standard) infinite; }
+@keyframes fx-indeterminate { 0% { transform: translateX(-100%); } 100% { transform: translateX(290%); } }
+
+/* ---------- Curseur ---------- */
+
+.fx-range { width: 100%; margin: 0; accent-color: var(--forma-color-action); cursor: pointer; }
+
+/* ---------- Chiffre clé ---------- */
+
+.fx-kpi { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.fx-kpi__label { font-size: 13px; color: var(--forma-color-text-muted); }
+.fx-kpi__value { font-family: var(--forma-font-sans); font-size: 28px; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.fx-kpi__delta { font-size: 13px; font-weight: 500; color: var(--forma-color-text-faint); font-variant-numeric: tabular-nums; }
+.fx-kpi__delta--good { color: var(--forma-color-success); }
+.fx-kpi__delta--bad { color: var(--forma-color-danger); }
+
+/* ---------- Fraîcheur des données : aria-busy="true" pendant l'actualisation ---------- */
+
+.fx-fresh { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--forma-color-text-faint); white-space: nowrap; }
+.fx-fresh[aria-busy="true"] svg { animation: fx-spin 0.9s linear infinite; }
+@keyframes fx-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Panneau flottant et notifications ---------- */
+
+.fx-popover {
+  position: absolute;
+  z-index: 30;
+  min-width: 240px;
+  padding: 6px;
+  border: 1px solid var(--forma-color-border);
+  border-radius: var(--forma-radius-surface);
+  background: var(--forma-color-surface);
+  box-shadow: var(--forma-elevation-2);
+}
+.fx-notif { position: relative; display: flex; gap: var(--forma-space-3); padding: 10px 12px 10px 26px; border-radius: var(--forma-radius-control); font-size: 14px; }
+.fx-notif:hover { background: var(--forma-color-surface-hover); }
+.fx-notif--unread::before { content: ""; position: absolute; left: 10px; top: 17px; width: 7px; height: 7px; border-radius: 50%; background: var(--forma-color-action); }
+.fx-notif--unread { font-weight: 500; }
+.fx-notif__meta { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 400; color: var(--forma-color-text-faint); }
+
+/* ---------- Fenêtre et tiroir sur <dialog> natif (forma.js : data-fx-open / data-fx-close) ---------- */
+
+dialog.fx-modal { margin: auto; max-width: calc(100% - 32px); color: var(--forma-color-text); }
+dialog.fx-modal:not([open]), dialog.fx-drawer:not([open]) { display: none; } /* .fx-modal fixe display: flex */
+dialog.fx-modal[open] { animation: fx-pop var(--forma-motion-normal) var(--forma-easing-standard); }
+dialog.fx-modal::backdrop, dialog.fx-drawer::backdrop { background: var(--forma-color-scrim); }
+.fx-drawer {
+  width: min(440px, 100%);
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--forma-color-border);
+  background: var(--forma-color-surface);
+  color: var(--forma-color-text);
+  box-shadow: var(--forma-elevation-3);
+}
+.fx-drawer[open] { display: flex; flex-direction: column; animation: fx-slide-in var(--forma-motion-slow) var(--forma-easing-standard); }
+.fx-drawer__head { display: flex; align-items: center; gap: var(--forma-space-3); padding: var(--forma-space-4) var(--forma-space-4) var(--forma-space-4) 20px; border-bottom: 1px solid var(--forma-color-border); }
+.fx-drawer__body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: var(--forma-space-4); }
+.fx-drawer__foot { display: flex; justify-content: flex-end; gap: var(--forma-space-2); padding: var(--forma-space-3) 20px; border-top: 1px solid var(--forma-color-border); }
+@keyframes fx-pop { from { transform: scale(0.97); } to { transform: none; } } /* sans opacité : visible même si l animation ne joue pas */
+@keyframes fx-slide-in { from { transform: translateX(100%); } to { transform: none; } }
+
+/* ---------- Graphe (conteneur ECharts) ---------- */
+
+.fx-chart { width: 100%; height: 240px; }
+.fx-chart--sm { width: 120px; height: 36px; flex: none; }
+.fx-chart--lg { height: 320px; }
+
+/* ---------- Écrans de connexion et d'accès refusé ---------- */
+
+.fx-auth { display: grid; place-items: center; min-height: 100vh; padding: var(--forma-space-6); background: var(--forma-color-bg); }
+.fx-auth__card {
+  width: min(400px, 100%);
+  padding: 36px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--forma-space-3);
+  text-align: center;
+  border: 1px solid var(--forma-color-border);
+  border-radius: var(--forma-radius-surface);
+  background: var(--forma-color-surface);
+  box-shadow: var(--forma-elevation-1);
+}
+.fx-auth__title { margin: var(--forma-space-2) 0 0; font-size: 22px; font-weight: 600; letter-spacing: -0.015em; }
+.fx-auth__body { margin: 0 0 var(--forma-space-3); font-size: 14px; color: var(--forma-color-text-muted); text-wrap: pretty; }
+.fx-auth__foot { margin-top: var(--forma-space-3); font-size: 12px; color: var(--forma-color-text-faint); }
+
+/* ---------- États : icône de l'état vide, d'erreur ou hors ligne ---------- */
+
+.fx-empty__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--forma-radius-surface);
+  background: var(--forma-color-surface-sunken);
+  color: var(--forma-color-text-muted);
+}
+.fx-empty__icon--danger { background: color-mix(in srgb, var(--forma-color-danger) 14%, transparent); color: var(--forma-color-danger); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-status--run::before, .fx-progress--indeterminate::before, .fx-fresh[aria-busy="true"] svg,
+  dialog.fx-modal[open], .fx-drawer[open] { animation: none; }
+}
+
+/* =====================================================================
+ *  Peau Lab — écarts de forme des composants existants.
+ * ===================================================================== */
+
+[data-forma-skin='lab'] .fx-btn { background: var(--forma-color-surface); height: var(--forma-size-control); font-size: 14px; transition: background-color var(--forma-motion-fast) var(--forma-easing-standard), border-color var(--forma-motion-fast) var(--forma-easing-standard); }
+[data-forma-skin='lab'] .fx-btn:hover { background: var(--forma-color-surface-sunken); }
+[data-forma-skin='lab'] .fx-btn--primary { background: var(--forma-color-action); }
+[data-forma-skin='lab'] .fx-btn--primary:hover { background: var(--forma-color-action-hover); }
+[data-forma-skin='lab'] .fx-btn--danger { background: var(--forma-color-danger); }
+[data-forma-skin='lab'] .fx-btn--ghost { background: transparent; }
+[data-forma-skin='lab'] .fx-btn--ghost:hover { background: var(--forma-color-surface-sunken); color: var(--forma-color-text); }
+[data-forma-skin='lab'] .fx-btn--sm { height: 30px; padding: 0 10px; font-size: 13px; border-radius: calc(var(--forma-radius-control) - 1px); }
+[data-forma-skin='lab'] .fx-input,
+[data-forma-skin='lab'] .fx-select { height: 38px; padding: 0 12px; }
+[data-forma-skin='lab'] .fx-input:focus,
+[data-forma-skin='lab'] .fx-select:focus,
+[data-forma-skin='lab'] .fx-textarea:focus { outline: none; border-color: var(--forma-color-action); box-shadow: 0 0 0 3px var(--forma-color-action-quiet); }
+[data-forma-skin='lab'] .fx-badge { height: 24px; padding: 0 10px; border-color: transparent; border-radius: var(--forma-radius-pill); }
+[data-forma-skin='lab'] .fx-chip { height: 30px; padding: 0 6px 0 12px; border-color: transparent; border-radius: var(--forma-radius-pill); background: var(--forma-color-action-quiet); color: var(--forma-color-action); font-size: 13px; font-weight: 500; }
+[data-forma-skin='lab'] .fx-segments { display: inline-flex; gap: 2px; padding: 3px; border-radius: calc(var(--forma-radius-control) + 2px); background: var(--forma-color-surface-sunken); }
+[data-forma-skin='lab'] .fx-segment { height: 30px; padding: 0 12px; border: 0; border-radius: calc(var(--forma-radius-control) - 1px); font-weight: 500; }
+[data-forma-skin='lab'] .fx-segment[aria-pressed="true"] { background: var(--forma-color-surface); box-shadow: var(--forma-elevation-1); }
+[data-forma-skin='lab'] .fx-card__head { padding: 18px 20px 0; border-bottom: 0; font-size: 16px; }
+[data-forma-skin='lab'] .fx-card__body { padding: var(--forma-space-4) 20px 20px; }
+[data-forma-skin='lab'] .fx-table { font-size: 14px; }
+[data-forma-skin='lab'] .fx-table th { padding: 10px 14px; background: transparent; font-size: 12.5px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+[data-forma-skin='lab'] .fx-table td { padding: 11px 14px; }
+[data-forma-skin='lab'] .fx-toolbar { padding: 10px 14px; }
+[data-forma-skin='lab'] .fx-page { min-width: 32px; height: 32px; border-color: transparent; font-size: 13px; font-variant-numeric: tabular-nums; }
+[data-forma-skin='lab'] .fx-page[aria-current="page"] { border-color: transparent; color: var(--forma-color-action); font-weight: 600; }
+[data-forma-skin='lab'] .fx-menu { border-radius: var(--forma-radius-surface); }
+[data-forma-skin='lab'] .fx-menu__item { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 10px; border-radius: var(--forma-radius-control); font-size: 14px; }
+[data-forma-skin='lab'] .fx-modal { padding: 24px; border-radius: calc(var(--forma-radius-surface) + 2px); box-shadow: var(--forma-elevation-3); }
+[data-forma-skin='lab'] .fx-toast { border-left-width: 1px; border-radius: var(--forma-radius-surface); }
+[data-forma-skin='lab'] .fx-skeleton { border-radius: 6px; }
+[data-forma-skin='lab'] .fx-nav__item[aria-current="page"] { color: var(--forma-color-action); font-weight: 600; }
+[data-forma-skin='lab'] .fx-num { font-family: inherit; font-variant-numeric: tabular-nums; }
