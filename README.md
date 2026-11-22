@@ -129,9 +129,11 @@ import "@fsapro/forma/css";
 
 ```
 tokens/forma.tokens.json   Source de vérité. Toute valeur se change ICI.
+catalog/forma.catalog.json Inventaire : tout ce que Forma fournit, prévoit ou ne couvre pas.
 src/components.css         CSS de composants, écrit à la main.
 build/build-tokens.mjs     Génère dist/. Zéro dépendance.
 build/check-contrast.mjs   Vérifie WCAG AA sur toutes les paires.
+build/check-catalog.mjs    Vérifie que l'inventaire et le CSS disent la même chose.
 dist/                      Généré et commité — ne pas éditer.
 docs/                      Doc vivante + fondations.
 ```
@@ -154,6 +156,19 @@ Sémantique appliqué aux **tokens**, pas au code :
 - **Correctif** — contraste, référence Pantone, documentation.
 
 Historique dans [`CHANGELOG.md`](CHANGELOG.md). Chaque version est taguée `vX.Y.Z` — épinglez le tag dans vos produits.
+
+## Forma d'abord : avant de créer une pièce d'interface
+
+Un projet qui consomme Forma ne crée pas de composant, de graphe ou d'écran sans avoir consulté l'inventaire `catalog/forma.catalog.json` (aussi exporté : `@fsapro/forma/catalog.json`).
+
+1. **`stable`** — la pièce existe : l'utiliser telle quelle, surcharger la variable et jamais la règle `.fx-*`.
+2. **Composable** — elle peut s'assembler à partir de pièces `stable` : l'assembler dans le projet, sans nouvelle classe `fx-`.
+3. **`essai` ou `reserve`** — elle est prévue : ne pas la réimplémenter en parallèle ; la construire localement en reprenant la fiche de l'inventaire, marquée « candidat Forma », ou demander d'accélérer sa livraison.
+4. **`absent` ou introuvable** — besoin **général** : ouvrir une issue sur ce dépôt ; besoin **propre au projet** : la construire localement avec un préfixe projet (classes et variables), marquée « candidat Forma ».
+
+Jamais de couleur, de taille ni de police en dur : tout passe par `var(--forma-*)`. Les candidats locaux sont revus à chaque version mineure ; ceux qui servent à plusieurs projets entrent dans Forma.
+
+L'inventaire est vérifié en CI : une classe livrée absente de l'inventaire, ou une classe citée qui n'existe pas, fait échouer la vérification.
 
 ## Cycle de vie des tokens
 

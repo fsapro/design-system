@@ -6,6 +6,16 @@ Format : [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Versionnage s
 - **Mineur** — un token est ajouté, une valeur change sans casser l'usage.
 - **Correctif** — correction de contraste, de référence Pantone, de documentation.
 
+## [Non publié]
+
+### Ajouté
+- **Inventaire** `catalog/forma.catalog.json`, exporté en `@fsapro/forma/catalog.json` : chaque pièce de Forma avec son statut (`stable`, `essai`, `reserve`, `absent`), son usage et ses classes. Couvre les 85 classes livrées, les pièces décidées pour la peau Martech (coque d'application, écrans types, catalogue de graphes `fx-chart/*`) et les manques connus.
+- **Contrôle** `build/check-catalog.mjs`, bloquant en CI : inventaire et CSS doivent dire la même chose.
+- **Règle « Forma d'abord »** dans le README : la marche à suivre d'un projet avant de créer une pièce d'interface.
+
+### Décidé
+- Moteur de graphes unique : **Apache ECharts**, thème généré depuis les tokens (Florent, 2026-11-22). Non livré.
+
 ## [0.4.0] — 2026-07-26
 
 ### Corrigé

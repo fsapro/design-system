@@ -27,6 +27,9 @@ jobs:
       - name: Contrastes WCAG AA
         run: node build/check-contrast.mjs
 
+      - name: Inventaire aligné sur le paquet
+        run: node build/check-catalog.mjs
+
       - name: Régénérer la documentation de contraste
         run: node build/update-contrast-report.mjs
 
@@ -62,6 +65,11 @@ jobs:
           # Vérifie que le module exporte version (export ESM nommé, jamais une clé JSON entre guillemets)
           if ! grep -q 'export const version' package/dist/forma.tokens.js; then
             echo "::error::forma.tokens.js n'exporte pas version"
+            exit 1
+          fi
+
+          if ! grep -q '"fx-root"' package/catalog/forma.catalog.json; then
+            echo "::error::l'inventaire catalog/forma.catalog.json est absent du paquet"
             exit 1
           fi
 

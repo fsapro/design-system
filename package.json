@@ -13,13 +13,15 @@
     "./tokens.css": "./dist/forma-tokens.css",
     "./components.css": "./dist/forma-components.css",
     "./tokens.json": "./tokens/forma.tokens.json",
+    "./catalog.json": "./catalog/forma.catalog.json",
     "./package.json": "./package.json"
   },
-  "files": ["dist", "tokens", "src", "build", "docs/foundations.md", "CHANGELOG.md", "README.md"],
+  "files": ["dist", "tokens", "catalog", "src", "build", "docs/foundations.md", "CHANGELOG.md", "README.md"],
   "scripts": {
     "build": "node build/build-tokens.mjs",
     "test:contrast": "node build/check-contrast.mjs",
-    "verify": "npm run build && git diff --exit-code dist && npm run test:contrast"
+    "test:catalog": "node build/check-catalog.mjs",
+    "verify": "npm run build && git diff --exit-code dist && npm run test:contrast && npm run test:catalog"
   },
   "engines": { "node": ">=18" },
   "keywords": ["design-system", "design-tokens", "dtcg", "css", "fsa", "forma"],

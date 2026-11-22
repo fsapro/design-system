@@ -3,11 +3,11 @@
 ```yaml
 solution_design:
   template_used: solution-design-lightweight
-  prd_version: "1.0"
+  prd_version: "1.1"
   status: approved
   approved_by: Florent
   approved_at: "2026-07-26"
-  sd_version: "1.0"
+  sd_version: "1.1"
 ```
 
 Projet : `forma-design-system` · Repository : `fsapro/design-system` (existant, adopté)
@@ -155,3 +155,4 @@ Niveau 0 suffit pour le tag et le job d'installation.
 | Version | Date | Changement | Approbateur |
 |---|---|---|---|
 | 1.0 | 2026-07-26 | Création, rattaché au PRD v1.0. Validé par Florent. | Florent |
+| 1.1 | 2026-11-22 | Avenant inventaire (PRD v1.1, critère 6) : `catalog/forma.catalog.json` écrit à la main, `build/check-catalog.mjs` sans dépendance sur le modèle de `check-contrast.mjs`, étape CI dédiée et présence vérifiée dans le paquet installé. Aucune dépendance, aucun service. Vérification : niveau 0 (contrôle déterministe, test négatif). | Florent |

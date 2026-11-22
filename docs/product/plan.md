@@ -4,7 +4,7 @@
 | --- | --- |
 | **Projet** | `forma-design-system` |
 | **Repository** | `fsapro/design-system` (existant, adopté) |
-| **Version du PRD** | 1.0 |
+| **Version du PRD** | 1.1 (avenant du 2026-11-22, section 13) |
 | **Statut** | `approved` |
 | **Approbateur** | Florent |
 | **Date d'approbation** | 2026-07-26 |
@@ -85,6 +85,7 @@ projet, indépendamment.
    vérifie que le CSS et les tokens JS se résolvent.
 4. Le repository porte `CLAUDE.md`, `docs/learnings/` et `.mcp.json` conformes au template du lab.
 5. Une règle écrite, tenant en un paragraphe, dit quoi faire quand un projet a besoin d'un token absent.
+6. *(v1.1)* Un inventaire lisible par machine liste chaque pièce de Forma avec son statut ; un contrôle bloquant en CI garantit qu'il couvre toutes les classes livrées et n'en cite aucune inexistante. Le README porte la règle « Forma d'abord ».
 
 ## 8. Premier milestone
 
@@ -121,13 +122,26 @@ une CI verte.
 | **D2** | Branche par défaut. | **`master` → `main`** (délégué à Claude). Effectué au bootstrap : aucune pull request n'existait, renommage sans risque. Le workflow CI a été mis à jour en conséquence. |
 | **D3** | Slug du projet. | **`forma-design-system`** (Florent). |
 | **D4** | Premier tag. | **`v0.4.0`**, une fois la CI verte (délégué à Claude). Ne pas taguer rétroactivement `v0.3.0` sur un commit rouge : cela figerait une version installable dont la documentation est fausse. Le README est corrigé pour pointer vers le premier tag vert. |
+| **D6** | Moteur de graphes. | **Apache ECharts seul** (Florent, 2026-11-22), thème généré depuis les tokens. Vega-Lite écarté des apps, réservé à un éventuel usage d'analyse hors produit. Dépendance structurante : décision du PM, non déléguée. Non livrée à ce stade. |
+| **D7** | Inventaire et règle « Forma d'abord ». | **Lancés** (Florent, 2026-11-22) : inventaire `catalog/forma.catalog.json` vérifié en CI, règle dans le README, et règle miroir dans `fsapro/project-template`. |
 | **D5** | Visibilité du repository. | **`private` → `public`** (Florent, 2026-07-27), déclenchée par le premier consommateur réel (Open Product Intelligence, issue #61). Motif : les trois mécanismes de consommation d'un dépôt privé (git+ssh, GitHub Packages+token, vendoring) imposent un secret CI à provisionner pour **chaque** futur consommateur, indéfiniment — contraire à l'objectif « disponible sur étagère ». Aucun secret trouvé dans l'historique complet du repository avant bascule (vérifié). Effet vérifié : `curl` anonyme et `npm install github:fsapro/design-system#v0.4.0` résolvent sans identifiant. Axe « confidentialité » de la protection du périmètre — décision explicitement de Florent, pas déléguée. |
 
 ## 11. Décisions non résolues
 
-Aucune. Le PRD est complet et ne comporte pas de décision bloquante.
+- **Peau Martech** *(ouverte le 2026-11-22)* — la section 5 exclut le multi-peaux. Les essais de la peau Martech (atelier visuel) sont décidés côté design mais **ne peuvent pas être livrés** sans un avenant qui lève cette exclusion et cadre la v0.5.0. L'inventaire les liste au statut `essai`, sans aucune classe livrée.
 
 ## 12. Traçabilité
 
 PRD v1.0 `approved` (2026-07-26) → Solution Design v1.0 `approved` (2026-07-26, template lightweight) →
 bootstrap → milestone M1 → issues → pull requests → validation PM.
+
+## 13. Avenant v1.1 — inventaire et règle « Forma d'abord » (2026-11-22)
+
+**Problème.** Un projet qui consomme Forma n'a aucun moyen fiable de savoir ce qui existe déjà, ce qui est prévu et ce qui manque. Chaque projet risque de recréer ses boutons, ses graphes ou ses écrans, et la cohérence entre les applications se perd.
+
+**Périmètre ajouté.** Un inventaire `catalog/forma.catalog.json` (exporté par le paquet), un contrôle CI qui l'aligne sur `src/components.css`, et la règle « Forma d'abord » dans le README et dans `fsapro/project-template`.
+
+**Hors périmètre de l'avenant.** Toute nouvelle classe, la peau Martech, le catalogue de graphes livré : l'inventaire les *référence* au statut `essai`, il ne les livre pas.
+
+**Critère.** Critère 6 (section 7). **Approbation.** Florent, en session, le 2026-11-22.
+
